@@ -1,0 +1,67 @@
+[
+  {
+    "id": "latest-yearly",
+    "name": "每年首发买最新 Pro Max",
+    "buyAge": 0,
+    "holdYears": 1,
+    "buyChannel": "Apple 官网/官方旗舰店",
+    "sellChannel": "闲鱼或回收平台",
+    "friction": 300,
+    "battery": 0,
+    "risk": "低",
+    "experience": 100,
+    "note": "始终最新，但承担首年最大折旧；等大促买可显著降低成本。"
+  },
+  {
+    "id": "lastgen-yearly",
+    "name": "新机发布后买上一代二手，每年换",
+    "buyAge": 1,
+    "holdYears": 1,
+    "buyChannel": "闲鱼/平台验机",
+    "sellChannel": "闲鱼/爱回收",
+    "friction": 350,
+    "battery": 0,
+    "risk": "中",
+    "experience": 90,
+    "note": "体验与成本较平衡；必须把平台买卖价差计入。"
+  },
+  {
+    "id": "twoyear-hold2",
+    "name": "买两年前 Pro Max，用两年",
+    "buyAge": 2,
+    "holdYears": 2,
+    "buyChannel": "闲鱼或可信商家",
+    "sellChannel": "闲鱼/回收平台",
+    "friction": 450,
+    "battery": 600,
+    "risk": "中",
+    "experience": 78,
+    "note": "通常是年均成本甜点位；两年内可能需要换电池。"
+  },
+  {
+    "id": "threeyear-hold3",
+    "name": "买三年前 Pro/Pro Max，用三年",
+    "buyAge": 3,
+    "holdYears": 3,
+    "buyChannel": "闲鱼/平台验机",
+    "sellChannel": "回收平台",
+    "friction": 550,
+    "battery": 700,
+    "risk": "中高",
+    "experience": 65,
+    "note": "现金支出低，但电池、维修和剩余系统支持需要重点考虑。"
+  },
+  {
+    "id": "standard-new-hold3",
+    "name": "大促买标准版新机，用三年",
+    "buyAge": 0,
+    "holdYears": 3,
+    "buyChannel": "京东/天猫官方旗舰店",
+    "sellChannel": "闲鱼/回收平台",
+    "friction": 250,
+    "battery": 0,
+    "risk": "低",
+    "experience": 82,
+    "note": "省心、保修完整；标准版现在已具备较长寿命和较低首发价。"
+  }
+]

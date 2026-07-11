@@ -1,0 +1,164 @@
+[
+  {
+    "id": "apple-identify",
+    "title": "识别 iPhone 机型",
+    "publisher": "Apple Support",
+    "url": "https://support.apple.com/zh-cn/108044",
+    "type": "official",
+    "accessed": "2026-07-10",
+    "note": "机型年份、容量和型号识别的基础来源。"
+  },
+  {
+    "id": "apple-17-pro-spec",
+    "title": "iPhone 17 Pro 与 iPhone 17 Pro Max 技术规格",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/iphone-17-pro/specs/",
+    "type": "official",
+    "accessed": "2026-07-10",
+    "note": "屏幕、重量、芯片、相机、续航和接口。"
+  },
+  {
+    "id": "apple-17-pro-buy",
+    "title": "购买 iPhone 17 Pro",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/shop/buy-iphone/iphone-17-pro",
+    "type": "official",
+    "accessed": "2026-07-10",
+    "note": "当前官方售价和存储版本。"
+  },
+  {
+    "id": "apple-air",
+    "title": "iPhone Air",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/iphone-air/",
+    "type": "official",
+    "accessed": "2026-07-10",
+    "note": "A19 Pro、轻薄设计、相机和产品定位。"
+  },
+  {
+    "id": "apple-17e",
+    "title": "iPhone 17e",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/iphone-17e/",
+    "type": "official",
+    "accessed": "2026-07-10",
+    "note": "A19、48MP 融合式摄像头和产品定位。"
+  },
+  {
+    "id": "apple-iphone",
+    "title": "iPhone 产品总览",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/iphone/",
+    "type": "official",
+    "accessed": "2026-07-10",
+    "note": "当前在售产品线。"
+  },
+  {
+    "id": "apple-15-pro",
+    "title": "Apple 发布 iPhone 15 Pro 和 iPhone 15 Pro Max",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/newsroom/2023/09/apple-unveils-iphone-15-pro-and-iphone-15-pro-max/",
+    "type": "official",
+    "accessed": "2026-07-10",
+    "note": "首发价格、A17 Pro、钛金属、USB-C 和 5 倍长焦。"
+  },
+  {
+    "id": "apple-16-pro",
+    "title": "Apple 发布 iPhone 16 Pro 和 iPhone 16 Pro Max",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/newsroom/2024/09/apple-introduces-iphone-16-pro-and-iphone-16-pro-max/",
+    "type": "official",
+    "accessed": "2026-07-10",
+    "note": "首发价格、A18 Pro、相机控制和影像升级。"
+  },
+  {
+    "id": "apple-17-pro-news",
+    "title": "Apple 发布 iPhone 17 Pro 和 iPhone 17 Pro Max",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/newsroom/2025/09/apple-unveils-iphone-17-pro-and-iphone-17-pro-max-cn/",
+    "type": "official",
+    "accessed": "2026-07-10",
+    "note": "首发价格、起步容量和核心更新。"
+  },
+  {
+    "id": "apple-trade-in",
+    "title": "Apple Trade In 换购计划",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/shop/trade-in",
+    "type": "official",
+    "accessed": "2026-07-10",
+    "note": "折抵金额为最高估价，最终以检测和配置为准。"
+  },
+  {
+    "id": "apple-intelligence-cn",
+    "title": "Apple 推出新一代 Apple 智能与 Siri AI",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/newsroom/2026/06/apple-unveils-next-generation-of-apple-intelligence-siri-ai-and-more/",
+    "type": "official",
+    "accessed": "2026-07-10",
+    "note": "Apple 于 2026-06 明确说明：Apple 智能在中国大陆的推出取决于监管审批，Siri AI 与其他新功能尚不可用。"
+  },
+  {
+    "id": "ram-xcode-17",
+    "title": "iPhone 17、Air 与 Pro 系列 RAM 容量",
+    "publisher": "MacRumors / Xcode 26",
+    "url": "https://www.macrumors.com/2025/09/09/iphone-17-pro-iphone-air-ram-amounts/",
+    "type": "secondary",
+    "accessed": "2026-07-10",
+    "note": "Apple 不公开 RAM；该数据来自 Xcode 设备信息。"
+  },
+  {
+    "id": "ram-xcode-15",
+    "title": "iPhone 15 Pro 系列配备 8GB RAM",
+    "publisher": "MacRumors / Xcode 15",
+    "url": "https://www.macrumors.com/2023/09/12/iphone-15-pro-models-have-8gb-ram/",
+    "type": "secondary",
+    "accessed": "2026-07-10",
+    "note": "Apple 不公开 RAM；该数据来自 Xcode。"
+  },
+  {
+    "id": "price-17pro-618",
+    "title": "2026 年 618 iPhone 17 Pro 官方旗舰店降价",
+    "publisher": "证券时报 / 界面新闻",
+    "url": "https://stcn.com/article/detail/3910531.html",
+    "type": "market_report",
+    "accessed": "2026-07-10",
+    "note": "iPhone 17 Pro 256GB 活动价 7999 元，部分地区叠加补贴可更低。"
+  },
+  {
+    "id": "price-17pro-used",
+    "title": "iPhone 17 Pro 二手价格短期反超新机",
+    "publisher": "新浪科技",
+    "url": "https://finance.sina.cn/tech/2026-05-15/detail-inhxypti3386701.d.html",
+    "type": "market_report",
+    "accessed": "2026-07-10",
+    "note": "2026-05-15 得物拆封激活机成交均价 8002.33 元；渠道回收价一天内从约 8200 降至最高 7700。"
+  },
+  {
+    "id": "price-15pm-case",
+    "title": "iPhone 15 Pro Max 回收平台公开案例",
+    "publisher": "公开用户案例",
+    "url": "https://www.cnblogs.com/-1688/p/21144101",
+    "type": "single_case",
+    "accessed": "2026-07-10",
+    "note": "单一公开案例：爱回收预估约 4280、成交约 4350；存在推广倾向，仅作低可信度样本。"
+  },
+  {
+    "id": "price-platform-review",
+    "title": "旧 iPhone 回收平台横评",
+    "publisher": "澎湃新闻 / 雷科技",
+    "url": "https://www.thepaper.cn/newsDetail_forward_28836807",
+    "type": "market_report",
+    "accessed": "2026-07-10",
+    "note": "展示平台券、检测条件与 Apple Trade In 会显著影响最终到手价。"
+  },
+  {
+    "id": "market-model",
+    "title": "市场区间估算方法",
+    "publisher": "iPhone Value Lab",
+    "url": "SOURCES.md",
+    "type": "method",
+    "accessed": "2026-07-10",
+    "note": "依据公开样本、机龄、容量、平台零售/回收价差建立参考区间；不是平台实时报价。"
+  }
+]
