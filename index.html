@@ -3,18 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="中国 iPhone 与 MacBook Pro 新机、二手价格、折旧趋势和持有成本比较工具">
+  <meta name="description" content="贵重物品持有成本、二手价格、购买参考与生活平替工具">
   <meta name="color-scheme" content="light dark">
-  <meta name="theme-color" content="#f5f6f5">
-  <title>Apple Value Lab</title>
+  <meta name="theme-color" content="#f4f5f3">
+  <title>Value Lab</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <script>
     (() => {
       try {
-        const saved = localStorage.getItem('ivl.theme');
+        const saved = localStorage.getItem('vl.theme');
         const theme = saved || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
         document.documentElement.dataset.theme = theme;
-        document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#111513' : '#f5f6f5');
       } catch (_) {}
     })();
   </script>
@@ -22,190 +21,123 @@
 </head>
 <body>
 <header class="app-header">
-  <div class="brand">
-    <strong>Apple Value Lab</strong>
-    <span id="headerMeta">换机成本</span>
-  </div>
-
-  <nav id="tabs" role="tablist" aria-label="主要页面">
-    <button class="tab active" type="button" role="tab" aria-selected="true" aria-controls="view-analysis" data-view="analysis"><span class="tab-icon">￥</span><span>成本</span></button>
-    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="view-market" data-view="market"><span class="tab-icon">↕</span><span>价格</span></button>
-    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="view-models" data-view="models"><span class="tab-icon">▤</span><span>机型</span></button>
-    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="view-macbook" data-view="macbook"><span class="tab-icon">⌘</span><span>MacBook</span></button>
-    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="view-method" data-view="method"><span class="tab-icon">i</span><span>口径</span></button>
+  <a class="brand" href="#cost" aria-label="Value Lab 首页">
+    <strong>Value Lab</strong><span id="headerMeta">持有成本</span>
+  </a>
+  <nav id="mainTabs" class="main-tabs" aria-label="主要功能">
+    <button class="main-tab active" data-view="cost" type="button"><span>￥</span>成本</button>
+    <button class="main-tab" data-view="market" type="button"><span>↕</span>市场</button>
+    <button class="main-tab" data-view="buy" type="button"><span>▤</span>购买参考</button>
+    <button class="main-tab" data-view="alternatives" type="button"><span>≈</span>生活平替</button>
+    <button class="main-tab" data-view="my" type="button"><span>☆</span>我的</button>
   </nav>
-
   <div class="header-actions">
-    <button id="themeToggle" class="icon-button" type="button" aria-label="切换深色主题" title="切换主题">
-      <span aria-hidden="true">◐</span>
-    </button>
+    <button id="globalSearchButton" class="icon-button" type="button" title="全局搜索" aria-label="全局搜索">⌕</button>
+    <button id="infoButton" class="icon-button" type="button" title="数据说明" aria-label="数据说明">i</button>
+    <button id="themeToggle" class="icon-button" type="button" title="切换主题" aria-label="切换主题">◐</button>
     <div class="menu-wrap">
-      <button id="exportToggle" class="icon-button" type="button" aria-label="导出数据" aria-haspopup="menu" aria-expanded="false" title="导出数据">
-        <span aria-hidden="true">⇩</span>
-      </button>
+      <button id="exportButton" class="icon-button" type="button" title="导出" aria-label="导出数据" aria-haspopup="menu" aria-expanded="false">⇩</button>
       <div id="exportMenu" class="menu" role="menu" hidden>
-        <button id="exportJson" type="button" role="menuitem">完整数据 · JSON</button>
-        <button id="exportCsv" type="button" role="menuitem">价格记录 · CSV</button>
+        <button data-export="json" role="menuitem">完整数据 · JSON</button>
+        <button data-export="market" role="menuitem">市场价格 · CSV</button>
+        <button data-export="alternatives" role="menuitem">生活平替 · CSV</button>
       </div>
     </div>
   </div>
 </header>
 
-<div class="statusbar" role="status">
-  <span id="dataCount">读取数据…</span>
-  <span class="status-note">同容量、同成色比较更有意义</span>
-</div>
+<div class="statusbar"><span id="dataStatus">读取数据…</span><span id="dataDate"></span></div>
 
 <main id="appMain">
-  <section id="view-analysis" class="view active" role="tabpanel" aria-labelledby="tab-analysis">
-    <div class="section-title">
-      <div><h1>换机成本</h1><p>比较买入、退出和持有期间的真实支出。</p></div>
-      <button id="resetAnalysis" class="text-button" type="button">恢复默认</button>
+  <section id="view-cost" class="view active">
+    <div class="page-head"><div><h1>持有成本</h1><p>买入、使用、维护和出售合并计算。</p></div><button id="resetCost" class="text-button" type="button">恢复默认</button></div>
+    <div class="product-tabs" data-product-tabs="cost">
+      <button class="active" data-product="iphone" type="button">iPhone</button>
+      <button data-product="macbook" type="button">MacBook Pro</button>
     </div>
-
-    <div class="toolbar dense-grid" aria-label="成本参数">
-      <label>机型<select id="modelSelect"></select></label>
-      <label>容量<select id="storageSelect"></select></label>
-      <label>持有<select id="holdYears"><option value="0">立即转卖</option><option value="1">1 年</option><option value="2">2 年</option><option value="3">3 年</option><option value="4">4 年</option></select></label>
-      <label>年折旧<input id="deprRate" type="number" inputmode="decimal" min="0" max="60" step="1"><i>%</i></label>
-      <label>交易费用<input id="fees" type="number" inputmode="numeric" min="0" step="50"><i>元</i></label>
-      <label>维修电池<input id="repair" type="number" inputmode="numeric" min="0" step="50"><i>元</i></label>
-    </div>
-
-    <div id="kpis" class="kpi-strip" aria-live="polite"></div>
-
+    <div id="costControls" class="toolbar"></div>
+    <div id="costKpis" class="kpi-strip"></div>
     <section class="block trend-block">
-      <div class="block-head"><h2>1–4 年价格下降趋势</h2><span id="iphoneTrendMeta">按当前二手样本校准</span></div>
-      <div class="trend-layout">
-        <div id="iphoneTrendChart" class="trend-chart" aria-label="iPhone 价格下降趋势图"></div>
-        <div id="iphoneTrendTable" class="trend-table"></div>
-      </div>
-      <p class="block-note">曲线是同容量、正常机况的个人转卖参考估值，不是未来成交承诺；首发价准确，后续年份按当前样本和分层折旧曲线估算。</p>
+      <div class="block-head"><div><h2>1–5 年价值趋势</h2><span id="trendMeta"></span></div><div class="segmented"><button class="active" data-trend-mode="age" type="button">产品机龄</button><button data-trend-mode="holding" type="button">我的持有</button></div></div>
+      <div class="trend-layout"><div id="trendChart" class="trend-chart"></div><div id="trendSummary" class="trend-summary"></div></div>
+      <div id="trendTable" class="table-wrap"></div>
     </section>
-
-    <div class="split main-split">
-      <section class="block">
-        <div class="block-head"><h2>交易路径</h2><span>成本与数据质量综合排序</span></div>
-        <div id="routeTable" class="table-wrap"></div>
-      </section>
-      <aside class="block model-summary">
-        <div class="block-head"><h2>所选机型</h2><span id="modelDate"></span></div>
-        <div id="modelBrief"></div>
-        <div id="costBars" class="cost-bars"></div>
-      </aside>
+    <div class="split cost-bottom">
+      <section class="block"><div class="block-head"><h2>交易路径</h2><span>同配置比较</span></div><div id="routeTable" class="table-wrap"></div></section>
+      <aside class="block"><div class="block-head"><h2>换机结论</h2><span id="selectedRelease"></span></div><div id="costConclusion"></div></aside>
     </div>
-
-    <section class="block">
-      <div class="block-head"><h2>价格样本</h2><span>核验 / 样本 / 参考</span></div>
-      <div id="selectedMarket" class="table-wrap"></div>
-    </section>
-
-    <details class="block compact-details">
-      <summary>长期换机策略</summary>
-      <div class="details-body">
-        <div id="strategyTable" class="table-wrap"></div>
-        <div class="note-grid" id="strategyNotes"></div>
-      </div>
-    </details>
   </section>
 
-  <section id="view-market" class="view" role="tabpanel" hidden>
-    <div class="section-title"><div><h1>市场价格</h1><p>新机、二手买入、个人转卖和平台回收分开记录。</p></div></div>
-    <div class="toolbar market-toolbar" aria-label="价格筛选">
-      <label>搜索<input id="marketSearch" type="search" autocomplete="off" placeholder="机型、平台、机况"></label>
-      <label>类型<select id="marketKind"><option value="">全部</option><option value="new">新机</option><option value="used">二手买入</option><option value="sell">出售回收</option></select></label>
-      <label>数据<select id="confidenceFilter"><option value="">全部</option><option value="high">核验</option><option value="medium">样本</option><option value="low">参考</option></select></label>
+  <section id="view-market" class="view" hidden>
+    <div class="page-head"><div><h1>市场价格</h1><p>新品、二手买入、个人转卖和平台回收分开查看。</p></div></div>
+    <div class="product-tabs" data-product-tabs="market"><button class="active" data-product="iphone" type="button">iPhone</button><button data-product="macbook" type="button">MacBook Pro</button></div>
+    <div class="toolbar market-toolbar">
+      <label>搜索<input id="marketSearch" type="search" placeholder="机型、配置、平台、机况"></label>
+      <label>类型<select id="marketSide"><option value="">全部</option><option value="buy">买入</option><option value="sell">卖出</option></select></label>
+      <label>数据<select id="marketConfidence"><option value="">全部</option><option value="high">核验</option><option value="medium">样本</option><option value="low">参考</option></select></label>
+      <label>平台<select id="marketChannel"><option value="">全部</option></select></label>
     </div>
+    <div id="marketKpis" class="kpi-strip compact"></div>
     <section class="block"><div class="block-head"><h2>价格记录</h2><span id="marketCount"></span></div><div id="marketTable" class="table-wrap tall"></div></section>
   </section>
 
-  <section id="view-models" class="view" role="tabpanel" hidden>
-    <div class="section-title"><div><h1>机型参数</h1><p>芯片、内存、屏幕、相机、关键更新和购买判断。</p></div></div>
-    <div class="toolbar model-toolbar" aria-label="机型筛选">
-      <label>搜索<input id="modelSearch" type="search" autocomplete="off" placeholder="A17 Pro、120Hz、5×"></label>
-      <label>年份<select id="yearFilter"><option value="">全部</option></select></label>
-      <label>系列<select id="tierFilter"><option value="">全部</option></select></label>
-      <label class="check"><input id="aiOnly" type="checkbox">仅 AI 硬件支持</label>
+  <section id="view-buy" class="view" hidden>
+    <div class="page-head"><div><h1>购买参考</h1><p>参数、价格和购买判断放在一起。</p></div></div>
+    <div class="product-tabs" data-product-tabs="buy"><button class="active" data-product="iphone" type="button">iPhone</button><button data-product="macbook" type="button">MacBook Pro</button></div>
+    <div class="toolbar buy-toolbar">
+      <label>搜索<input id="buySearch" type="search" placeholder="芯片、内存、120Hz、长焦"></label>
+      <label id="buyYearLabel">年份<select id="buyYear"><option value="">全部</option></select></label>
+      <label id="buyTierLabel">系列<select id="buyTier"><option value="">全部</option></select></label>
+      <label>预算上限<input id="buyBudget" type="number" min="0" step="500" placeholder="不限"></label>
+      <label class="check"><input id="buyUsed" type="checkbox" checked>接受二手</label>
     </div>
-    <div class="split model-split">
-      <section class="block"><div class="block-head"><h2>机型列表</h2><span id="modelCount"></span></div><div id="modelsTable" class="table-wrap tall"></div></section>
-      <aside class="block sticky-detail desktop-detail"><div class="block-head"><h2>详细信息</h2><span>选择一行查看</span></div><div id="modelDetail"></div></aside>
+    <div class="split buy-layout">
+      <section class="block"><div class="block-head"><h2>产品列表</h2><span id="buyCount"></span></div><div id="buyTable" class="table-wrap tall"></div></section>
+      <aside class="block sticky-detail"><div class="block-head"><h2>详细信息</h2><span>选择一行查看</span></div><div id="buyDetail"></div></aside>
     </div>
   </section>
 
-  <section id="view-macbook" class="view" role="tabpanel" hidden>
-    <div class="section-title"><div><h1>MacBook Pro</h1><p>M1 至 M5 Pro/Max 的规格、国行价格、二手买卖价差和 1–4 年折旧趋势。</p></div></div>
-    <div class="toolbar mac-toolbar" aria-label="MacBook Pro 选择">
-      <label>机型<select id="macModelSelect"></select></label>
-      <label>趋势口径<select id="macTrendMode"><option value="personal">个人转卖</option><option value="recycle">平台回收</option></select></label>
+  <section id="view-alternatives" class="view" hidden>
+    <div class="page-head"><div><h1>生活平替</h1><p>先看功能、限制和风险，再看能省多少。</p></div><button id="showFavorites" class="text-button" type="button">只看收藏</button></div>
+    <div class="alternative-search"><span>⌕</span><input id="alternativeSearch" type="search" placeholder="搜索需求、平替方案、材料或使用场景"></div>
+    <div id="categoryChips" class="category-chips"></div>
+    <div class="toolbar alternative-toolbar">
+      <label>可靠性<select id="alternativeReliability"><option value="">全部</option><option value="A">A · 高</option><option value="B">B · 有限制</option><option value="C">C · 临时</option></select></label>
+      <label>风险<select id="alternativeRisk"><option value="">全部</option><option value="low">低风险</option><option value="conditional">有条件</option></select></label>
+      <label>证据<select id="alternativeEvidence"><option value="">全部</option><option value="A">A</option><option value="B">B</option><option value="C">C</option></select></label>
+      <label>类型<select id="alternativeType"><option value="">全部</option></select></label>
+      <label>排序<select id="alternativeSort"><option value="recommended">综合推荐</option><option value="saving">预计节省</option><option value="reliability">可靠性</option><option value="category">分类</option></select></label>
     </div>
-
-    <div id="macKpis" class="kpi-strip" aria-live="polite"></div>
-
-    <section class="block trend-block">
-      <div class="block-head"><h2>1–4 年二手价格趋势</h2><span id="macTrendMeta">按当前二手样本校准</span></div>
-      <div class="trend-layout">
-        <div id="macTrendChart" class="trend-chart" aria-label="MacBook Pro 二手价格趋势图"></div>
-        <div id="macTrendTable" class="trend-table"></div>
-      </div>
-      <p class="block-note">高配 Max、超大内存和大容量 SSD 的升级费用，在二手市场通常不能按原价等比例回收；曲线按所列代表配置计算。</p>
-    </section>
-
-    <div class="split mac-main-split">
-      <aside class="block model-summary">
-        <div class="block-head"><h2>所选配置</h2><span id="macModelDate"></span></div>
-        <div id="macBrief"></div>
-      </aside>
-      <section class="block">
-        <div class="block-head"><h2>当前价格样本</h2><span>买入 / 个人转卖 / 平台回收</span></div>
-        <div id="macSelectedMarket" class="table-wrap"></div>
-      </section>
+    <div class="split alternative-layout">
+      <section class="block"><div class="block-head"><h2>平替列表</h2><span id="alternativeCount"></span></div><div id="alternativeTable" class="table-wrap tall"></div></section>
+      <aside class="block sticky-detail"><div class="block-head"><h2>方案详情</h2><span id="alternativeDetailMeta"></span></div><div id="alternativeDetail"></div></aside>
     </div>
-
-    <section class="block">
-      <div class="block-head"><h2>MacBook Pro 机型汇总</h2><span id="macModelCount"></span></div>
-      <div id="macModelsTable" class="table-wrap tall"></div>
-    </section>
   </section>
 
-  <section id="view-method" class="view" role="tabpanel" hidden>
-    <div class="section-title"><div><h1>数据口径</h1><p>同时说明 iPhone 与 MacBook Pro 的报价、成交、回收和趋势估值口径。</p></div></div>
-    <div class="split method-split">
-      <section class="block prose">
-        <h2>怎么看这些价格</h2>
-        <ol>
-          <li><b>买入价</b>是获得手机需要支付的金额；<b>退出价</b>是出售手机实际收到的金额。</li>
-          <li><b>即时价差</b>反映平台零售与回收之间的差距，不等于自然折旧。</li>
-          <li><b>持有成本</b> = 买入价 − 预计退出价 + 交易费用 + 维修或电池费用。</li>
-          <li><b>1–4 年趋势</b>以首发价为起点，再用当前同配置二手样本校准分层折旧曲线。</li>
-          <li>只有容量、成色、电池健康和维修历史接近的记录才适合直接比较。</li>
-        </ol>
-        <h2>数据标记</h2>
-        <div class="legend">
-          <span class="tag high">核验</span><span>官方页面或明确价格</span>
-          <span class="tag medium">样本</span><span>公开报道或单次案例</span>
-          <span class="tag low">参考</span><span>综合公开行情形成的区间</span>
-        </div>
-        <h2>交易前检查</h2>
-        <ul>
-          <li>同一天分别询问买入和回收价格。</li>
-          <li>确认电池健康、维修史、网络锁和部件提示。</li>
-          <li>把优惠券、运费、质检降价和换电池费用算进去。</li>
-        </ul>
-      </section>
-      <section class="block"><div class="block-head"><h2>资料来源</h2><span id="sourceCount"></span></div><div id="sourcesList" class="source-list"></div></section>
+  <section id="view-my" class="view" hidden>
+    <div class="page-head"><div><h1>我的</h1><p>数据只保存在当前浏览器。</p></div><button id="clearMyData" class="text-button danger-text" type="button">清空本地数据</button></div>
+    <div id="myKpis" class="kpi-strip"></div>
+    <div class="split my-layout">
+      <section class="block"><div class="block-head"><h2>我的物品</h2><button id="addOwnedItem" class="small-button" type="button">＋ 添加</button></div><div id="ownedItems"></div></section>
+      <section class="block"><div class="block-head"><h2>平替收藏</h2><span id="favoriteCount"></span></div><div id="favoriteAlternatives"></div></section>
     </div>
   </section>
 </main>
 
-<dialog id="modelDialog" class="detail-dialog" aria-labelledby="modelDialogTitle">
-  <div class="dialog-head"><strong id="modelDialogTitle">机型详情</strong><button id="closeModelDialog" class="icon-button" type="button" aria-label="关闭" title="关闭">×</button></div>
-  <div id="modelDetailMobile"></div>
-</dialog>
+<nav class="mobile-nav" aria-label="移动端导航">
+  <button class="active" data-view="cost" type="button">￥<span>成本</span></button>
+  <button data-view="market" type="button">↕<span>市场</span></button>
+  <button data-view="buy" type="button">▤<span>选购</span></button>
+  <button data-view="alternatives" type="button">≈<span>平替</span></button>
+  <button data-view="my" type="button">☆<span>我的</span></button>
+</nav>
 
-<div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
-
-<footer><span id="footerMeta">价格与趋势仅供比较，成交前请复核。</span></footer>
+<dialog id="detailDialog" class="detail-dialog"><div class="dialog-head"><strong id="detailDialogTitle">详情</strong><button class="icon-button" data-close-dialog="detailDialog" type="button">×</button></div><div id="detailDialogBody"></div></dialog>
+<dialog id="infoDialog" class="info-dialog"><div class="dialog-head"><strong>数据说明</strong><button class="icon-button" data-close-dialog="infoDialog" type="button">×</button></div><div id="infoBody"></div></dialog>
+<dialog id="searchDialog" class="search-dialog"><div class="dialog-head"><strong>全局搜索</strong><button class="icon-button" data-close-dialog="searchDialog" type="button">×</button></div><div class="global-search"><input id="globalSearch" type="search" placeholder="搜索产品、品牌、生活需求或平替方案"></div><div id="globalSearchResults"></div></dialog>
+<dialog id="ownedDialog" class="owned-dialog"><form method="dialog" id="ownedForm"><div class="dialog-head"><strong>添加我的物品</strong><button class="icon-button" value="cancel" type="submit">×</button></div><div class="form-grid"><label>产品类型<select id="ownedType"><option value="iphone">iPhone</option><option value="macbook">MacBook Pro</option></select></label><label>机型<select id="ownedModel"></select></label><label>购买日期<input id="ownedDate" type="date" required></label><label>购买价格<input id="ownedPrice" type="number" min="0" step="100" required></label><label>备注<input id="ownedNote" type="text" maxlength="80" placeholder="成色、容量或配置"></label></div><div class="dialog-actions"><button value="cancel" type="submit" class="text-button">取消</button><button id="saveOwned" value="default" type="button" class="primary-button">保存</button></div></form></dialog>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<footer><span>价格、价值趋势和平替评价用于比较；交易或使用前请复核具体条件。</span></footer>
 <script src="app.js"></script>
 </body>
 </html>

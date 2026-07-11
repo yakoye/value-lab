@@ -1,0 +1,17 @@
+{
+  "name": "Value Lab",
+  "version": "0.4.0",
+  "updated": "2026-07-11",
+  "modules": [
+    "cost",
+    "market",
+    "buy",
+    "alternatives",
+    "my"
+  ],
+  "counts": {
+    "alternatives": 108,
+    "rejected": 8,
+    "categories": 18
+  }
+}

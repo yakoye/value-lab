@@ -1,0 +1,92 @@
+[
+  {
+    "id": "storage",
+    "name": "收纳整理",
+    "icon": "▦"
+  },
+  {
+    "id": "kitchen",
+    "name": "厨房餐饮",
+    "icon": "⌑"
+  },
+  {
+    "id": "cleaning",
+    "name": "清洁洗护",
+    "icon": "◇"
+  },
+  {
+    "id": "home",
+    "name": "家居家具",
+    "icon": "□"
+  },
+  {
+    "id": "decor",
+    "name": "软装装饰",
+    "icon": "◫"
+  },
+  {
+    "id": "bath",
+    "name": "卫浴",
+    "icon": "◌"
+  },
+  {
+    "id": "beauty",
+    "name": "美妆个护",
+    "icon": "◐"
+  },
+  {
+    "id": "clothing",
+    "name": "衣物鞋包",
+    "icon": "⌁"
+  },
+  {
+    "id": "pet",
+    "name": "宠物用品",
+    "icon": "●"
+  },
+  {
+    "id": "baby",
+    "name": "母婴用品",
+    "icon": "○"
+  },
+  {
+    "id": "office",
+    "name": "文具办公",
+    "icon": "▤"
+  },
+  {
+    "id": "digital",
+    "name": "数码配件",
+    "icon": "⌘"
+  },
+  {
+    "id": "outdoor",
+    "name": "户外露营",
+    "icon": "△"
+  },
+  {
+    "id": "travel",
+    "name": "出行旅行",
+    "icon": "↗"
+  },
+  {
+    "id": "fitness",
+    "name": "健身运动",
+    "icon": "＋"
+  },
+  {
+    "id": "garden",
+    "name": "园艺",
+    "icon": "♧"
+  },
+  {
+    "id": "tools",
+    "name": "工具维修",
+    "icon": "⌁"
+  },
+  {
+    "id": "appliance",
+    "name": "家电耗材",
+    "icon": "◉"
+  }
+]

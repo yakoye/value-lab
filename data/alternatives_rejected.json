@@ -1,0 +1,50 @@
+[
+  {
+    "original": "婴儿围栏",
+    "alternative": "成箱矿泉水瓶或网格片DIY",
+    "reason": "婴幼儿夹困、翻倒和窒息风险，不能以临时结构替代合规围栏。",
+    "risk": "high"
+  },
+  {
+    "original": "宠物维生素或药品",
+    "alternative": "人用复合维生素或人用药",
+    "reason": "剂量、成分和代谢差异不可控，应由兽医确认。",
+    "risk": "high"
+  },
+  {
+    "original": "瓷砖清洁剂",
+    "alternative": "自行稀释盐酸",
+    "reason": "腐蚀和吸入风险高，也可能与其他清洁剂发生危险反应。",
+    "risk": "high"
+  },
+  {
+    "original": "便携烧水壶",
+    "alternative": "保温杯加加热棒",
+    "reason": "电击、干烧、过热和容器不适配风险。",
+    "risk": "high"
+  },
+  {
+    "original": "健身杠铃或引体架",
+    "alternative": "竹竿、门框或非承重管件DIY",
+    "reason": "承重失效会造成严重跌落或砸伤。",
+    "risk": "high"
+  },
+  {
+    "original": "宠物食品和营养品",
+    "alternative": "未经配方计算的自制替代",
+    "reason": "营养不完整或成分不适合，不能作为通用平替推荐。",
+    "risk": "high"
+  },
+  {
+    "original": "大牌护肤或彩妆",
+    "alternative": "无备案的极低价同色产品",
+    "reason": "来源、成分和卫生条件无法核验。",
+    "risk": "high"
+  },
+  {
+    "original": "食品容器",
+    "alternative": "来源不明的工业、医疗或化工容器",
+    "reason": "无法确认食品接触材料、迁移物和耐温范围。",
+    "risk": "high"
+  }
+]

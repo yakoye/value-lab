@@ -1,329 +1,427 @@
-const state={models:[],market:[],macbook_models:[],macbook_market:[],strategies:[],sources:[],audit:{},selectedModel:null,dataDate:''};
-const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const UI_KEY='avl.ui.v4', THEME_KEY='ivl.theme';
-const defaults={view:'analysis',modelId:'iphone-15-pro-max',detailModelId:'iphone-15-pro-max',storage:'256GB',holdYears:1,deprRate:14,fees:250,repair:0,marketSearch:'',marketKind:'',confidence:'',modelSearch:'',year:'',tier:'',aiOnly:false,macModelId:'mbp-14-m3pro-2023',macTrendMode:'personal'};
-let ui={...defaults,...readJson(UI_KEY)};
-let toastTimer=0;
+'use strict';
 
-const yuan=n=>new Intl.NumberFormat('zh-CN',{style:'currency',currency:'CNY',maximumFractionDigits:0}).format(Math.round(Number(n)||0));
-const mid=r=>(Number(r.low)+Number(r.high))/2;
-const pct=n=>`${(Number(n||0)*100).toFixed(1)}%`;
-const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const confidenceLabel={high:'核验',medium:'样本',low:'参考'};
-const confidenceTitle={high:'官方页面或明确价格',medium:'公开报道或单次案例',low:'综合公开行情形成的参考区间'};
+const state = {
+  models: [], market: [], macModels: [], macMarket: [], sources: [], strategies: [],
+  alternatives: [], categories: [], site: {},
+  view: 'cost', costProduct: 'iphone', marketProduct: 'iphone', buyProduct: 'iphone',
+  trendMode: 'age', selectedBuyId: '', selectedAlternativeId: '', favoritesOnly: false,
+  ui: {}, favorites: new Set(), owned: []
+};
 
-function readJson(key){try{return JSON.parse(localStorage.getItem(key)||'{}')}catch(_){return {}}}
-function saveUi(){try{localStorage.setItem(UI_KEY,JSON.stringify(ui))}catch(_){}}
-function clamp(value,min,max,fallback){const n=Number(value);return Number.isFinite(n)?Math.min(max,Math.max(min,n)):fallback}
-function safeUrl(value){try{const url=new URL(value,location.href);return ['http:','https:'].includes(url.protocol)?url.href:'#'}catch(_){return '#'}}
-function sourceMap(){return Object.fromEntries(state.sources.map(x=>[x.id,x]))}
-function publicNote(value){return String(value??'').replaceAll('公开挂牌与市场折旧模型形成的参考区间','综合公开挂牌与历史折旧形成的参考区间').replaceAll('平台检测价差演示','平台检测前后价差说明').replaceAll('模型估算','参考区间')}
+const $ = (s, root=document) => root.querySelector(s);
+const $$ = (s, root=document) => [...root.querySelectorAll(s)];
+const esc = v => String(v ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const yuan = n => Number.isFinite(+n) ? new Intl.NumberFormat('zh-CN',{style:'currency',currency:'CNY',maximumFractionDigits:0}).format(+n) : '—';
+const num = n => new Intl.NumberFormat('zh-CN').format(Math.round(+n || 0));
+const median = (a,b) => Math.round(((+a||0)+(+b||0))/2);
+const pct = n => Number.isFinite(+n) ? `${(+n).toFixed(1)}%` : '—';
+const clamp = (n,min,max) => Math.min(max,Math.max(min,n));
+const today = () => new Date().toISOString().slice(0,10);
+const ageYears = release => Math.max(0,(new Date('2026-07-11')-new Date(`${release}-01`))/(365.25*864e5));
+const debounce = (fn, ms=140) => { let t; return (...args) => { clearTimeout(t); t=setTimeout(()=>fn(...args),ms); }; };
 
-async function load(){
-  const files=['models','market','macbook_models','macbook_market','strategies','sources','audit'];
-  const data=await Promise.all(files.map(f=>fetch(`data/${f}.json`,{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('DATA_LOAD');return r.json()})));
-  files.forEach((f,i)=>state[f]=data[i]);
-  if(!Array.isArray(state.models)||!Array.isArray(state.market)||!state.models.length)throw new Error('DATA_INVALID');
-  state.dataDate=[...state.market,...state.macbook_market].map(x=>x.date).filter(Boolean).sort().at(-1)||state.sources.map(x=>x.accessed).filter(Boolean).sort().at(-1)||'';
-  init();
+function toast(message){
+  const el=$('#toast'); el.textContent=message; el.classList.add('show');
+  clearTimeout(toast.timer); toast.timer=setTimeout(()=>el.classList.remove('show'),1800);
+}
+function safeStore(key,value){ try{localStorage.setItem(key,JSON.stringify(value));}catch(_){} }
+function safeRead(key,fallback){ try{const v=localStorage.getItem(key); return v?JSON.parse(v):fallback}catch(_){return fallback} }
+function saveState(){
+  safeStore('vl.ui',{
+    view:state.view,costProduct:state.costProduct,marketProduct:state.marketProduct,buyProduct:state.buyProduct,
+    trendMode:state.trendMode,selectedBuyId:state.selectedBuyId,selectedAlternativeId:state.selectedAlternativeId,ui:state.ui
+  });
+  safeStore('vl.favorites',[...state.favorites]); safeStore('vl.owned',state.owned);
+}
+function loadState(){
+  const s=safeRead('vl.ui',{}); Object.assign(state,s); state.ui=s.ui||{};
+  state.favorites=new Set(safeRead('vl.favorites',[])); state.owned=safeRead('vl.owned',[]);
+}
+
+async function loadData(){
+  const names=['models','market','macbook_models','macbook_market','sources','strategies','alternatives','categories','site'];
+  const results=await Promise.all(names.map(n=>fetch(`data/${n}.json`).then(r=>{if(!r.ok)throw new Error(n);return r.json()})));
+  [state.models,state.market,state.macModels,state.macMarket,state.sources,state.strategies,state.alternatives,state.categories,state.site]=results;
+}
+
+function parseStorage(s){
+  const parts=String(s||'').split(/[\/–-]/).map(x=>x.trim()).filter(Boolean);
+  return parts.map((part,i)=>{
+    if(/^(\d+(?:\.\d+)?)(GB|TB)$/i.test(part))return part.toUpperCase();
+    if(!/^\d+(?:\.\d+)?$/.test(part))return '';
+    let unit='';
+    for(let j=i+1;j<parts.length&&!unit;j++){const m=parts[j].match(/(GB|TB)$/i);if(m)unit=m[1].toUpperCase()}
+    if(!unit){for(let j=i-1;j>=0&&!unit;j--){const m=parts[j].match(/(GB|TB)$/i);if(m)unit=m[1].toUpperCase()}}
+    return unit?`${part}${unit}`:'';
+  }).filter(Boolean);
+}
+function storageGB(s){ const m=String(s).match(/([\d.]+)\s*(TB|GB)/i); if(!m)return 0; return +m[1]*(m[2].toUpperCase()==='TB'?1024:1); }
+const storagePremium = gb => {
+  const map={64:0,128:500,256:1500,512:3500,1024:5500,2048:7500,4096:10500,8192:15500};
+  if(map[gb]!=null)return map[gb];
+  return Math.max(0,(Math.log2(Math.max(64,gb)/64))*1000);
+};
+function adjustedLaunch(model,storage){
+  if(!storage || !model.baseStorage)return model.launchPrice||0;
+  return Math.max(0,(model.launchPrice||0)+storagePremium(storageGB(storage))-storagePremium(storageGB(model.baseStorage)));
+}
+function adjustMarketRows(rows, storage, model){
+  if(!storage || !rows.length || !model) return rows;
+  const exact=rows.filter(r=>!r.storage || r.storage===storage);
+  if(exact.length)return exact;
+  const candidates=rows.filter(r=>r.storage);
+  if(!candidates.length)return rows;
+  const target=storageGB(storage);
+  const nearestStorage=[...new Set(candidates.map(r=>r.storage))].sort((a,b)=>Math.abs(storageGB(a)-target)-Math.abs(storageGB(b)-target))[0];
+  const delta=(storagePremium(target)-storagePremium(storageGB(nearestStorage)))*0.42;
+  return candidates.filter(r=>r.storage===nearestStorage).map(r=>({...r,storage,low:Math.max(0,Math.round(r.low+delta)),high:Math.max(0,Math.round(r.high+delta)),derived:true,note:`由 ${nearestStorage} 参考区间按容量残值换算。`}));
+}
+function productData(product){ return product==='iphone'?{models:state.models,market:state.market}:{models:state.macModels,market:state.macMarket}; }
+function getModel(product,id){ return productData(product).models.find(x=>x.id===id); }
+function rowsFor(product,modelId,storage=''){
+  const d=productData(product); let rows=d.market.filter(x=>x.modelId===modelId);
+  if(product==='iphone') rows=adjustMarketRows(rows,storage,getModel(product,modelId));
+  return rows;
+}
+function rowMid(r){return median(r.low,r.high)}
+function confidenceText(v){return ({high:'核验',medium:'样本',low:'参考'})[v]||v||'—'}
+function confidenceTag(v){return `<span class="tag ${esc(v)}">${esc(confidenceText(v))}</span>`}
+function riskText(v){return v==='low'?'低风险':'有条件'}
+function statusText(v){return ({recommended:'推荐',conditional:'有条件推荐',temporary:'临时替代'})[v]||v}
+
+function curveFor(product,model){
+  if(product==='iphone'){
+    if(/Pro Max/.test(model.name))return [1,.76,.61,.49,.39,.31];
+    if(/Pro/.test(model.name))return [1,.74,.58,.46,.36,.28];
+    if(/mini|SE/.test(model.name))return [1,.66,.49,.37,.28,.21];
+    if(/Plus/.test(model.name))return [1,.70,.55,.43,.33,.25];
+    return [1,.70,.54,.42,.32,.24];
+  }
+  if(/Max/.test(model.chip))return [1,.77,.63,.52,.43,.35];
+  if(/Pro/.test(model.chip))return [1,.79,.66,.55,.46,.38];
+  return [1,.75,.60,.49,.40,.32];
+}
+function interpolateCurve(curve,year){
+  if(year<=0)return 1;
+  const i=Math.floor(year), f=year-i;
+  if(i>=curve.length-1){
+    const last=curve[curve.length-1], prev=curve[curve.length-2];
+    const rate=last/prev; return last*Math.pow(rate,year-(curve.length-1));
+  }
+  const a=curve[i],b=curve[i+1]; return a*Math.pow(b/a,f);
+}
+function currentSellAnchor(product,model,storage,channel=''){
+  const rows=rowsFor(product,model.id,storage).filter(r=>r.side==='sell' && (!channel||r.channel===channel));
+  if(!rows.length)return 0;
+  const sorted=rows.map(rowMid).sort((a,b)=>b-a); return sorted[0]||0;
+}
+function currentBuyAnchor(product,model,storage,channel=''){
+  const rows=rowsFor(product,model.id,storage).filter(r=>r.side==='buy' && (!channel||r.channel===channel));
+  if(!rows.length)return 0;
+  const sorted=rows.map(rowMid).sort((a,b)=>a-b); return sorted[0]||0;
+}
+function calibratedValue(product,model,storage,year,side='sell',channel='',manualRate=null){
+  const launch=product==='iphone'?adjustedLaunch(model,storage):model.launchPrice;
+  if(manualRate!=null) return Math.max(0,Math.round(launch*Math.pow(1-manualRate,year)));
+  const curve=curveFor(product,model); const base=interpolateCurve(curve,year)*launch;
+  const currentAge=ageYears(model.release); const anchor=side==='buy'?currentBuyAnchor(product,model,storage,channel):currentSellAnchor(product,model,storage,channel);
+  if(!anchor)return Math.round(base);
+  const baseAtAge=interpolateCurve(curve,currentAge)*launch;
+  const scale=clamp(anchor/Math.max(1,baseAtAge),.58,1.5);
+  const fade=Math.exp(-Math.abs(year-currentAge)/6);
+  return Math.max(0,Math.round(base*(1+(scale-1)*fade)));
+}
+function futureFromNow(product,model,storage,currentValue,holdYears,manualRate=null){
+  if(manualRate!=null)return Math.round(currentValue*Math.pow(1-manualRate,holdYears));
+  const curve=curveFor(product,model), age=ageYears(model.release);
+  const now=interpolateCurve(curve,age), future=interpolateCurve(curve,age+holdYears);
+  return Math.max(0,Math.round(currentValue*(future/Math.max(.01,now))));
 }
 
 function init(){
-  setupTheme();
-  setupTabs();
-  setupMenu();
-  setupFilters();
-  setupDialog();
-  setupExports();
-  $('#headerMeta').textContent=state.dataDate?`更新 ${state.dataDate}`:'换机成本';
-  $('#dataCount').textContent=`iPhone ${state.models.length} 款 / ${state.market.length} 条价格 · MacBook Pro ${state.macbook_models.length} 款 / ${state.macbook_market.length} 条价格 · 更新 ${state.dataDate||'—'}`;
-  $('#footerMeta').textContent=`数据更新 ${state.dataDate||'—'} · 价格仅供比较，成交前请复核`;
-  renderAll();
+  loadState(); bindGlobal(); populateStaticFilters(); switchView(state.view||'cost',false);
+  renderCost(); renderMarket(); renderBuy(); renderAlternatives(); renderMy(); renderInfo();
+  $('#dataStatus').textContent=`${state.models.length} 款 iPhone · ${state.macModels.length} 款 MacBook Pro · ${state.alternatives.length} 条平替`;
+  $('#dataDate').textContent=`数据 ${state.site.updated||'2026-07-11'}`;
 }
 
-function setupTheme(){
-  const current=document.documentElement.dataset.theme||'light';
-  updateThemeButton(current);
-  $('#themeToggle').onclick=()=>applyTheme(document.documentElement.dataset.theme==='dark'?'light':'dark');
-  window.addEventListener('storage',e=>{if(e.key===THEME_KEY&&e.newValue)applyTheme(e.newValue,false)});
-}
-function applyTheme(theme,persist=true){
-  const next=theme==='dark'?'dark':'light';
-  document.documentElement.dataset.theme=next;
-  $('meta[name="theme-color"]')?.setAttribute('content',next==='dark'?'#111513':'#f5f6f5');
-  updateThemeButton(next);
-  if(persist){try{localStorage.setItem(THEME_KEY,next)}catch(_){}}
-}
-function updateThemeButton(theme){
-  const btn=$('#themeToggle'); if(!btn)return;
-  btn.innerHTML=theme==='dark'?'<span aria-hidden="true">☀</span>':'<span aria-hidden="true">◐</span>';
-  btn.setAttribute('aria-label',theme==='dark'?'切换浅色主题':'切换深色主题');
-  btn.title=btn.getAttribute('aria-label');
-}
-
-function setupTabs(){
-  const valid=$$('.tab').map(x=>x.dataset.view);
-  const hash=location.hash.replace('#','');
-  if(valid.includes(hash))ui.view=hash;
-  $$('.tab').forEach((btn,index)=>{
-    btn.id=`tab-${btn.dataset.view}`;
-    btn.tabIndex=index===0?0:-1;
-    btn.onclick=()=>activateView(btn.dataset.view);
-    btn.onkeydown=e=>{
-      let target=-1;
-      if(e.key==='ArrowRight')target=(index+1)%valid.length;
-      if(e.key==='ArrowLeft')target=(index-1+valid.length)%valid.length;
-      if(e.key==='Home')target=0;
-      if(e.key==='End')target=valid.length-1;
-      if(target>=0){e.preventDefault();const next=$$('.tab')[target];activateView(next.dataset.view);next.focus()}
-    };
-  });
-  activateView(valid.includes(ui.view)?ui.view:'analysis',false);
-  window.addEventListener('hashchange',()=>{const view=location.hash.replace('#','');if(valid.includes(view))activateView(view,false)});
-}
-function activateView(view,updateHash=true){
-  ui.view=view;saveUi();
-  $$('.tab').forEach(btn=>{const active=btn.dataset.view===view;btn.classList.toggle('active',active);btn.setAttribute('aria-selected',String(active));btn.tabIndex=active?0:-1});
-  $$('.view').forEach(panel=>{const active=panel.id===`view-${view}`;panel.classList.toggle('active',active);panel.hidden=!active});
-  if(updateHash&&location.hash!==`#${view}`)history.replaceState(null,'',`#${view}`);
-}
-
-function setupMenu(){
-  const toggle=$('#exportToggle'),menu=$('#exportMenu');
-  const close=()=>{menu.hidden=true;toggle.setAttribute('aria-expanded','false')};
-  toggle.onclick=e=>{e.stopPropagation();menu.hidden=!menu.hidden;toggle.setAttribute('aria-expanded',String(!menu.hidden));if(!menu.hidden)menu.querySelector('button')?.focus()};
-  document.addEventListener('click',e=>{if(!e.target.closest('.menu-wrap'))close()});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'){close();if($('#modelDialog')?.open)$('#modelDialog').close()}});
-  menu.addEventListener('keydown',e=>{const items=[...menu.querySelectorAll('button')],i=items.indexOf(document.activeElement);if(e.key==='ArrowDown'){e.preventDefault();items[(i+1)%items.length].focus()}if(e.key==='ArrowUp'){e.preventDefault();items[(i-1+items.length)%items.length].focus()}});
-}
-
-function marketModels(){return state.models.filter(m=>state.market.some(r=>r.modelId===m.id)).sort((a,b)=>b.year-a.year||b.launchPrice-a.launchPrice)}
-function setupFilters(){
-  const ms=$('#modelSelect');
-  ms.innerHTML=marketModels().map(m=>`<option value="${esc(m.id)}">${esc(m.name)}</option>`).join('');
-  if(![...ms.options].some(x=>x.value===ui.modelId))ui.modelId=[...ms.options].some(x=>x.value===defaults.modelId)?defaults.modelId:ms.options[0]?.value;
-  ms.value=ui.modelId;
-  populateStorage(ui.storage);
-  $('#holdYears').value=String(clamp(ui.holdYears,0,4,1));
-  $('#deprRate').value=String(clamp(ui.deprRate,0,60,14));
-  $('#fees').value=String(clamp(ui.fees,0,100000,250));
-  $('#repair').value=String(clamp(ui.repair,0,100000,0));
-  ms.onchange=()=>{ui.modelId=ms.value;populateStorage();saveUi();renderAnalysis()};
-  $('#storageSelect').onchange=()=>{ui.storage=$('#storageSelect').value;saveUi();renderAnalysis()};
-  ['holdYears','deprRate','fees','repair'].forEach(id=>{$('#'+id).oninput=()=>{ui[id]=Number($('#'+id).value);saveUi();renderAnalysis()}});
-  $('#resetAnalysis').onclick=()=>{Object.assign(ui,{modelId:defaults.modelId,storage:defaults.storage,holdYears:1,deprRate:14,fees:250,repair:0});ms.value=[...ms.options].some(x=>x.value===ui.modelId)?ui.modelId:ms.options[0]?.value;populateStorage(ui.storage);$('#holdYears').value='1';$('#deprRate').value='14';$('#fees').value='250';$('#repair').value='0';saveUi();renderAnalysis();showToast('已恢复默认参数')};
-
-  $('#marketSearch').value=ui.marketSearch||'';$('#marketKind').value=ui.marketKind||'';$('#confidenceFilter').value=ui.confidence||'';
-  $('#marketSearch').oninput=()=>{ui.marketSearch=$('#marketSearch').value;saveUi();renderMarket()};
-  $('#marketKind').onchange=()=>{ui.marketKind=$('#marketKind').value;saveUi();renderMarket()};
-  $('#confidenceFilter').onchange=()=>{ui.confidence=$('#confidenceFilter').value;saveUi();renderMarket()};
-
-  const years=[...new Set(state.models.map(m=>m.year))].sort((a,b)=>b-a);$('#yearFilter').innerHTML='<option value="">全部</option>'+years.map(y=>`<option value="${y}">${y}</option>`).join('');
-  const tiers=[...new Set(state.models.map(m=>m.tier))];$('#tierFilter').innerHTML='<option value="">全部</option>'+tiers.map(x=>`<option value="${esc(x)}">${esc(x)}</option>`).join('');
-  $('#modelSearch').value=ui.modelSearch||'';$('#yearFilter').value=ui.year||'';$('#tierFilter').value=ui.tier||'';$('#aiOnly').checked=Boolean(ui.aiOnly);
-  $('#modelSearch').oninput=()=>{ui.modelSearch=$('#modelSearch').value;saveUi();renderModels()};
-  $('#yearFilter').onchange=()=>{ui.year=$('#yearFilter').value;saveUi();renderModels()};
-  $('#tierFilter').onchange=()=>{ui.tier=$('#tierFilter').value;saveUi();renderModels()};
-  $('#aiOnly').onchange=()=>{ui.aiOnly=$('#aiOnly').checked;saveUi();renderModels()};
-
-  const macSelect=$('#macModelSelect');
-  macSelect.innerHTML=[...state.macbook_models].sort((a,b)=>b.year-a.year||b.launchPrice-a.launchPrice).map(m=>`<option value="${esc(m.id)}">${esc(m.name)} · ${esc(m.memory)}/${esc(m.storage)}</option>`).join('');
-  if(![...macSelect.options].some(x=>x.value===ui.macModelId))ui.macModelId=macSelect.options[0]?.value||'';
-  macSelect.value=ui.macModelId;
-  $('#macTrendMode').value=ui.macTrendMode||'personal';
-  macSelect.onchange=()=>{ui.macModelId=macSelect.value;saveUi();renderMacbook()};
-  $('#macTrendMode').onchange=()=>{ui.macTrendMode=$('#macTrendMode').value;saveUi();renderMacbook()};
-}
-function populateStorage(preferred){
-  const id=$('#modelSelect').value;
-  const stor=[...new Set(state.market.filter(r=>r.modelId===id).map(r=>r.storage))];
-  $('#storageSelect').innerHTML=stor.map(s=>`<option value="${esc(s)}">${esc(s)}</option>`).join('');
-  const target=preferred||ui.storage;
-  $('#storageSelect').value=stor.includes(target)?target:(stor.includes('256GB')?'256GB':stor[0]||'');
-  ui.storage=$('#storageSelect').value;
-}
-function currentRows(){return state.market.filter(r=>r.modelId===$('#modelSelect').value&&r.storage===$('#storageSelect').value)}
-function buyRows(rows){return rows.filter(r=>r.side==='buy')}
-function sellRows(rows){return rows.filter(r=>r.side==='sell')}
-
-function riskScore(b,s){
-  const conf={high:0,medium:14,low:30};
-  let score=(conf[b.confidence]??30)+(conf[s.confidence]??30);
-  if(b.kind==='used_personal')score+=12;
-  if(s.kind==='personal_sale')score+=14;
-  if(['recycle_case','channel_recycle'].includes(s.kind))score+=8;
-  return Math.min(100,score);
-}
-function riskInfo(score){if(score<=24)return {text:'低',cls:'risk-low'};if(score<=52)return {text:'中',cls:'risk-mid'};return {text:'高',cls:'risk-high'}}
-function routeCombinations(rows,years,depr,fees,repair){
-  const out=[];
-  buyRows(rows).forEach(b=>sellRows(rows).forEach(s=>{
-    const buy=mid(b),sellNow=mid(s),exit=sellNow*Math.pow(1-depr,years),spread=buy-sellNow,total=buy-exit+fees+repair,annual=years?total/years:total,risk=riskScore(b,s);
-    const anomaly=sellNow>buy*1.05||total<-50;
-    out.push({b,s,buy,sellNow,exit,spread,spreadPct:buy?spread/buy:0,total,annual,risk,anomaly,rank:(anomaly?100000:0)+annual+risk*6});
+function bindGlobal(){
+  $$('.main-tab,.mobile-nav button').forEach(b=>b.addEventListener('click',()=>switchView(b.dataset.view)));
+  $$('[data-product-tabs]').forEach(w=>w.addEventListener('click',e=>{
+    const b=e.target.closest('button[data-product]'); if(!b)return;
+    const area=w.dataset.productTabs; state[`${area}Product`]=b.dataset.product;
+    $$('button',w).forEach(x=>x.classList.toggle('active',x===b));
+    if(area==='cost')renderCost(); if(area==='market')renderMarket(); if(area==='buy')renderBuy(); saveState();
   }));
-  return out.sort((a,b)=>a.rank-b.rank);
+  $('#themeToggle').addEventListener('click',toggleTheme);
+  $('#infoButton').addEventListener('click',()=>$('#infoDialog').showModal());
+  $('#globalSearchButton').addEventListener('click',()=>{ $('#searchDialog').showModal(); setTimeout(()=>$('#globalSearch').focus(),20); });
+  $$('[data-close-dialog]').forEach(b=>b.addEventListener('click',()=>document.getElementById(b.dataset.closeDialog).close()));
+  [$('#detailDialog'),$('#infoDialog'),$('#searchDialog'),$('#ownedDialog')].forEach(d=>d.addEventListener('click',e=>{if(e.target===d)d.close()}));
+  $('#exportButton').addEventListener('click',()=>{const m=$('#exportMenu');m.hidden=!m.hidden;$('#exportButton').setAttribute('aria-expanded',String(!m.hidden))});
+  $('#exportMenu').addEventListener('click',e=>{const b=e.target.closest('[data-export]');if(b)exportData(b.dataset.export)});
+  document.addEventListener('click',e=>{if(!e.target.closest('.menu-wrap')){$('#exportMenu').hidden=true;$('#exportButton').setAttribute('aria-expanded','false')}});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')$('#exportMenu').hidden=true});
+  $('#resetCost').addEventListener('click',()=>{delete state.ui.cost;renderCost();saveState();toast('已恢复默认')});
+  $('#globalSearch').addEventListener('input',debounce(renderGlobalSearch));
+  $('#clearMyData').addEventListener('click',clearMyData);
+  $('#addOwnedItem').addEventListener('click',openOwnedDialog);
+  $('#saveOwned').addEventListener('click',saveOwnedItem);
+  $('#ownedType').addEventListener('change',populateOwnedModels);
+  $('#detailDialog').addEventListener('click',e=>{
+    const fav=e.target.closest('[data-detail-fav]');
+    if(fav){toggleFavorite(fav.dataset.detailFav);$('#detailDialog').close();return}
+    if(e.target.closest('#detailCostButton')){const m=getModel(state.buyProduct,state.selectedBuyId);if(m){state.costProduct=state.buyProduct;getCostSettings().modelId=m.id;$('#detailDialog').close();switchView('cost');renderCost()}return}
+    if(e.target.closest('#detailOwnedButton')){const m=getModel(state.buyProduct,state.selectedBuyId);if(m){$('#detailDialog').close();openOwnedDialog(state.buyProduct,m.id,currentReferencePrice(state.buyProduct,m))}}
+  });
+  window.addEventListener('resize',debounce(()=>{if(state.view==='alternatives')renderAlternativeList()},180));
 }
-function renderAnalysis(){
-  const rows=currentRows(),calcRows=rows.filter(r=>r.analysisEligible!==false),years=clamp($('#holdYears').value,0,4,1),depr=clamp($('#deprRate').value,0,60,14)/100,fees=clamp($('#fees').value,0,100000,250),repair=clamp($('#repair').value,0,100000,0);
-  const routes=routeCombinations(calcRows,years,depr,fees,repair),best=routes.find(r=>!r.anomaly&&r.annual>=0)||routes[0];
-  const model=state.models.find(m=>m.id===$('#modelSelect').value);
-  const buys=buyRows(calcRows),sells=sellRows(calcRows),minBuy=buys.length?Math.min(...buys.map(mid)):0,maxSell=sells.length?Math.max(...sells.map(mid)):0;
-  const spreadRoute=routes.filter(r=>!r.anomaly&&r.spread>=0).sort((a,b)=>a.spread-b.spread)[0];
-  const risk=best?riskInfo(best.risk):{text:'—',cls:''};
-  const values=[['样本最低买入',minBuy?yuan(minBuy):'—','不同渠道'],['样本最高退出',maxSell?yuan(maxSell):'—','检测条件不同'],['较优即时价差',spreadRoute?yuan(spreadRoute.spread):'—',spreadRoute?pct(spreadRoute.spreadPct):'无可比路径'],[years?'推荐年均成本':'推荐即时损失',best?yuan(best.annual):'—',years?`${years} 年持有`:'立即转卖'],['路径风险',risk.text,best?confidenceTitle[best.b.confidence]:'—',risk.cls]];
-  $('#kpis').innerHTML=values.map(v=>`<div class="kpi"><small>${esc(v[0])}</small><strong class="${v[3]||''}">${esc(v[1])}</strong><em>${esc(v[2])}</em></div>`).join('');
-  renderRoutes(routes,years);renderSelectedMarket(rows);renderBrief(model,best,years,fees,repair);renderIphoneTrend(model,$('#storageSelect').value,rows);
+function switchView(view,save=true){
+  if(!['cost','market','buy','alternatives','my'].includes(view))view='cost'; state.view=view;
+  $$('.view').forEach(v=>{const on=v.id===`view-${view}`;v.classList.toggle('active',on);v.hidden=!on});
+  $$('.main-tab,.mobile-nav button').forEach(b=>b.classList.toggle('active',b.dataset.view===view));
+  const labels={cost:'持有成本',market:'市场价格',buy:'购买参考',alternatives:'生活平替',my:'我的'};$('#headerMeta').textContent=labels[view];
+  history.replaceState(null,'',`#${view}`); if(save)saveState(); window.scrollTo({top:0,behavior:'instant'});
 }
-function renderRoutes(routes,years){
-  if(!routes.length){$('#routeTable').innerHTML=emptyHtml('暂无可比较路径','该容量缺少买入价或退出价。');return}
-  $('#routeTable').innerHTML=`<table><thead><tr><th>#</th><th>买入渠道</th><th class="num">买入中位</th><th>退出渠道</th><th class="num">当前退出</th><th class="num">即时价差</th><th class="num">${years?years+' 年后退出':'退出金额'}</th><th class="num">${years?'年均成本':'即时损失'}</th><th>风险</th><th>数据</th></tr></thead><tbody>${routes.slice(0,16).map((r,i)=>{const risk=riskInfo(r.risk);return `<tr><td>${i+1}</td><td>${esc(r.b.channel)}<br><span class="tag buy">${esc(kindLabel(r.b.kind))}</span></td><td class="num"><b>${yuan(r.buy)}</b><br><span class="muted">${yuan(r.b.low)}–${yuan(r.b.high)}</span></td><td>${esc(r.s.channel)}<br><span class="tag sell">${esc(kindLabel(r.s.kind))}</span></td><td class="num">${yuan(r.sellNow)}</td><td class="num ${r.spreadPct>.15?'negative':''}">${yuan(r.spread)}<br><span class="muted">${pct(r.spreadPct)}</span></td><td class="num">${yuan(r.exit)}</td><td class="num ${r.annual<0?'negative':''}"><b>${yuan(r.annual)}</b>${r.anomaly?'<br><span class="tag risk-high">需核验</span>':''}</td><td><span class="tag ${risk.cls}">${risk.text}</span></td><td><span class="tag ${r.b.confidence}" title="${confidenceTitle[r.b.confidence]}">${confidenceLabel[r.b.confidence]}</span> <span class="tag ${r.s.confidence}" title="${confidenceTitle[r.s.confidence]}">${confidenceLabel[r.s.confidence]}</span></td></tr>`}).join('')}</tbody></table>`;
-}
-function kindLabel(k){return ({new_official:'官方新机',new_campaign:'促销新机',used_personal:'个人二手',personal_sale:'个人转卖',used_retail:'平台二手',used_merchant:'商家二手',recycle:'平台回收',recycle_case:'回收案例',trade_in:'官方折抵',used_open_box:'拆封激活',channel_recycle:'渠道回收',official_refurbished:'官方翻新'})[k]||k}
-function renderSelectedMarket(rows){
-  if(!rows.length){$('#selectedMarket').innerHTML=emptyHtml('暂无价格记录','可在“市场价格”中查看其他机型。');return}
-  const sm=sourceMap(),sorted=[...rows].sort((a,b)=>a.side.localeCompare(b.side)||mid(a)-mid(b));
-  $('#selectedMarket').innerHTML=`<table><thead><tr><th>方向</th><th>渠道</th><th>类别</th><th class="num">价格区间</th><th class="num">中位</th><th>机况</th><th>数据</th><th>备注/来源</th></tr></thead><tbody>${sorted.map(r=>{const s=sm[r.sourceId];return `<tr><td><span class="tag ${r.side}">${r.side==='buy'?'买入':'卖出'}</span></td><td>${esc(r.channel)}</td><td>${esc(kindLabel(r.kind))}</td><td class="num">${yuan(r.low)}–${yuan(r.high)}</td><td class="num"><b>${yuan(mid(r))}</b></td><td class="wrap">${esc(r.condition)}</td><td><span class="tag ${r.confidence}" title="${confidenceTitle[r.confidence]}">${confidenceLabel[r.confidence]}</span></td><td class="wrap">${esc(publicNote(r.note))}${s?`<br><a href="${safeUrl(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.publisher)}</a>`:''}</td></tr>`}).join('')}</tbody></table>`;
-}
-function renderBrief(m,best,years,fees,repair){
-  if(!m){$('#modelBrief').innerHTML=emptyHtml('未找到机型','请选择其他机型。');$('#costBars').innerHTML='';return}
-  $('#modelDate').textContent=m.release;
-  $('#modelBrief').innerHTML=`<div class="brief-title"><div><h3>${esc(m.name)}</h3><span class="muted">${esc(m.baseStorage)} 起步 · ${esc(m.tier)}</span></div><div class="price">${yuan(m.launchPrice)}</div></div><div class="brief-grid">${[['芯片',`${m.chip} · ${m.cpuCores} 核 CPU / ${m.gpuCores} 核 GPU`],['内存',`${m.ramGB}GB`],['屏幕',`${m.display} · ${m.refreshHz}Hz`],['续航',`最长 ${m.videoHours} 小时视频播放`],['相机',m.camera],['接口',`${m.port} · ${m.portSpeed}`]].map(x=>`<div class="brief-item"><small>${esc(x[0])}</small>${esc(x[1])}</div>`).join('')}</div><div class="brief-text"><p><b>更新：</b>${esc(m.keyUpdates)}</p><p class="positive"><b>优点：</b>${esc(m.pros)}</p><p class="negative"><b>缺点：</b>${esc(m.cons)}</p><p><b>判断：</b>${esc(m.verdict)}</p></div>`;
-  if(!best){$('#costBars').innerHTML='';return}
-  const items=[['买入中位',best.buy,false],['当前退出',best.sellNow,false],[years?`${years}年后退出`:'即时价差',years?best.exit:best.spread,!years],['交易+维修',fees+repair,true],['总持有成本',best.total,true]],max=Math.max(...items.map(x=>Math.abs(x[1])),1);
-  $('#costBars').innerHTML=items.map(([n,v,loss])=>`<div class="bar-row"><span>${esc(n)}</span><div class="bar-track"><div class="bar-fill ${loss?'loss':''}" style="width:${Math.max(2,Math.abs(v)/max*100)}%"></div></div><b class="${v<0?'negative':''}">${yuan(v)}</b></div>`).join('');
-}
-
-
-const iphoneCurves={
-  'Pro Max':[1,.77,.62,.50,.41],Pro:[1,.75,.60,.48,.39],Plus:[1,.72,.55,.43,.34],mini:[1,.68,.51,.40,.32],SE:[1,.61,.43,.31,.22],Air:[1,.70,.54,.42,.33],e:[1,.66,.49,.37,.28],标准:[1,.69,.52,.40,.31]
-};
-const macCurves={base:[1,.76,.62,.50,.40],pro:[1,.79,.67,.56,.47],max:[1,.73,.59,.47,.38]};
-function parseCapacity(value){const m=String(value||'').match(/([0-9.]+)\s*(TB|GB)/i);if(!m)return 0;return Number(m[1])*(m[2].toUpperCase()==='TB'?1024:1)}
-function iphoneLaunchForStorage(m,storage){
-  if(!m)return 0;const base=parseCapacity(m.baseStorage),target=parseCapacity(storage);if(!base||!target||target<=base)return m.launchPrice;
-  let price=m.launchPrice,current=base;
-  while(current<target){const next=current<128?128:current<256?256:current<512?512:1024;let add=1000;if(current<128)add=500;else if(current>=256)add=2000;else if(m.year<=2022)add=900;price+=add;current=next;if(current>=1024&&target>1024){price+=4000;break}}
-  return price;
-}
-function monthsBetween(a,b){const x=new Date(`${a}-01T00:00:00`),y=new Date(`${b}T00:00:00`);return Math.max(0,(y-x)/(1000*60*60*24*30.4375))}
-function currentMarketAnchor(rows,mode='personal'){
-  const preferred=mode==='recycle'?rows.filter(r=>r.side==='sell'&&['recycle','recycle_case','channel_recycle','trade_in'].includes(r.kind)):rows.filter(r=>r.side==='sell'&&r.kind==='personal_sale');
-  const pool=preferred.length?preferred:rows.filter(r=>r.side==='sell');
-  if(!pool.length)return null;return pool.sort((a,b)=>mid(b)-mid(a))[0];
-}
-function interpolateCurve(curve,age){const a=Math.max(0,Math.min(4,age)),lo=Math.floor(a),hi=Math.ceil(a);if(lo===hi)return curve[lo];return curve[lo]+(curve[hi]-curve[lo])*(a-lo)}
-function calibratedTrend({launch,release,curve,rows,mode='personal'}){
-  const age=Math.max(.15,Math.min(4,monthsBetween(release,state.dataDate)/12));
-  const anchor=currentMarketAnchor(rows,mode);let adjustment=1;
-  if(anchor&&launch>0){const target=Math.max(.16,Math.min(.96,mid(anchor)/launch));const base=interpolateCurve(curve,age);adjustment=Math.max(.72,Math.min(1.22,target/base))}
-  const points=[{year:0,label:'首发',ratio:1,price:launch}];let prev=launch;
-  for(let y=1;y<=4;y++){const ratio=Math.min(.96,curve[y]*Math.pow(adjustment,y/Math.max(age,1)));let price=Math.round(launch*ratio/10)*10;price=Math.min(prev-10,price);price=Math.max(0,price);points.push({year:y,label:`第 ${y} 年`,ratio:price/launch,price});prev=price}
-  return {points,anchor,age};
-}
-function trendSvg(points){
-  const W=760,H=244,L=56,R=24,T=24,B=38,max=Math.max(...points.map(x=>x.price))*1.06,min=0,plotW=W-L-R,plotH=H-T-B;
-  const x=i=>L+plotW*i/(points.length-1),y=v=>T+plotH*(1-(v-min)/(max-min||1));
-  const grid=[0,.25,.5,.75,1].map(q=>{const val=max*(1-q),yy=T+plotH*q;return `<line class=\"chart-grid\" x1=\"${L}\" y1=\"${yy}\" x2=\"${W-R}\" y2=\"${yy}\"/><text class=\"chart-axis\" x=\"${L-8}\" y=\"${yy+3}\" text-anchor=\"end\">${Math.round(val/1000)}k</text>`}).join('');
-  const path=points.map((p,i)=>`${i?'L':'M'} ${x(i)} ${y(p.price)}`).join(' ');
-  const marks=points.map((p,i)=>`<g><circle class=\"chart-point\" cx=\"${x(i)}\" cy=\"${y(p.price)}\" r=\"4\"/><text class=\"chart-value\" x=\"${x(i)}\" y=\"${Math.max(14,y(p.price)-10)}\" text-anchor=\"middle\">${Math.round(p.price/100)/10}k</text><text class=\"chart-axis\" x=\"${x(i)}\" y=\"${H-13}\" text-anchor=\"middle\">${esc(p.label)}</text></g>`).join('');
-  return `<svg viewBox=\"0 0 ${W} ${H}\" role=\"img\" aria-label=\"价格随年份下降的折线图\">${grid}<path class=\"chart-line\" d=\"${path}\" fill=\"none\"/>${marks}</svg>`;
-}
-function trendTableHtml(points){return `<table><thead><tr><th>时间</th><th class=\"num\">参考价格</th><th class=\"num\">较首发减少</th><th class=\"num\">残值率</th></tr></thead><tbody>${points.map((p,i)=>`<tr><td>${esc(p.label)}</td><td class=\"num\"><b>${yuan(p.price)}</b></td><td class=\"num ${i?'negative':''}\">${i?yuan(points[0].price-p.price):'—'}</td><td class=\"num\">${Math.round(p.ratio*100)}%</td></tr>`).join('')}</tbody></table>`}
-function renderIphoneTrend(model,storage,rows){
-  if(!model){$('#iphoneTrendChart').innerHTML='';$('#iphoneTrendTable').innerHTML='';return}
-  const launch=iphoneLaunchForStorage(model,storage),curve=iphoneCurves[model.tier]||iphoneCurves['标准'],trend=calibratedTrend({launch,release:model.release,curve,rows,mode:'personal'});
-  $('#iphoneTrendChart').innerHTML=trendSvg(trend.points);$('#iphoneTrendTable').innerHTML=trendTableHtml(trend.points);
-  $('#iphoneTrendMeta').textContent=`${model.name} · ${storage} · 当前样本 ${trend.anchor?yuan(mid(trend.anchor)):'不足'}`;
+function toggleTheme(){
+  const next=document.documentElement.dataset.theme==='dark'?'light':'dark';document.documentElement.dataset.theme=next;try{localStorage.setItem('vl.theme',next)}catch(_){}toast(next==='dark'?'已切换深色':'已切换浅色');
 }
 
-function marketCategory(r){if(r.side==='sell')return 'sell';if(r.kind.startsWith('new'))return 'new';return 'used'}
+function populateStaticFilters(){
+  $('#marketSearch').value=state.ui.marketSearch||''; $('#marketSide').value=state.ui.marketSide||''; $('#marketConfidence').value=state.ui.marketConfidence||'';
+  ['marketSearch','marketSide','marketConfidence','marketChannel'].forEach(id=>$('#'+id).addEventListener('input',()=>{state.ui[id]=$('#'+id).value;renderMarketTable();saveState()}));
+  $('#buySearch').value=state.ui.buySearch||''; $('#buyBudget').value=state.ui.buyBudget||''; $('#buyUsed').checked=state.ui.buyUsed!==false;
+  ['buySearch','buyYear','buyTier','buyBudget','buyUsed'].forEach(id=>$('#'+id).addEventListener('input',()=>{state.ui[id]=id==='buyUsed'?$('#'+id).checked:$('#'+id).value;renderBuyList();saveState()}));
+  $('#alternativeSearch').value=state.ui.alternativeSearch||'';
+  ['alternativeSearch','alternativeReliability','alternativeRisk','alternativeEvidence','alternativeType','alternativeSort'].forEach(id=>$('#'+id).addEventListener('input',()=>{state.ui[id]=$('#'+id).value;renderAlternativeList();saveState()}));
+  $('#showFavorites').addEventListener('click',()=>{state.favoritesOnly=!state.favoritesOnly;$('#showFavorites').classList.toggle('active',state.favoritesOnly);$('#showFavorites').textContent=state.favoritesOnly?'显示全部':'只看收藏';renderAlternativeList()});
+  $$('[data-trend-mode]').forEach(b=>b.addEventListener('click',()=>{state.trendMode=b.dataset.trendMode;$$('[data-trend-mode]').forEach(x=>x.classList.toggle('active',x===b));renderCostResults();saveState()}));
+}
+
+function costDefaults(product){
+  if(product==='iphone')return {modelId:'iphone-15-pro-max',storage:'256GB',buyChannel:'闲鱼个人',sellChannel:'闲鱼个人转卖',hold:2,deprMode:'market',manualRate:16,fees:250,repair:0};
+  return {modelId:'mbp-14-m3pro-2023',storage:'',buyChannel:'闲鱼个人',sellChannel:'闲鱼个人转卖',hold:3,deprMode:'market',manualRate:15,fees:300,repair:0};
+}
+function getCostSettings(){
+  state.ui.cost=state.ui.cost||{}; const p=state.costProduct;
+  state.ui.cost[p]={...costDefaults(p),...(state.ui.cost[p]||{})}; return state.ui.cost[p];
+}
+function renderCost(){
+  const p=state.costProduct, d=productData(p), s=getCostSettings();
+  if(!d.models.some(m=>m.id===s.modelId))s.modelId=d.models[0]?.id||'';
+  const model=getModel(p,s.modelId); const storages=p==='iphone'?parseStorage(model.storageOptions):[];
+  if(p==='iphone'&&!storages.includes(s.storage))s.storage=storages.includes(model.baseStorage)?model.baseStorage:storages[0];
+  const rows=rowsFor(p,s.modelId,s.storage); const buyChannels=[...new Set(rows.filter(r=>r.side==='buy').map(r=>r.channel))]; const sellChannels=[...new Set(rows.filter(r=>r.side==='sell').map(r=>r.channel))];
+  if(!buyChannels.includes(s.buyChannel))s.buyChannel=buyChannels[0]||''; if(!sellChannels.includes(s.sellChannel))s.sellChannel=sellChannels[0]||'';
+  const modelOptions=d.models.map(m=>`<option value="${esc(m.id)}" ${m.id===s.modelId?'selected':''}>${esc(m.name)}${p==='macbook'?` · ${esc(m.memory)}/${esc(m.storage)}`:''}</option>`).join('');
+  const storageControl=p==='iphone'?`<label>容量<select data-cost="storage">${storages.map(x=>`<option ${x===s.storage?'selected':''}>${esc(x)}</option>`).join('')}</select></label>`:'';
+  $('#costControls').innerHTML=`
+    <label>机型<select data-cost="modelId">${modelOptions}</select></label>${storageControl}
+    <label>买入方式<select data-cost="buyChannel">${buyChannels.map(x=>`<option ${x===s.buyChannel?'selected':''}>${esc(x)}</option>`).join('')}</select></label>
+    <label>卖出方式<select data-cost="sellChannel">${sellChannels.map(x=>`<option ${x===s.sellChannel?'selected':''}>${esc(x)}</option>`).join('')}</select></label>
+    <label>持有年限<select data-cost="hold">${[1,2,3,4,5].map(x=>`<option value="${x}" ${+s.hold===x?'selected':''}>${x} 年</option>`).join('')}</select></label>
+    <label>折旧设置<select data-cost="deprMode"><option value="market" ${s.deprMode==='market'?'selected':''}>市场模型</option><option value="manual" ${s.deprMode==='manual'?'selected':''}>手动年折旧</option></select></label>
+    <label>年折旧率<input data-cost="manualRate" type="number" min="0" max="60" value="${esc(s.manualRate)}" ${s.deprMode==='manual'?'':'disabled'}></label>
+    <label>交易费用<input data-cost="fees" type="number" min="0" step="50" value="${esc(s.fees)}"></label>
+    <label>维修 / 电池<input data-cost="repair" type="number" min="0" step="50" value="${esc(s.repair)}"></label>`;
+  $$('[data-cost]').forEach(el=>el.addEventListener('input',()=>{
+    const key=el.dataset.cost; s[key]=['hold','manualRate','fees','repair'].includes(key)?+el.value:el.value;
+    if(key==='modelId'){const m=getModel(p,s.modelId);if(p==='iphone')s.storage=parseStorage(m.storageOptions)[0]||m.baseStorage;renderCost()}else if(key==='storage'){renderCost()}else if(key==='deprMode'){renderCost()}else renderCostResults(); saveState();
+  }));
+  $$('[data-product-tabs="cost"] button').forEach(b=>b.classList.toggle('active',b.dataset.product===p));
+  $$('[data-trend-mode]').forEach(b=>b.classList.toggle('active',b.dataset.trendMode===state.trendMode));
+  renderCostResults();
+}
+function selectedRows(product,settings){return rowsFor(product,settings.modelId,settings.storage)}
+function selectedPrice(rows,channel,side){const r=rows.find(x=>x.channel===channel&&x.side===side);return r?rowMid(r):0}
+function costAtHold(product,model,s,hold){
+  const rows=selectedRows(product,s); const buy=selectedPrice(rows,s.buyChannel,'buy'); const currentSell=selectedPrice(rows,s.sellChannel,'sell');
+  const rate=s.deprMode==='manual'?clamp(s.manualRate/100,0,.8):null;
+  const future=futureFromNow(product,model,s.storage,currentSell,hold,rate);
+  const total=Math.max(0,buy-future+(+s.fees||0)+(+s.repair||0));
+  return {buy,currentSell,future,total,annual:total/hold,monthly:total/(hold*12)};
+}
+function renderCostResults(){
+  const p=state.costProduct,s=getCostSettings(),model=getModel(p,s.modelId);if(!model)return;
+  const c=costAtHold(p,model,s,+s.hold||1); const launch=p==='iphone'?adjustedLaunch(model,s.storage):model.launchPrice;
+  const loss=Math.max(0,c.buy-c.future), lossPct=c.buy?loss/c.buy*100:0;
+  const itemName=p==='iphone'?`${model.name} ${s.storage}`:`${model.name} ${model.memory}/${model.storage}`;
+  $('#costKpis').innerHTML=[
+    ['买入价格',yuan(c.buy),s.buyChannel],['预计卖出',yuan(c.future),`${s.hold} 年后 · ${s.sellChannel}`],['总持有成本',yuan(c.total),`${num(c.total/c.buy*100)}% 买入价`],
+    ['年均成本',yuan(c.annual),'每年'],['月均成本',yuan(c.monthly),'每月'],['累计价值下降',yuan(loss),pct(lossPct)]
+  ].map(([a,b,d])=>`<div class="kpi"><span>${esc(a)}</span><strong>${esc(b)}</strong><small>${esc(d)}</small></div>`).join('');
+  $('#selectedRelease').textContent=model.release;
+  renderTrend(p,model,s,c,launch,itemName); renderRoutes(p,model,s); renderConclusion(p,model,s,c,itemName);
+}
+function trendPoints(product,model,s,c,launch){
+  const rate=s.deprMode==='manual'?clamp(s.manualRate/100,0,.8):null;
+  if(state.trendMode==='holding'){
+    const rows=selectedRows(product,s); const buy=selectedPrice(rows,s.buyChannel,'buy')||c.buy;
+    return Array.from({length:6},(_,i)=>({label:i===0?'现在':`持有${i}年`,year:i,value:i===0?buy:futureFromNow(product,model,s.storage,buy,i,rate),actualAge:ageYears(model.release)+i}));
+  }
+  return Array.from({length:6},(_,i)=>({label:i===0?'首发':`第${i}年`,year:i,value:i===0?launch:calibratedValue(product,model,s.storage,i,'sell',s.sellChannel,rate),actualAge:i}));
+}
+function renderTrend(product,model,s,c,launch,itemName){
+  const points=trendPoints(product,model,s,c,launch); const values=points.map(x=>x.value); const max=Math.max(...values)*1.08,min=Math.min(...values)*.88;
+  const W=760,H=250,pad={l:58,r:28,t:34,b:42}; const x=i=>pad.l+i*(W-pad.l-pad.r)/(points.length-1); const y=v=>pad.t+(max-v)/(max-min||1)*(H-pad.t-pad.b);
+  const path=points.map((p,i)=>`${i?'L':'M'} ${x(i).toFixed(1)} ${y(p.value).toFixed(1)}`).join(' ');
+  const grid=[0,.25,.5,.75,1].map(t=>{const val=max-(max-min)*t;const yy=pad.t+(H-pad.t-pad.b)*t;return `<line x1="${pad.l}" y1="${yy}" x2="${W-pad.r}" y2="${yy}" class="grid"/><text x="${pad.l-8}" y="${yy+3}" text-anchor="end" class="axis">${num(val)}</text>`}).join('');
+  const segments=points.slice(1).map((p,i)=>{const prev=points[i],drop=Math.max(0,prev.value-p.value),rate=prev.value?drop/prev.value*100:0;const mx=(x(i)+x(i+1))/2,my=(y(prev.value)+y(p.value))/2-10;return `<g class="segment-label"><rect x="${mx-38}" y="${my-11}" width="76" height="22" rx="5"/><text x="${mx}" y="${my-1}" text-anchor="middle">↓${num(drop)} · ${rate.toFixed(1)}%</text></g>`}).join('');
+  const nodes=points.map((p,i)=>`<g><circle cx="${x(i)}" cy="${y(p.value)}" r="4.2" class="node"/><text x="${x(i)}" y="${y(p.value)-11}" text-anchor="middle" class="price">${num(p.value)}</text><text x="${x(i)}" y="${H-17}" text-anchor="middle" class="axis">${esc(p.label)}</text></g>`).join('');
+  $('#trendChart').innerHTML=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(itemName)} 价值趋势"><style>.grid{stroke:var(--line);stroke-width:1}.axis{fill:var(--muted);font:9px var(--font)}.price{fill:var(--text);font:10px var(--mono);font-weight:600}.trendline{fill:none;stroke:var(--accent);stroke-width:2}.node{fill:var(--surface);stroke:var(--accent);stroke-width:2.5}.segment-label rect{fill:var(--surface);stroke:var(--line)}.segment-label text{fill:var(--danger);font:8.5px var(--mono)}</style>${grid}<path d="${path}" class="trendline"/>${segments}${nodes}</svg>`;
+  $('#trendMeta').textContent=`${itemName} · ${state.trendMode==='holding'?'从当前买入开始':'从首发开始'}`;
+  const summary=points.slice(1).map((p,i)=>{const prev=points[i],drop=Math.max(0,prev.value-p.value),rate=prev.value?drop/prev.value*100:0;return `<div class="trend-item"><span>${esc(p.label)}</span><b>${yuan(p.value)}</b><em>↓ ${yuan(drop)} / ${rate.toFixed(1)}%</em></div>`}).join('');
+  $('#trendSummary').innerHTML=summary;
+  $('#trendTable').innerHTML=`<table><thead><tr><th>时间</th><th class="num">参考价值</th><th class="num">本期下降金额</th><th class="num">本期下降率</th><th class="num">累计下降金额</th><th class="num">累计下降率</th><th class="num">残值率</th></tr></thead><tbody>${points.map((p,i)=>{const prev=points[i-1],drop=prev?Math.max(0,prev.value-p.value):0,period=prev&&prev.value?drop/prev.value*100:0,cum=Math.max(0,points[0].value-p.value),cumPct=points[0].value?cum/points[0].value*100:0,res=points[0].value?p.value/points[0].value*100:100;return `<tr><td>${esc(p.label)}</td><td class="num">${yuan(p.value)}</td><td class="num">${i?yuan(drop):'—'}</td><td class="num">${i?pct(period):'—'}</td><td class="num">${i?yuan(cum):'—'}</td><td class="num">${i?pct(cumPct):'—'}</td><td class="num">${pct(res)}</td></tr>`}).join('')}</tbody></table>`;
+}
+function renderRoutes(product,model,s){
+  const rows=selectedRows(product,s), buys=rows.filter(r=>r.side==='buy'), sells=rows.filter(r=>r.side==='sell'), rate=s.deprMode==='manual'?s.manualRate/100:null;
+  const routes=[]; buys.forEach(b=>sells.forEach(e=>{const buy=rowMid(b),cur=rowMid(e),future=futureFromNow(product,model,s.storage,cur,+s.hold,rate),total=Math.max(0,buy-future+(+s.fees||0)+(+s.repair||0));routes.push({b,e,buy,cur,future,total,annual:total/+s.hold,spread:buy-cur})})); routes.sort((a,b)=>a.annual-b.annual);
+  $('#routeTable').innerHTML=routes.length?`<table><thead><tr><th>买入</th><th>卖出</th><th class="num">买入价</th><th class="num">当前退出</th><th class="num">${s.hold}年后</th><th class="num">年均成本</th><th>数据</th></tr></thead><tbody>${routes.slice(0,8).map((r,i)=>`<tr class="${i===0?'selected':''}"><td>${esc(r.b.channel)}</td><td>${esc(r.e.channel)}</td><td class="num">${yuan(r.buy)}</td><td class="num">${yuan(r.cur)}</td><td class="num">${yuan(r.future)}</td><td class="num"><b>${yuan(r.annual)}</b></td><td>${confidenceTag(r.b.confidence)} ${confidenceTag(r.e.confidence)}</td></tr>`).join('')}</tbody></table>`:`<div class="empty">暂无可比较路径</div>`;
+}
+function renderConclusion(product,model,s,c,itemName){
+  const holds=[1,2,3,4,5].map(h=>({h,...costAtHold(product,model,s,h)})); const best=holds.reduce((a,b)=>a.annual<b.annual?a:b); const nextLoss=c.currentSell-futureFromNow(product,model,s.storage,c.currentSell,1,s.deprMode==='manual'?s.manualRate/100:null);
+  $('#costConclusion').innerHTML=`<h3 class="detail-title">${esc(itemName)}</h3><div class="detail-sub">按当前条件，持有 ${best.h} 年的年均成本最低</div><div class="detail-grid"><div class="detail-cell"><span>推荐持有</span><b>${best.h} 年</b></div><div class="detail-cell"><span>年均成本</span><b>${yuan(best.annual)}</b></div><div class="detail-cell"><span>推荐买入</span><b>${esc(s.buyChannel)}</b></div><div class="detail-cell"><span>推荐卖出</span><b>${esc(s.sellChannel)}</b></div></div><div class="detail-section"><h3>继续持有判断</h3><p>未来一年预计再下降约 ${yuan(nextLoss)}。若维修支出明显高于这一数值，换机或出售的优先级会上升。</p></div><div class="detail-actions"><button class="primary-button" type="button" id="addCurrentToOwned">加入我的物品</button><button class="text-button" type="button" id="openSelectedInBuy">查看购买参考</button></div>`;
+  $('#addCurrentToOwned').onclick=()=>openOwnedDialog(product,model.id,c.buy); $('#openSelectedInBuy').onclick=()=>{state.buyProduct=product;state.selectedBuyId=model.id;switchView('buy');renderBuy()};
+}
+
 function renderMarket(){
-  const q=$('#marketSearch').value.trim().toLowerCase(),kind=$('#marketKind').value,conf=$('#confidenceFilter').value,sm=sourceMap(),map=Object.fromEntries(state.models.map(m=>[m.id,m]));
-  const list=state.market.filter(r=>{const hay=`${map[r.modelId]?.name} ${r.channel} ${r.note} ${r.condition}`.toLowerCase();return (!q||hay.includes(q))&&(!kind||marketCategory(r)===kind)&&(!conf||r.confidence===conf)}).sort((a,b)=>(map[b.modelId]?.year||0)-(map[a.modelId]?.year||0)||a.side.localeCompare(b.side)||mid(a)-mid(b));
-  $('#marketCount').textContent=`${list.length} 条`;
-  if(!list.length){$('#marketTable').innerHTML=emptyHtml('没有匹配的价格','调整搜索词或筛选条件。');return}
-  $('#marketTable').innerHTML=`<table><thead><tr><th>机型</th><th>容量</th><th>方向</th><th>渠道</th><th>类别</th><th class="num">低位</th><th class="num">高位</th><th class="num">中位</th><th>机况</th><th>数据</th><th>日期</th><th>备注/来源</th></tr></thead><tbody>${list.map(r=>{const s=sm[r.sourceId];return `<tr><td><b>${esc(map[r.modelId]?.name||r.modelId)}</b></td><td>${esc(r.storage)}</td><td><span class="tag ${r.side}">${r.side==='buy'?'买入':'卖出'}</span></td><td>${esc(r.channel)}</td><td>${esc(kindLabel(r.kind))}</td><td class="num">${yuan(r.low)}</td><td class="num">${yuan(r.high)}</td><td class="num"><b>${yuan(mid(r))}</b></td><td class="wrap">${esc(r.condition)}</td><td><span class="tag ${r.confidence}" title="${confidenceTitle[r.confidence]}">${confidenceLabel[r.confidence]}</span></td><td>${esc(r.date)}</td><td class="wrap">${esc(publicNote(r.note))}${s?`<br><a href="${safeUrl(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.publisher)}</a>`:''}</td></tr>`}).join('')}</tbody></table>`;
+  $$('[data-product-tabs="market"] button').forEach(b=>b.classList.toggle('active',b.dataset.product===state.marketProduct));
+  const channels=[...new Set(productData(state.marketProduct).market.map(r=>r.channel))].sort();
+  $('#marketChannel').innerHTML='<option value="">全部</option>'+channels.map(x=>`<option ${state.ui.marketChannel===x?'selected':''}>${esc(x)}</option>`).join('');
+  renderMarketTable();
+}
+function filteredMarket(){
+  const p=state.marketProduct,d=productData(p), q=($('#marketSearch').value||'').trim().toLowerCase(),side=$('#marketSide').value,conf=$('#marketConfidence').value,ch=$('#marketChannel').value;
+  return d.market.filter(r=>{const m=d.models.find(x=>x.id===r.modelId);const hay=JSON.stringify([m?.name,m?.chip,m?.memory,m?.storage,r.channel,r.condition,r.storage]).toLowerCase();return (!q||hay.includes(q))&&(!side||r.side===side)&&(!conf||r.confidence===conf)&&(!ch||r.channel===ch)});
+}
+function renderMarketTable(){
+  const p=state.marketProduct,d=productData(p), rows=filteredMarket(); $('#marketCount').textContent=`${rows.length} 条`;
+  const buy=rows.filter(r=>r.side==='buy').map(rowMid),sell=rows.filter(r=>r.side==='sell').map(rowMid);
+  $('#marketKpis').innerHTML=[['记录',rows.length,'条'],['买入中位',buy.length?yuan(buy.sort((a,b)=>a-b)[Math.floor(buy.length/2)]):'—',''],['卖出中位',sell.length?yuan(sell.sort((a,b)=>a-b)[Math.floor(sell.length/2)]):'—',''],['覆盖平台',new Set(rows.map(r=>r.channel)).size,'个']].map(([a,b,c])=>`<div class="kpi"><span>${a}</span><strong>${b}</strong><small>${c}</small></div>`).join('');
+  $('#marketTable').innerHTML=rows.length?`<table><thead><tr><th>产品</th>${p==='iphone'?'<th>容量</th>':'<th>配置</th>'}<th>平台</th><th>方向</th><th class="num">区间</th><th class="num">中位</th><th>机况</th><th>数据</th><th>日期</th></tr></thead><tbody>${rows.map(r=>{const m=d.models.find(x=>x.id===r.modelId);return `<tr><td><b>${esc(m?.name||r.modelId)}</b></td><td>${p==='iphone'?esc(r.storage||'—'):esc(`${m?.memory||''}/${m?.storage||''}`)}</td><td>${esc(r.channel)}</td><td>${r.side==='buy'?'买入':'卖出'}</td><td class="num">${yuan(r.low)}–${yuan(r.high)}</td><td class="num"><b>${yuan(rowMid(r))}</b></td><td>${esc(r.condition||'')}</td><td>${confidenceTag(r.confidence)}</td><td>${esc(r.date||'')}</td></tr>`}).join('')}</tbody></table>`:'<div class="empty">没有符合条件的价格记录</div>';
 }
 
-function renderModels(){
-  const q=$('#modelSearch').value.trim().toLowerCase(),year=$('#yearFilter').value,tier=$('#tierFilter').value,ai=$('#aiOnly').checked;
-  const list=state.models.filter(m=>(!q||JSON.stringify(m).toLowerCase().includes(q))&&(!year||String(m.year)===year)&&(!tier||m.tier===tier)&&(!ai||m.appleIntelligence)).sort((a,b)=>b.year-a.year||b.launchPrice-a.launchPrice);
-  $('#modelCount').textContent=`${list.length} 款`;
-  if(!list.length){state.selectedModel=null;$('#modelsTable').innerHTML=emptyHtml('没有匹配的机型','调整搜索词或筛选条件。');renderModelDetail();return}
-  if(!state.selectedModel){state.selectedModel=state.models.find(x=>x.id===ui.detailModelId)||list[0]}
-  if(!list.some(x=>x.id===state.selectedModel.id))state.selectedModel=list[0];
-  $('#modelsTable').innerHTML=`<table><thead><tr><th>年份</th><th>机型</th><th>定位</th><th class="num">首发价</th><th>芯片</th><th>CPU / GPU</th><th>RAM</th><th>屏幕</th><th>续航</th><th>接口</th><th>相机</th><th>AI</th><th>购买判断</th></tr></thead><tbody>${list.map(m=>`<tr data-id="${esc(m.id)}" class="clickable ${state.selectedModel.id===m.id?'selected':''}" tabindex="0"><td>${m.year}</td><td><b>${esc(m.name)}</b><br><span class="muted">${esc(m.storageOptions)}</span></td><td>${esc(m.tier)}</td><td class="num">${yuan(m.launchPrice)}<br><span class="muted">${esc(m.baseStorage)}</span></td><td>${esc(m.chip)}</td><td>${m.cpuCores} 核 / ${m.gpuCores} 核</td><td>${m.ramGB}GB</td><td>${esc(m.display)}<br><span class="muted">${m.refreshHz}Hz · ${m.weightG}g</span></td><td>${m.videoHours}h</td><td>${esc(m.port)}<br><span class="muted">${esc(m.portSpeed)}</span></td><td class="wrap">${esc(m.camera)} · ${esc(m.telephoto)}</td><td>${m.appleIntelligence?'<span class="tag high">支持</span>':'—'}</td><td class="wrap">${esc(m.verdict)}</td></tr>`).join('')}</tbody></table>`;
-  $$('#modelsTable tbody tr').forEach(tr=>{const choose=()=>selectModel(tr.dataset.id,true);tr.onclick=choose;tr.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose()}}});
-  renderModelDetail();
+function renderBuy(){
+  $$('[data-product-tabs="buy"] button').forEach(b=>b.classList.toggle('active',b.dataset.product===state.buyProduct));
+  const d=productData(state.buyProduct); const years=[...new Set(d.models.map(m=>m.year))].sort((a,b)=>b-a); const tiers=[...new Set(d.models.map(m=>state.buyProduct==='iphone'?m.tier:m.size))];
+  $('#buyYear').innerHTML='<option value="">全部</option>'+years.map(x=>`<option value="${x}" ${String(state.ui.buyYear||'')===String(x)?'selected':''}>${x}</option>`).join('');
+  $('#buyTierLabel').firstChild.textContent=state.buyProduct==='iphone'?'系列':'尺寸';
+  $('#buyTier').innerHTML='<option value="">全部</option>'+tiers.map(x=>`<option ${state.ui.buyTier===x?'selected':''}>${esc(x)}</option>`).join('');
+  renderBuyList();
 }
-function selectModel(id,openMobile=false){state.selectedModel=state.models.find(m=>m.id===id)||state.selectedModel;ui.detailModelId=state.selectedModel?.id||ui.detailModelId;saveUi();renderModelDetail();$$('#modelsTable tbody tr').forEach(tr=>tr.classList.toggle('selected',tr.dataset.id===id));if(openMobile&&matchMedia('(max-width:700px)').matches)openModelDialog()}
-function modelDetailHtml(m){
-  if(!m)return emptyHtml('未选择机型','从左侧列表选择一款 iPhone。');
-  const labels=[['发布日期',m.release],['首发',`${yuan(m.launchPrice)} / ${m.baseStorage}`],['存储',m.storageOptions],['芯片',m.chip],['CPU',`${m.cpuCores} 核（${m.cpuLayout}）`],['GPU',`${m.gpuCores} 核`],['神经网络引擎',m.neuralEngine],['RAM',`${m.ramGB}GB`],['屏幕',`${m.display} / ${m.refreshHz}Hz`],['重量/厚度',`${m.weightG}g / ${m.thicknessMm}mm`],['续航',`${m.videoHours} 小时视频播放`],['接口',`${m.port} / ${m.portSpeed}`],['相机',m.camera],['长焦',m.telephoto],['首发系统',m.iosLaunch],['Apple Intelligence',m.appleIntelligence?'硬件支持；中国大陆上线时间依监管审批':'不支持完整功能']];
-  return `<div class="detail"><h3>${esc(m.name)}</h3><div class="price-line"><b>${yuan(m.launchPrice)}</b><span class="tag ${m.appleIntelligence?'high':'low'}">${m.appleIntelligence?'AI 硬件支持':'无完整 AI'}</span></div><div class="spec-list">${labels.map(x=>`<div><small>${esc(x[0])}</small>${esc(x[1])}</div>`).join('')}</div><h4>关键更新</h4><p>${esc(m.keyUpdates)}</p><h4>优点</h4><p class="positive">${esc(m.pros)}</p><h4>缺点</h4><p class="negative">${esc(m.cons)}</p><h4>购买判断</h4><p>${esc(m.verdict)}</p><h4>内存口径</h4><p class="muted">${esc(m.ramBasis)}</p></div>`;
+function currentReferencePrice(product,model){
+  const rows=rowsFor(product,model.id,product==='iphone'?(parseStorage(model.storageOptions).includes('256GB')?'256GB':model.baseStorage):'').filter(r=>r.side==='buy');
+  return rows.length?Math.min(...rows.map(rowMid)):model.currentOfficialPrice||model.launchPrice;
 }
-function renderModelDetail(){const html=modelDetailHtml(state.selectedModel);$('#modelDetail').innerHTML=html;$('#modelDetailMobile').innerHTML=html;$('#modelDialogTitle').textContent=state.selectedModel?.name||'机型详情'}
-function setupDialog(){
-  const dialog=$('#modelDialog');$('#closeModelDialog').onclick=()=>dialog.close();
-  dialog.addEventListener('click',e=>{const rect=dialog.getBoundingClientRect();if(e.clientX<rect.left||e.clientX>rect.right||e.clientY<rect.top||e.clientY>rect.bottom)dialog.close()});
+function filteredBuyModels(){
+  const p=state.buyProduct,d=productData(p),q=($('#buySearch').value||'').toLowerCase(),year=$('#buyYear').value,tier=$('#buyTier').value,budget=+$('#buyBudget').value||Infinity,used=$('#buyUsed').checked;
+  return d.models.filter(m=>{const price=used?currentReferencePrice(p,m):(m.currentOfficialPrice||m.launchPrice);const hay=JSON.stringify(m).toLowerCase();return (!q||hay.includes(q))&&(!year||String(m.year)===year)&&(!tier||(p==='iphone'?m.tier:m.size)===tier)&&price<=budget});
 }
-function openModelDialog(){const dialog=$('#modelDialog');if(!dialog.open)dialog.showModal()}
-
-
-function macRows(id){return state.macbook_market.filter(r=>r.modelId===id)}
-function renderMacbook(){
-  const id=$('#macModelSelect')?.value||ui.macModelId,m=state.macbook_models.find(x=>x.id===id);if(!m)return;
-  const rows=macRows(id),mode=$('#macTrendMode')?.value||'personal',buys=buyRows(rows.filter(r=>r.analysisEligible!==false)),sells=sellRows(rows.filter(r=>r.analysisEligible!==false));
-  const personal=rows.filter(r=>r.kind==='personal_sale'),recycles=rows.filter(r=>['recycle','recycle_case','channel_recycle','trade_in'].includes(r.kind));
-  const minBuy=buys.length?Math.min(...buys.map(mid)):0,personalSell=personal.length?Math.max(...personal.map(mid)):0,recycleSell=recycles.length?Math.max(...recycles.map(mid)):0,spread=minBuy-(mode==='recycle'?recycleSell:personalSell);
-  const curve=macCurves[m.curve]||macCurves.pro,trend=calibratedTrend({launch:m.launchPrice,release:m.release,curve,rows,mode});
-  const y4=trend.points[4];
-  $('#macKpis').innerHTML=[['中国首发',yuan(m.launchPrice),`${m.memory}/${m.storage}`],['个人二手买入',minBuy?yuan(minBuy):'—','样本中位低位'],['个人转卖',personalSell?yuan(personalSell):'—','正常机况'],['平台回收',recycleSell?yuan(recycleSell):'—','检测后可能变化'],['第 4 年参考',yuan(y4.price),`${Math.round(y4.ratio*100)}% 残值`]].map(v=>`<div class=\"kpi\"><small>${esc(v[0])}</small><strong>${esc(v[1])}</strong><em>${esc(v[2])}</em></div>`).join('');
-  $('#macTrendChart').innerHTML=trendSvg(trend.points);$('#macTrendTable').innerHTML=trendTableHtml(trend.points);$('#macTrendMeta').textContent=`${m.name} · ${m.memory}/${m.storage} · ${mode==='recycle'?'平台回收':'个人转卖'}口径`;
-  $('#macModelDate').textContent=m.release;
-  const current=m.currentOfficialPrice?`<span class=\"muted\">当前官方 ${yuan(m.currentOfficialPrice)}</span>`:'';
-  $('#macBrief').innerHTML=`<div class=\"brief-title\"><div><h3>${esc(m.name)}</h3><span class=\"muted\">${esc(m.memory)} / ${esc(m.storage)}</span></div><div class=\"price\">${yuan(m.launchPrice)}${current}</div></div><div class=\"brief-grid\">${[['芯片',`${m.chip} · ${m.cpuCores} 核 CPU / ${m.gpuCores} 核 GPU`],['内存',`${m.memory} · 最高 ${m.maxMemory}`],['屏幕',m.display],['续航',`最长 ${m.batteryHours} 小时视频播放`],['重量',`${m.weightKg}kg`],['接口',m.ports]].map(x=>`<div class=\"brief-item\"><small>${esc(x[0])}</small>${esc(x[1])}</div>`).join('')}</div><div class=\"brief-text\"><p><b>更新：</b>${esc(m.keyUpdates)}</p><p class=\"positive\"><b>优点：</b>${esc(m.pros)}</p><p class=\"negative\"><b>缺点：</b>${esc(m.cons)}</p><p><b>判断：</b>${esc(m.verdict)}</p></div>`;
-  renderMacMarket(rows);renderMacModels(id);
+function renderBuyList(){
+  const p=state.buyProduct,list=filteredBuyModels(); $('#buyCount').textContent=`${list.length} 款`;
+  if(!list.some(m=>m.id===state.selectedBuyId))state.selectedBuyId=list[0]?.id||'';
+  $('#buyTable').innerHTML=list.length?`<table><thead><tr><th>产品</th><th>芯片</th><th>${p==='iphone'?'内存':'配置'}</th><th>屏幕</th><th class="num">首发价</th><th class="num">当前参考</th><th>判断</th></tr></thead><tbody>${list.map(m=>`<tr class="clickable ${m.id===state.selectedBuyId?'selected':''}" data-buy-id="${esc(m.id)}"><td><b>${esc(m.name)}</b><br><span class="muted">${esc(m.release)}</span></td><td>${esc(m.chip)}</td><td>${p==='iphone'?`${esc(m.ramGB)}GB · ${esc(m.storageOptions)}`:`${esc(m.memory)} / ${esc(m.storage)}`}</td><td>${esc(m.display)}</td><td class="num">${yuan(m.launchPrice)}</td><td class="num"><b>${yuan(currentReferencePrice(p,m))}</b></td><td>${esc(m.verdict)}</td></tr>`).join('')}</tbody></table>`:'<div class="empty">没有符合条件的产品</div>';
+  $$('[data-buy-id]').forEach(tr=>tr.addEventListener('click',()=>{state.selectedBuyId=tr.dataset.buyId;renderBuyList();showBuyDetail();saveState();if(innerWidth<=680)openDetail('产品详情',$('#buyDetail').innerHTML)}));
+  showBuyDetail();
 }
-function renderMacMarket(rows){
-  const sm=sourceMap(),sorted=[...rows].sort((a,b)=>a.side.localeCompare(b.side)||mid(a)-mid(b));
-  $('#macSelectedMarket').innerHTML=`<table><thead><tr><th>方向</th><th>渠道</th><th>类别</th><th class=\"num\">价格区间</th><th class=\"num\">中位</th><th>数据</th><th>条件/说明</th></tr></thead><tbody>${sorted.map(r=>{const source=sm[r.sourceId];return `<tr><td><span class=\"tag ${r.side}\">${r.side==='buy'?'买入':'卖出'}</span></td><td>${esc(r.channel)}</td><td>${esc(kindLabel(r.kind))}</td><td class=\"num\">${yuan(r.low)}–${yuan(r.high)}</td><td class=\"num\"><b>${yuan(mid(r))}</b></td><td><span class=\"tag ${r.confidence}\">${confidenceLabel[r.confidence]}</span></td><td class=\"wrap\">${esc(r.condition)}<br><span class=\"muted\">${esc(publicNote(r.note))}${source?` · ${esc(source.publisher)}`:''}</span></td></tr>`}).join('')}</tbody></table>`;
-}
-function renderMacModels(selected){
-  const list=[...state.macbook_models].sort((a,b)=>b.year-a.year||b.launchPrice-a.launchPrice);$('#macModelCount').textContent=`${list.length} 款代表配置`;
-  $('#macModelsTable').innerHTML=`<table><thead><tr><th>年份</th><th>机型 / 配置</th><th class=\"num\">首发价</th><th>芯片</th><th>CPU / GPU</th><th>内存 / SSD</th><th>屏幕</th><th>续航</th><th>重量</th><th>接口</th><th>关键更新</th><th>购买判断</th></tr></thead><tbody>${list.map(m=>`<tr data-mac-id=\"${esc(m.id)}\" class=\"clickable ${selected===m.id?'selected':''}\" tabindex=\"0\"><td>${m.year}</td><td><b>${esc(m.name)}</b><br><span class=\"muted\">${esc(m.memory)} / ${esc(m.storage)}</span></td><td class=\"num\">${yuan(m.launchPrice)}${m.currentOfficialPrice?`<br><span class=\"muted\">当前 ${yuan(m.currentOfficialPrice)}</span>`:''}</td><td>${esc(m.chip)}</td><td>${m.cpuCores} 核 / ${m.gpuCores} 核</td><td>${esc(m.memory)} / ${esc(m.storage)}</td><td>${esc(m.display)}</td><td>${m.batteryHours}h</td><td>${m.weightKg}kg</td><td class=\"wrap\">${esc(m.ports)}</td><td class=\"wrap\">${esc(m.keyUpdates)}</td><td class=\"wrap\">${esc(m.verdict)}</td></tr>`).join('')}</tbody></table>`;
-  $$('#macModelsTable tbody tr').forEach(tr=>{const choose=()=>{$('#macModelSelect').value=tr.dataset.macId;ui.macModelId=tr.dataset.macId;saveUi();renderMacbook();window.scrollTo({top:0,behavior:'smooth'})};tr.onclick=choose;tr.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose()}}});
+function showBuyDetail(){
+  const p=state.buyProduct,m=getModel(p,state.selectedBuyId); if(!m){$('#buyDetail').innerHTML='<div class="empty">选择产品查看详情</div>';return}
+  const price=currentReferencePrice(p,m); const grid=p==='iphone' ? [
+    ['芯片',m.chip],['CPU / GPU',`${m.cpuCores} 核 / ${m.gpuCores} 核`],['内存',`${m.ramGB}GB`],['容量',m.storageOptions],['屏幕',m.display],['刷新率',`${m.refreshHz}Hz`],['相机',m.camera],['长焦',m.telephoto],['接口',`${m.port} · ${m.portSpeed}`],['重量',`${m.weightG}g`],['续航',`${m.videoHours} 小时视频`],['AI',m.appleIntelligence?'支持':'不支持']
+  ]:[['芯片',m.chip],['CPU / GPU',`${m.cpuCores} 核 / ${m.gpuCores} 核`],['内存',m.memory],['SSD',m.storage],['最大内存',m.maxMemory],['屏幕',m.display],['重量',`${m.weightKg}kg`],['续航',`${m.batteryHours} 小时`],['接口',m.ports],['摄像头',m.camera]];
+  $('#buyDetail').innerHTML=`<h3 class="detail-title">${esc(m.name)}</h3><div class="detail-sub">${esc(m.release)} · 首发 ${yuan(m.launchPrice)} · 当前参考 ${yuan(price)}</div><div class="detail-grid">${grid.map(([a,b])=>`<div class="detail-cell"><span>${esc(a)}</span><b>${esc(b)}</b></div>`).join('')}</div><div class="detail-section"><h3>关键更新</h3><p>${esc(m.keyUpdates)}</p></div><div class="detail-section"><h3>优点</h3><p>${esc(m.pros)}</p></div><div class="detail-section"><h3>缺点</h3><p>${esc(m.cons)}</p></div><div class="detail-section"><h3>购买判断</h3><p>${esc(m.verdict)}</p></div><div class="detail-actions"><button id="detailCostButton" class="primary-button" type="button">计算持有成本</button><button id="detailOwnedButton" class="text-button" type="button">加入我的物品</button></div>`;
+  $('#detailCostButton').onclick=()=>{state.costProduct=p;getCostSettings().modelId=m.id;switchView('cost');renderCost()}; $('#detailOwnedButton').onclick=()=>openOwnedDialog(p,m.id,price);
 }
 
-function renderStrategies(){
-  const reps={'latest-yearly':'iphone-17-pro-max','lastgen-yearly':'iphone-16-pro-max','twoyear-hold2':'iphone-15-pro-max','threeyear-hold3':'iphone-14-pro-max','standard-new-hold3':'iphone-17'};
-  const dep=clamp(ui.deprRate,0,60,14)/100;
-  const rows=state.strategies.map(s=>{const m=state.models.find(x=>x.id===reps[s.id]);if(!m)return null;const mr=state.market.filter(x=>x.modelId===m.id&&x.storage==='256GB'),buys=buyRows(mr),sells=sellRows(mr);if(!buys.length||!sells.length)return null;let pool=buys;if(['latest-yearly','standard-new-hold3'].includes(s.id)){const preferred=buys.filter(x=>['new_campaign','new_official'].includes(x.kind));if(preferred.length)pool=preferred}else{const used=buys.filter(x=>!x.kind.startsWith('new'));if(used.length)pool=used}const buy=Math.min(...pool.map(mid)),sell=Math.max(...sells.map(mid)),exit=sell*Math.pow(1-dep,s.holdYears),total=buy-exit+s.friction+s.battery,annual=total/s.holdYears;return {...s,m,buy,exit,total,annual}}).filter(Boolean).sort((a,b)=>a.annual-b.annual);
-  if(!rows.length){$('#strategyTable').innerHTML=emptyHtml('暂无策略结果','价格样本不足。');return}
-  $('#strategyTable').innerHTML=`<table><thead><tr><th>#</th><th>策略</th><th>代表机型</th><th class="num">买入参考</th><th class="num">持有后退出</th><th class="num">交易/电池</th><th class="num">总成本</th><th class="num">年均成本</th><th>体验</th><th>风险</th><th>结论</th></tr></thead><tbody>${rows.map((r,i)=>`<tr><td>${i+1}</td><td><b>${esc(r.name)}</b><br><span class="muted">${esc(r.buyChannel)} → ${esc(r.sellChannel)}</span></td><td>${esc(r.m.name)}</td><td class="num">${yuan(r.buy)}</td><td class="num">${yuan(r.exit)}</td><td class="num">${yuan(r.friction+r.battery)}</td><td class="num">${yuan(r.total)}</td><td class="num"><b>${yuan(r.annual)}</b></td><td>${r.experience}/100</td><td>${esc(r.risk)}</td><td class="wrap">${esc(r.note)}</td></tr>`).join('')}</tbody></table>`;
-  $('#strategyNotes').innerHTML=[['平台价差先于折旧','平台二手零售价与回收价之间的差额，可能在购买当天就产生。'],['旧机需要预留维修费','年均折旧虽然较低，但换电池或维修可能改变最终排序。'],['个人交易更接近市场价','价差通常较小，同时需要承担验机、议价、发货和纠纷风险。']].map(x=>`<article class="note-card"><h3>${esc(x[0])}</h3><p>${esc(x[1])}</p></article>`).join('');
+function renderAlternatives(){
+  $('#alternativeReliability').value=state.ui.alternativeReliability||'';$('#alternativeRisk').value=state.ui.alternativeRisk||'';$('#alternativeEvidence').value=state.ui.alternativeEvidence||'';$('#alternativeSort').value=state.ui.alternativeSort||'recommended';
+  const types=[...new Set(state.alternatives.map(x=>x.type))].sort(); $('#alternativeType').innerHTML='<option value="">全部</option>'+types.map(x=>`<option ${state.ui.alternativeType===x?'selected':''}>${esc(x)}</option>`).join('');
+  const selected=state.ui.alternativeCategory||'';
+  $('#categoryChips').innerHTML=`<button data-category="" class="${!selected?'active':''}">全部</button>`+state.categories.map(c=>`<button data-category="${esc(c.id)}" class="${selected===c.id?'active':''}">${esc(c.icon)} ${esc(c.name)}</button>`).join('');
+  $$('[data-category]').forEach(b=>b.addEventListener('click',()=>{state.ui.alternativeCategory=b.dataset.category;renderAlternatives();saveState()})); renderAlternativeList();
 }
-function renderSources(){
-  const typeLabel={official:'官方',secondary:'规格资料',market_report:'市场报道',single_case:'个案'};
-  const list=[...state.sources].sort((a,b)=>(a.type==='official'?-1:1)-(b.type==='official'?-1:1));
-  $('#sourceCount').textContent=`${list.length} 项`;
-  $('#sourcesList').innerHTML=list.map(s=>`<article class="source"><a href="${safeUrl(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.title)}</a><p>${esc(publicNote(s.note))}</p><div class="source-meta"><span>${esc(s.publisher)}</span><span>${esc(typeLabel[s.type]||s.type)}</span><span>${esc(s.accessed)}</span></div></article>`).join('');
+function filteredAlternatives(){
+  const q=($('#alternativeSearch').value||'').trim().toLowerCase(),cat=state.ui.alternativeCategory||'',rel=$('#alternativeReliability').value,risk=$('#alternativeRisk').value,evidence=$('#alternativeEvidence').value,type=$('#alternativeType').value;
+  let list=state.alternatives.filter(a=>{const hay=JSON.stringify([a.original,a.alternative,a.tags,a.why,a.limits,a.category,a.type]).toLowerCase();return (!q||hay.includes(q))&&(!cat||a.category===cat)&&(!rel||a.reliability===rel)&&(!risk||a.risk===risk)&&(!evidence||a.evidence===evidence)&&(!type||a.type===type)&&(!state.favoritesOnly||state.favorites.has(a.id))});
+  const order={A:0,B:1,C:2},riskOrder={low:0,conditional:1};
+  const sort=$('#alternativeSort').value; list.sort((a,b)=>sort==='saving'?(b.savingMax-a.savingMax):sort==='category'?a.category.localeCompare(b.category,'zh-CN'):sort==='reliability'?(order[a.reliability]-order[b.reliability]||riskOrder[a.risk]-riskOrder[b.risk]):(order[a.reliability]-order[b.reliability]||riskOrder[a.risk]-riskOrder[b.risk]||b.savingMax-a.savingMax));
+  return list;
+}
+function renderAlternativeList(){
+  const list=filteredAlternatives();$('#alternativeCount').textContent=`${list.length} 条`;
+  if(!list.some(a=>a.id===state.selectedAlternativeId))state.selectedAlternativeId=list[0]?.id||'';
+  const catMap=Object.fromEntries(state.categories.map(c=>[c.id,c.name]));
+  const mobile=innerWidth<=680;
+  if(mobile){
+    const limit=state.ui.altMobileLimit||20, shown=list.slice(0,limit);
+    $('#alternativeTable').innerHTML=shown.length?`<div class="alt-mobile-list">${shown.map(a=>`<article class="alt-mobile-card ${a.id===state.selectedAlternativeId?'selected':''}" data-alt-id="${a.id}" tabindex="0"><div class="alt-card-head"><b>${esc(a.original)}</b><button class="favorite-button ${state.favorites.has(a.id)?'active':''}" data-fav="${a.id}" title="收藏">${state.favorites.has(a.id)?'★':'☆'}</button></div><div class="alt-arrow">→ ${esc(a.alternative)}</div><div class="alt-card-meta"><span>${esc(catMap[a.category]||a.category)}</span><span class="saving">省 ${a.savingMin}–${a.savingMax}%</span><span class="tag ${a.reliability}">${a.reliability}</span><span class="tag ${a.risk}">${esc(riskText(a.risk))}</span></div><p>${esc(a.limits)}</p></article>`).join('')}${list.length>limit?`<button class="load-more" data-alt-more type="button">再显示 ${Math.min(20,list.length-limit)} 条</button>`:''}</div>`:'<div class="empty">没有符合条件的平替方案</div>';
+  }else{
+    $('#alternativeTable').innerHTML=list.length?`<table><thead><tr><th></th><th>原需求</th><th>平替方案</th><th>分类</th><th class="num">预计节省</th><th>可靠性</th><th>风险</th><th>限制</th></tr></thead><tbody>${list.map(a=>`<tr class="clickable ${a.id===state.selectedAlternativeId?'selected':''}" data-alt-id="${a.id}"><td><button class="favorite-button ${state.favorites.has(a.id)?'active':''}" data-fav="${a.id}" title="收藏">${state.favorites.has(a.id)?'★':'☆'}</button></td><td><b>${esc(a.original)}</b></td><td>${esc(a.alternative)}</td><td>${esc(catMap[a.category]||a.category)}</td><td class="num"><span class="saving">${a.savingMin}–${a.savingMax}%</span></td><td><span class="tag ${a.reliability}">${a.reliability}</span></td><td><span class="tag ${a.risk}">${esc(riskText(a.risk))}</span></td><td>${esc(a.limits)}</td></tr>`).join('')}</tbody></table>`:'<div class="empty">没有符合条件的平替方案</div>';
+  }
+  $$('[data-fav]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();toggleFavorite(b.dataset.fav)}));
+  $$('[data-alt-id]').forEach(row=>{const open=()=>{state.selectedAlternativeId=row.dataset.altId;renderAlternativeList();showAlternativeDetail();saveState();if(innerWidth<=680)openDetail('平替详情',$('#alternativeDetail').innerHTML)};row.addEventListener('click',open);row.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open()}})});
+  $('[data-alt-more]')?.addEventListener('click',()=>{state.ui.altMobileLimit=(state.ui.altMobileLimit||20)+20;renderAlternativeList()});
+  showAlternativeDetail();
+}
+function showAlternativeDetail(){
+  const a=state.alternatives.find(x=>x.id===state.selectedAlternativeId);if(!a){$('#alternativeDetail').innerHTML='<div class="empty">选择方案查看详情</div>';return}
+  const cat=state.categories.find(c=>c.id===a.category)?.name||a.category;$('#alternativeDetailMeta').textContent=cat;
+  $('#alternativeDetail').innerHTML=`<h3 class="detail-title">${esc(a.original)} → ${esc(a.alternative)}</h3><div class="detail-sub">${esc(cat)} · ${esc(a.type)} · 预计节省 ${a.savingMin}–${a.savingMax}%</div><div class="detail-grid"><div class="detail-cell"><span>功能可靠性</span><b>${a.reliability} · ${a.reliability==='A'?'高':a.reliability==='B'?'有明确限制':'仅临时'}</b></div><div class="detail-cell"><span>安全等级</span><b>${esc(riskText(a.risk))}</b></div><div class="detail-cell"><span>证据等级</span><b>${esc(a.evidence)}</b></div><div class="detail-cell"><span>推荐状态</span><b>${esc(statusText(a.status))}</b></div></div><div class="detail-section"><h3>为什么可替代</h3><p>${esc(a.why)}</p></div><div class="detail-section"><h3>限制</h3><p>${esc(a.limits)}</p></div><div class="detail-section risk-note"><h3>安全与使用条件</h3><p>${esc(a.safety)}</p></div><div class="detail-section"><h3>标签</h3><p>${a.tags.map(t=>`<span class="tag">${esc(t)}</span>`).join(' ')}</p></div><div class="detail-actions"><button class="primary-button" data-detail-fav="${a.id}" type="button">${state.favorites.has(a.id)?'取消收藏':'收藏方案'}</button></div>`;
+  $('[data-detail-fav]')?.addEventListener('click',()=>toggleFavorite(a.id));
+}
+function toggleFavorite(id){state.favorites.has(id)?state.favorites.delete(id):state.favorites.add(id);saveState();renderAlternativeList();renderMy();toast(state.favorites.has(id)?'已收藏':'已取消收藏')}
+
+function estimateOwnedValue(item){
+  const p=item.type,m=getModel(p,item.modelId);if(!m)return 0;
+  const storage=p==='iphone'?(item.note?.match(/\d+(?:GB|TB)/i)?.[0]||m.baseStorage):'';
+  return currentSellAnchor(p,m,storage)||currentReferencePrice(p,m);
+}
+function renderMy(){
+  const purchase=state.owned.reduce((s,x)=>s+(+x.price||0),0), current=state.owned.reduce((s,x)=>s+estimateOwnedValue(x),0), loss=Math.max(0,purchase-current);
+  $('#myKpis').innerHTML=[['我的物品',state.owned.length,'件'],['累计买入',yuan(purchase),''],['当前参考',yuan(current),''],['累计价值下降',yuan(loss),purchase?pct(loss/purchase*100):''],['平替收藏',state.favorites.size,'条'],['本地保存','浏览器','不上传']].map(([a,b,c])=>`<div class="kpi"><span>${a}</span><strong>${b}</strong><small>${c}</small></div>`).join('');
+  $('#ownedItems').innerHTML=state.owned.length?state.owned.map((x,i)=>{const m=getModel(x.type,x.modelId),v=estimateOwnedValue(x),diff=(+x.price||0)-v;return `<div class="owned-card"><div><h3>${esc(m?.name||x.modelId)}</h3><p>${esc(x.date)} · 买入 ${yuan(x.price)} · 当前约 ${yuan(v)} · 下降 ${yuan(Math.max(0,diff))}${x.note?` · ${esc(x.note)}`:''}</p></div><div class="card-actions"><button class="danger-button" data-owned-delete="${i}" type="button">删除</button></div></div>`}).join(''):'<div class="empty">还没有添加物品</div>';
+  $$('[data-owned-delete]').forEach(b=>b.addEventListener('click',()=>{if(confirm('删除这条物品记录？')){state.owned.splice(+b.dataset.ownedDelete,1);saveState();renderMy();toast('已删除')}}));
+  const favs=state.alternatives.filter(a=>state.favorites.has(a.id));$('#favoriteCount').textContent=`${favs.length} 条`;
+  $('#favoriteAlternatives').innerHTML=favs.length?favs.map(a=>`<div class="favorite-card"><div><h3>${esc(a.original)} → ${esc(a.alternative)}</h3><p>可靠性 ${a.reliability} · ${riskText(a.risk)} · 节省 ${a.savingMin}–${a.savingMax}%</p></div><div class="card-actions"><button class="text-button" data-fav-open="${a.id}" type="button">查看</button></div></div>`).join(''):'<div class="empty">还没有收藏平替方案</div>';
+  $$('[data-fav-open]').forEach(b=>b.addEventListener('click',()=>{state.selectedAlternativeId=b.dataset.favOpen;switchView('alternatives');renderAlternatives()}));
+}
+function openOwnedDialog(type=state.costProduct,modelId='',price=0){
+  $('#ownedType').value=type;populateOwnedModels(modelId);$('#ownedDate').value=today();$('#ownedPrice').value=Math.round(price||currentReferencePrice(type,getModel(type,$('#ownedModel').value))||0);$('#ownedNote').value='';$('#ownedDialog').showModal();
+}
+function populateOwnedModels(selected=''){
+  const type=$('#ownedType').value,d=productData(type);$('#ownedModel').innerHTML=d.models.map(m=>`<option value="${esc(m.id)}" ${m.id===selected?'selected':''}>${esc(m.name)}${type==='macbook'?` · ${esc(m.memory)}/${esc(m.storage)}`:''}</option>`).join('');
+}
+function saveOwnedItem(){
+  const type=$('#ownedType').value,modelId=$('#ownedModel').value,date=$('#ownedDate').value,price=+$('#ownedPrice').value,note=$('#ownedNote').value.trim();if(!modelId||!date||!price){toast('请完整填写');return}
+  state.owned.push({type,modelId,date,price,note,created:Date.now()});saveState();$('#ownedDialog').close();renderMy();toast('已加入我的物品');
+}
+function clearMyData(){if(!confirm('清空我的物品和所有平替收藏？'))return;state.owned=[];state.favorites.clear();saveState();renderMy();renderAlternatives();toast('本地数据已清空')}
+
+function renderGlobalSearch(){
+  const q=$('#globalSearch').value.trim().toLowerCase();if(!q){$('#globalSearchResults').innerHTML='<div class="empty">输入产品、品牌、需求或平替方案</div>';return}
+  const iph=state.models.filter(m=>JSON.stringify(m).toLowerCase().includes(q)).slice(0,5),mac=state.macModels.filter(m=>JSON.stringify(m).toLowerCase().includes(q)).slice(0,5),alts=state.alternatives.filter(a=>JSON.stringify(a).toLowerCase().includes(q)).slice(0,8);
+  const group=(title,items,fn)=>items.length?`<div class="search-group"><h3>${title}</h3>${items.map(fn).join('')}</div>`:'';
+  $('#globalSearchResults').innerHTML=group('iPhone',iph,m=>`<button class="search-result" data-global-product="iphone" data-id="${m.id}"><b>${esc(m.name)}</b> · ${esc(m.chip)}</button>`)+group('MacBook Pro',mac,m=>`<button class="search-result" data-global-product="macbook" data-id="${m.id}"><b>${esc(m.name)}</b> · ${esc(m.chip)}</button>`)+group('生活平替',alts,a=>`<button class="search-result" data-global-alt="${a.id}"><b>${esc(a.original)}</b> → ${esc(a.alternative)}</button>`)+(iph.length||mac.length||alts.length?'':'<div class="empty">没有找到相关内容</div>');
+  $$('[data-global-product]').forEach(b=>b.addEventListener('click',()=>{state.buyProduct=b.dataset.globalProduct;state.selectedBuyId=b.dataset.id;$('#searchDialog').close();switchView('buy');renderBuy()}));
+  $$('[data-global-alt]').forEach(b=>b.addEventListener('click',()=>{state.selectedAlternativeId=b.dataset.globalAlt;$('#searchDialog').close();switchView('alternatives');renderAlternatives()}));
+}
+function renderInfo(){
+  $('#infoBody').innerHTML=`<div class="detail-section"><h3>数据范围</h3><p>${state.models.length} 款 iPhone、${state.macModels.length} 款 MacBook Pro、${state.alternatives.length} 条经初步去重和安全筛选的生活平替。</p></div><div class="detail-section"><h3>市场价格</h3><p>“核验”表示官方或明确价格；“样本”表示公开案例；“参考”表示根据公开行情形成的区间。成交前需按相同配置、容量、机况和日期复核。</p></div><div class="detail-section"><h3>价值趋势</h3><p>以首发价格、当前同配置二手样本和分层残值曲线计算，不是未来成交承诺。</p></div><div class="detail-section"><h3>生活平替</h3><p>功能可靠性、安全等级和证据等级分开评价。涉及婴幼儿安全、宠物用药、危险化学品、电器改装、火源或关键承重的高风险条目不会进入普通列表。</p></div><div class="detail-section"><h3>隐私</h3><p>我的物品和收藏只保存在当前浏览器，不上传服务器。清除浏览器网站数据后无法恢复，建议定期导出。</p></div>`;
+}
+function openDetail(title,html){$('#detailDialogTitle').textContent=title;$('#detailDialogBody').innerHTML=html;$('#detailDialog').showModal()}
+
+function exportData(type){
+  let content,name,mime='application/json';
+  if(type==='json'){
+    content=JSON.stringify({site:state.site,models:state.models,market:state.market,macModels:state.macModels,macMarket:state.macMarket,alternatives:state.alternatives,categories:state.categories,my:{owned:state.owned,favorites:[...state.favorites]}},null,2);name=`value-lab-${today()}.json`;
+  }else{
+    const rows=type==='market'?[['产品类型','产品','配置','平台','方向','最低','最高','中位','可信度','日期'],...['iphone','macbook'].flatMap(p=>productData(p).market.map(r=>{const m=getModel(p,r.modelId);return [p,m?.name||r.modelId,p==='iphone'?(r.storage||''):`${m?.memory||''}/${m?.storage||''}`,r.channel,r.side,r.low,r.high,rowMid(r),confidenceText(r.confidence),r.date]}))]:[['原需求','平替方案','分类','类型','可靠性','风险','证据','节省下限','节省上限','限制','安全条件'],...state.alternatives.map(a=>[a.original,a.alternative,state.categories.find(c=>c.id===a.category)?.name||a.category,a.type,a.reliability,riskText(a.risk),a.evidence,a.savingMin,a.savingMax,a.limits,a.safety])];
+    content='\ufeff'+rows.map(r=>r.map(v=>`"${String(v??'').replace(/"/g,'""')}"`).join(',')).join('\n');name=type==='market'?`value-lab-market-${today()}.csv`:`value-lab-alternatives-${today()}.csv`;mime='text/csv;charset=utf-8';
+  }
+  const blob=new Blob([content],{type:mime}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);$('#exportMenu').hidden=true;toast('导出完成');
 }
 
-function setupExports(){
-  $('#exportJson').onclick=()=>{const data={dataDate:state.dataDate,iphoneModels:state.models,iphoneMarket:state.market,macbookModels:state.macbook_models,macbookMarket:state.macbook_market,strategies:state.strategies,sources:state.sources,audit:state.audit};download(`iphone-value-lab-${state.dataDate||'data'}.json`,JSON.stringify(data,null,2),'application/json');$('#exportMenu').hidden=true;$('#exportToggle').setAttribute('aria-expanded','false');showToast('JSON 已导出')};
-  $('#exportCsv').onclick=()=>{const map=Object.fromEntries([...state.models,...state.macbook_models].map(m=>[m.id,m]));const headers=['产品','日期','机型','容量/配置','方向','渠道','类别','低位','高位','中位','机况','数据等级','备注'];const lines=[headers.map(csv).join(',')];[...state.market.map(r=>({...r,product:'iPhone'})),...state.macbook_market.map(r=>({...r,product:'MacBook Pro',storage:map[r.modelId]?`${map[r.modelId].memory}/${map[r.modelId].storage}`:r.storage}))].forEach(r=>lines.push([r.product,r.date,map[r.modelId]?.name,r.storage,r.side==='buy'?'买入':'卖出',r.channel,kindLabel(r.kind),r.low,r.high,mid(r),r.condition,confidenceLabel[r.confidence],publicNote(r.note)].map(csv).join(',')));download(`apple-market-${state.dataDate||'data'}.csv`,'\ufeff'+lines.join('\n'),'text/csv;charset=utf-8');$('#exportMenu').hidden=true;$('#exportToggle').setAttribute('aria-expanded','false');showToast('CSV 已导出')};
-}
-function csv(v){return `"${String(v??'').replaceAll('"','""')}"`}
-function download(name,text,type){const url=URL.createObjectURL(new Blob([text],{type})),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
-function showToast(message){const el=$('#toast');clearTimeout(toastTimer);el.textContent=message;el.classList.add('show');toastTimer=setTimeout(()=>el.classList.remove('show'),2200)}
-function emptyHtml(title,text){return `<div class="empty"><strong>${esc(title)}</strong><span>${esc(text)}</span></div>`}
-function renderAll(){renderAnalysis();renderMarket();renderModels();renderMacbook();renderStrategies();renderSources()}
-function showLoadError(){
-  $('#dataCount').textContent='数据读取失败';
-  $('#appMain').innerHTML='<section class="error-shell"><h2>暂时无法读取数据</h2><p>请检查网络连接后重试。</p><button id="retryLoad" class="primary-button" type="button">重新加载</button></section>';
-  $$('.tab').forEach(btn=>btn.disabled=true);
-  $('#retryLoad').onclick=()=>location.reload();
-}
-load().catch(err=>{console.error(err);showLoadError()});
+loadData().then(init).catch(err=>{
+  console.error(err);document.body.innerHTML=`<main><section class="block"><h1>数据读取失败</h1><p class="muted">请刷新页面重试。</p><button class="primary-button" onclick="location.reload()">重新加载</button></section></main>`;
+});
