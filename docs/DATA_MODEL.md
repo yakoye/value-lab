@@ -6,19 +6,72 @@
 id
 category
 brand
-model
-variant
-releaseDate
+name
+release
 launchPrice
-currentRetailPrice
-usedBuyPrice
-privateSellPrice
-recyclePrice
+currentOfficialPrice
+variant
 condition
 source
 confidence
 updatedAt
 ```
+
+## 产品变体
+
+### iPhone
+
+```text
+modelId
+storage
+```
+
+### iPad
+
+```text
+modelId
+storage
+network: Wi-Fi | Wi-Fi + 蜂窝网络
+cellularPremium
+pencilCompatibility
+```
+
+### MacBook
+
+```text
+modelId
+size
+chip
+cpuCores
+gpuCores
+memory
+storage
+```
+
+## 市场价格记录
+
+```text
+modelId
+side: buy | sell
+kind: new_official | used_retail | private | recycle | trade_in
+channel
+storage
+network
+condition
+low
+high
+date
+confidence
+sourceId
+note
+```
+
+## 容量和网络换算
+
+- 官方新品：按目标容量和网络版本的官方价差计算。
+- 二手价格：缺少独立样本时，按容量升级成本的一部分折算为二手残值。
+- 衍生记录必须设置 `derived: true` 并显示换算说明。
+- iPad 蜂窝版溢价独立于容量溢价。
 
 ## 成本公式
 
@@ -66,23 +119,3 @@ status
 source
 updated
 ```
-
-## 平替评价
-
-### 功能可靠性
-
-- A：核心功能基本等同，可长期使用。
-- B：大部分场景可替代，但有明确限制。
-- C：只适合临时或低要求场景。
-
-### 安全等级
-
-- low：普通合理使用下风险低。
-- conditional：必须满足材质、承重、耐温、认证或操作条件。
-- high：不进入普通列表。
-
-### 证据等级
-
-- A：标准、官方资料或稳定测试依据。
-- B：多个一致的实际使用经验或产品结构依据。
-- C：单一经验或尚需更多验证。

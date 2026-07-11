@@ -1,5 +1,18 @@
 # Changelog
 
+## v0.5.0 — 2026-07-11
+
+- 新增 18 款 iPad，覆盖标准版、mini、Air 和 Pro。
+- 新增 258 条 iPad 新品、二手买入、个人转卖和回收参考记录。
+- 新增 9 款 MacBook Air，覆盖 M1 至 M5 的 13/15 英寸代表配置。
+- 新增 65 条 MacBook Air 市场参考记录。
+- iPhone 扩展至 37 款，新增 iPhone 8、8 Plus、X、XR、XS 和 XS Max。
+- 成本、市场、购买参考、全局搜索和“我的物品”统一支持 iPhone、iPad、MacBook Air 与 MacBook Pro。
+- iPad 新增容量和 Wi-Fi / 蜂窝网络联动。
+- 官方新机容量价差与二手容量残值换算分开处理。
+- 购买参考新增 iPad 网络、Apple Pencil、蜂窝溢价等字段。
+- 更新数据来源、网站结构、开发计划和自动化测试记录。
+
 ## v0.4.0 — 2026-07-11
 
 - 项目由 Apple Value Lab 更名为 Value Lab。

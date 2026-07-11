@@ -53,6 +53,8 @@
     <div class="page-head"><div><h1>持有成本</h1><p>买入、使用、维护和出售合并计算。</p></div><button id="resetCost" class="text-button" type="button">恢复默认</button></div>
     <div class="product-tabs" data-product-tabs="cost">
       <button class="active" data-product="iphone" type="button">iPhone</button>
+      <button data-product="ipad" type="button">iPad</button>
+      <button data-product="macbook-air" type="button">MacBook Air</button>
       <button data-product="macbook" type="button">MacBook Pro</button>
     </div>
     <div id="costControls" class="toolbar"></div>
@@ -70,7 +72,7 @@
 
   <section id="view-market" class="view" hidden>
     <div class="page-head"><div><h1>市场价格</h1><p>新品、二手买入、个人转卖和平台回收分开查看。</p></div></div>
-    <div class="product-tabs" data-product-tabs="market"><button class="active" data-product="iphone" type="button">iPhone</button><button data-product="macbook" type="button">MacBook Pro</button></div>
+    <div class="product-tabs" data-product-tabs="market"><button class="active" data-product="iphone" type="button">iPhone</button><button data-product="ipad" type="button">iPad</button><button data-product="macbook-air" type="button">MacBook Air</button><button data-product="macbook" type="button">MacBook Pro</button></div>
     <div class="toolbar market-toolbar">
       <label>搜索<input id="marketSearch" type="search" placeholder="机型、配置、平台、机况"></label>
       <label>类型<select id="marketSide"><option value="">全部</option><option value="buy">买入</option><option value="sell">卖出</option></select></label>
@@ -83,7 +85,7 @@
 
   <section id="view-buy" class="view" hidden>
     <div class="page-head"><div><h1>购买参考</h1><p>参数、价格和购买判断放在一起。</p></div></div>
-    <div class="product-tabs" data-product-tabs="buy"><button class="active" data-product="iphone" type="button">iPhone</button><button data-product="macbook" type="button">MacBook Pro</button></div>
+    <div class="product-tabs" data-product-tabs="buy"><button class="active" data-product="iphone" type="button">iPhone</button><button data-product="ipad" type="button">iPad</button><button data-product="macbook-air" type="button">MacBook Air</button><button data-product="macbook" type="button">MacBook Pro</button></div>
     <div class="toolbar buy-toolbar">
       <label>搜索<input id="buySearch" type="search" placeholder="芯片、内存、120Hz、长焦"></label>
       <label id="buyYearLabel">年份<select id="buyYear"><option value="">全部</option></select></label>
@@ -135,7 +137,7 @@
 <dialog id="detailDialog" class="detail-dialog"><div class="dialog-head"><strong id="detailDialogTitle">详情</strong><button class="icon-button" data-close-dialog="detailDialog" type="button">×</button></div><div id="detailDialogBody"></div></dialog>
 <dialog id="infoDialog" class="info-dialog"><div class="dialog-head"><strong>数据说明</strong><button class="icon-button" data-close-dialog="infoDialog" type="button">×</button></div><div id="infoBody"></div></dialog>
 <dialog id="searchDialog" class="search-dialog"><div class="dialog-head"><strong>全局搜索</strong><button class="icon-button" data-close-dialog="searchDialog" type="button">×</button></div><div class="global-search"><input id="globalSearch" type="search" placeholder="搜索产品、品牌、生活需求或平替方案"></div><div id="globalSearchResults"></div></dialog>
-<dialog id="ownedDialog" class="owned-dialog"><form method="dialog" id="ownedForm"><div class="dialog-head"><strong>添加我的物品</strong><button class="icon-button" value="cancel" type="submit">×</button></div><div class="form-grid"><label>产品类型<select id="ownedType"><option value="iphone">iPhone</option><option value="macbook">MacBook Pro</option></select></label><label>机型<select id="ownedModel"></select></label><label>购买日期<input id="ownedDate" type="date" required></label><label>购买价格<input id="ownedPrice" type="number" min="0" step="100" required></label><label>备注<input id="ownedNote" type="text" maxlength="80" placeholder="成色、容量或配置"></label></div><div class="dialog-actions"><button value="cancel" type="submit" class="text-button">取消</button><button id="saveOwned" value="default" type="button" class="primary-button">保存</button></div></form></dialog>
+<dialog id="ownedDialog" class="owned-dialog"><form method="dialog" id="ownedForm"><div class="dialog-head"><strong>添加我的物品</strong><button class="icon-button" value="cancel" type="submit">×</button></div><div class="form-grid"><label>产品类型<select id="ownedType"><option value="iphone">iPhone</option><option value="ipad">iPad</option><option value="macbook-air">MacBook Air</option><option value="macbook">MacBook Pro</option></select></label><label>机型<select id="ownedModel"></select></label><label>购买日期<input id="ownedDate" type="date" required></label><label>购买价格<input id="ownedPrice" type="number" min="0" step="100" required></label><label>备注<input id="ownedNote" type="text" maxlength="80" placeholder="成色、容量或配置"></label></div><div class="dialog-actions"><button value="cancel" type="submit" class="text-button">取消</button><button id="saveOwned" value="default" type="button" class="primary-button">保存</button></div></form></dialog>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <footer><span>价格、价值趋势和平替评价用于比较；交易或使用前请复核具体条件。</span></footer>
 <script src="app.js"></script>

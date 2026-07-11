@@ -304,5 +304,203 @@
     "type": "secondary",
     "accessed": "2026-07-11",
     "note": "综合官方首发价、公开成交线索、同代平台价差和机龄曲线生成；不是平台实时抓取报价。"
+  },
+  {
+    "id": "apple-iphone8-news",
+    "title": "iPhone 8 和 iPhone 8 Plus：新一代 iPhone",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/newsroom/2017/09/iphone-8-and-iphone-8-plus-a-new-generation-of-iphone/",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "iPhone 8 系列容量与中国起售价。"
+  },
+  {
+    "id": "apple-iphonex-news",
+    "title": "遇见未来：iPhone X",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/newsroom/2017/09/the-future-is-here-iphone-x/",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "iPhone X 容量与中国起售价。"
+  },
+  {
+    "id": "apple-iphonexr-news",
+    "title": "Apple 推出 iPhone XR",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/newsroom/2018/09/apple-introduces-iphone-xr/",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "iPhone XR 容量与中国起售价。"
+  },
+  {
+    "id": "apple-iphonexs-news",
+    "title": "iPhone XS 和 iPhone XS Max",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/newsroom/2018/09/iphone-xs-and-iphone-xs-max-bring-the-best-and-biggest-displays-to-iphone/",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "iPhone XS 系列容量与中国起售价。"
+  },
+  {
+    "id": "apple-ipad-a16-spec",
+    "title": "iPad 11 英寸（A16）技术规格",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/ipad-11/specs/",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "A16、CPU/GPU、屏幕和摄像头规格。"
+  },
+  {
+    "id": "apple-ipad8-news",
+    "title": "Apple 推出第八代 iPad",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/newsroom/2020/09/apple-introduces-eighth-generation-ipad-with-a-huge-jump-in-performance/",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "第八代 iPad 中国起售价和容量。"
+  },
+  {
+    "id": "apple-ipadair4-news",
+    "title": "Apple 推出全新 iPad Air（A14）",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/newsroom/2020/09/apple-unveils-all-new-ipad-air-with-a14-bionic-apples-most-advanced-chip/",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "iPad Air 4 中国起售价和容量。"
+  },
+  {
+    "id": "apple-ipadair-m2-news",
+    "title": "Apple 发布搭载 M2 的 11/13 英寸 iPad Air",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/newsroom/2024/05/apple-unveils-the-redesigned-11-inch-and-all-new-13-inch-ipad-air-with-m2/",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "M2 iPad Air 尺寸、容量和中国起售价。"
+  },
+  {
+    "id": "apple-ipadair-m4-news",
+    "title": "Apple 推出搭载 M4 的 iPad Air",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/newsroom/2026/03/apple-introduces-the-new-ipad-air-powered-by-m4/",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "M4 iPad Air 内存、芯片、容量和中国起售价。"
+  },
+  {
+    "id": "apple-ipadpro-m4-news",
+    "title": "Apple 发布搭载 M4 的 iPad Pro",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/newsroom/2024/05/apple-unveils-stunning-new-ipad-pro-with-m4-chip-and-apple-pencil-pro/",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "M4 iPad Pro 规格与价格。"
+  },
+  {
+    "id": "apple-ipadpro-m5-news",
+    "title": "Apple 发布搭载 M5 的 iPad Pro",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/newsroom/2025/10/apple-introduces-ipad-pro-with-m5/",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "M5 iPad Pro 容量和中国起售价。"
+  },
+  {
+    "id": "apple-ipad-mini-a17-news",
+    "title": "Apple 推出搭载 A17 Pro 的 iPad mini",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/newsroom/2024/10/apple-introduces-powerful-new-ipad-mini-with-a17-pro/",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "A17 Pro iPad mini 起售价与容量。"
+  },
+  {
+    "id": "apple-ipad-identify",
+    "title": "识别 iPad 机型",
+    "publisher": "Apple Support",
+    "url": "https://support.apple.com/zh-cn/108043",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "历史 iPad 机型识别与基础规格。"
+  },
+  {
+    "id": "ipad-market-model",
+    "title": "iPad 中国二手市场参考模型",
+    "publisher": "Value Lab",
+    "url": "docs/DATA_MODEL.md",
+    "type": "model",
+    "accessed": "2026-07-11",
+    "note": "根据官方首发价、机龄、产品线曲线和渠道价差生成。"
+  },
+  {
+    "id": "apple-mba-m1-news",
+    "title": "Apple 推出搭载 M1 的 MacBook Air",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/newsroom/2020/11/introducing-the-next-generation-of-mac/",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "M1 MacBook Air 基础信息。"
+  },
+  {
+    "id": "apple-mba-m2-news",
+    "title": "Apple 推出搭载 M2 的 MacBook Air",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/newsroom/2022/06/apple-unveils-all-new-macbook-air-supercharged-by-the-new-m2-chip/",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "M2 MacBook Air 规格与起售价。"
+  },
+  {
+    "id": "apple-mba-m3-news",
+    "title": "Apple 推出搭载 M3 的 MacBook Air",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/newsroom/2024/03/apple-unveils-the-new-13-and-15-inch-macbook-air-with-the-powerful-m3-chip/",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "M3 MacBook Air 中国起售价。"
+  },
+  {
+    "id": "apple-mba-m4-news",
+    "title": "Apple 推出搭载 M4 的 MacBook Air",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/newsroom/2025/03/apple-introduces-the-new-macbook-air-with-m4-and-a-gorgeous-new-sky-blue-color/",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "M4 MacBook Air 内存、摄像头与起售价。"
+  },
+  {
+    "id": "apple-mba-m5-news",
+    "title": "Apple 推出搭载 M5 的 MacBook Air",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/newsroom/2026/03/apple-introduces-the-new-macbook-air-with-m5/",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "M5 MacBook Air 容量与中国起售价。"
+  },
+  {
+    "id": "apple-mba-m5-spec",
+    "title": "MacBook Air（M5）技术规格",
+    "publisher": "Apple Support",
+    "url": "https://support.apple.com/zh-cn/126320",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "M5 CPU/GPU、内存和存储规格。"
+  },
+  {
+    "id": "apple-mba-identify",
+    "title": "识别 MacBook Air 机型",
+    "publisher": "Apple Support",
+    "url": "https://support.apple.com/zh-cn/102869",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "历史 MacBook Air 识别。"
+  },
+  {
+    "id": "mac-air-market-model",
+    "title": "MacBook Air 中国二手市场参考模型",
+    "publisher": "Value Lab",
+    "url": "docs/DATA_MODEL.md",
+    "type": "model",
+    "accessed": "2026-07-11",
+    "note": "根据官方首发价、机龄和渠道价差生成。"
   }
 ]
