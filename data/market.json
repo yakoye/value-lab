@@ -12,7 +12,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-11",
@@ -102,7 +102,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-11-pro",
@@ -192,7 +192,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-11-pro-max",
@@ -282,7 +282,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-se-2",
@@ -372,7 +372,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-12-mini",
@@ -462,7 +462,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-12",
@@ -552,7 +552,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-12-pro",
@@ -642,7 +642,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-12-pro-max",
@@ -732,7 +732,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-13-mini",
@@ -822,7 +822,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-13",
@@ -912,7 +912,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-13-pro",
@@ -1002,7 +1002,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-13-pro-max",
@@ -1092,7 +1092,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-se-3",
@@ -1182,7 +1182,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-14",
@@ -1272,7 +1272,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-14-plus",
@@ -1362,7 +1362,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-14-pro",
@@ -1452,7 +1452,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-14-pro-max",
@@ -1542,7 +1542,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-15",
@@ -1632,7 +1632,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-15-plus",
@@ -1722,7 +1722,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-15-pro",
@@ -1812,7 +1812,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-15-pro-max",
@@ -1902,7 +1902,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-16e",
@@ -1992,7 +1992,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-16",
@@ -2082,7 +2082,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-16-plus",
@@ -2172,7 +2172,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-16-pro",
@@ -2262,7 +2262,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-16-pro-max",
@@ -2352,7 +2352,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-17e",
@@ -2442,7 +2442,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-17",
@@ -2532,7 +2532,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-air",
@@ -2622,7 +2622,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-17-pro",
@@ -2712,7 +2712,7 @@
     "confidence": "low",
     "method": "modelled",
     "sourceId": "market-model",
-    "note": "公开挂牌与市场折旧模型形成的参考区间；不等于实时成交价。"
+    "note": "综合公开挂牌与历史折旧形成的参考区间；不等于实时成交价。"
   },
   {
     "modelId": "iphone-17-pro-max",
@@ -2971,7 +2971,7 @@
     "confidence": "low",
     "method": "sample",
     "sourceId": "price-15pm-case",
-    "note": "仅作平台检测价差演示，不能代表今日统一报价。"
+    "note": "用于说明平台检测前后价差，不能代表今日统一报价。"
   },
   {
     "modelId": "iphone-16-pro-max",
