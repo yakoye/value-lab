@@ -3,10 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="description" content="中国 iPhone 新机、二手买入、回收价差与持有成本比较工具">
+  <meta name="description" content="中国 iPhone 与 MacBook Pro 新机、二手价格、折旧趋势和持有成本比较工具">
   <meta name="color-scheme" content="light dark">
   <meta name="theme-color" content="#f5f6f5">
-  <title>iPhone Value Lab</title>
+  <title>Apple Value Lab</title>
   <link rel="icon" href="favicon.svg" type="image/svg+xml">
   <script>
     (() => {
@@ -23,7 +23,7 @@
 <body>
 <header class="app-header">
   <div class="brand">
-    <strong>iPhone Value Lab</strong>
+    <strong>Apple Value Lab</strong>
     <span id="headerMeta">换机成本</span>
   </div>
 
@@ -31,7 +31,7 @@
     <button class="tab active" type="button" role="tab" aria-selected="true" aria-controls="view-analysis" data-view="analysis"><span class="tab-icon">￥</span><span>成本</span></button>
     <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="view-market" data-view="market"><span class="tab-icon">↕</span><span>价格</span></button>
     <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="view-models" data-view="models"><span class="tab-icon">▤</span><span>机型</span></button>
-    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="view-strategies" data-view="strategies"><span class="tab-icon">◎</span><span>策略</span></button>
+    <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="view-macbook" data-view="macbook"><span class="tab-icon">⌘</span><span>MacBook</span></button>
     <button class="tab" type="button" role="tab" aria-selected="false" aria-controls="view-method" data-view="method"><span class="tab-icon">i</span><span>口径</span></button>
   </nav>
 
@@ -74,6 +74,15 @@
 
     <div id="kpis" class="kpi-strip" aria-live="polite"></div>
 
+    <section class="block trend-block">
+      <div class="block-head"><h2>1–4 年价格下降趋势</h2><span id="iphoneTrendMeta">按当前二手样本校准</span></div>
+      <div class="trend-layout">
+        <div id="iphoneTrendChart" class="trend-chart" aria-label="iPhone 价格下降趋势图"></div>
+        <div id="iphoneTrendTable" class="trend-table"></div>
+      </div>
+      <p class="block-note">曲线是同容量、正常机况的个人转卖参考估值，不是未来成交承诺；首发价准确，后续年份按当前样本和分层折旧曲线估算。</p>
+    </section>
+
     <div class="split main-split">
       <section class="block">
         <div class="block-head"><h2>交易路径</h2><span>成本与数据质量综合排序</span></div>
@@ -90,6 +99,14 @@
       <div class="block-head"><h2>价格样本</h2><span>核验 / 样本 / 参考</span></div>
       <div id="selectedMarket" class="table-wrap"></div>
     </section>
+
+    <details class="block compact-details">
+      <summary>长期换机策略</summary>
+      <div class="details-body">
+        <div id="strategyTable" class="table-wrap"></div>
+        <div class="note-grid" id="strategyNotes"></div>
+      </div>
+    </details>
   </section>
 
   <section id="view-market" class="view" role="tabpanel" hidden>
@@ -116,14 +133,43 @@
     </div>
   </section>
 
-  <section id="view-strategies" class="view" role="tabpanel" hidden>
-    <div class="section-title"><div><h1>换机策略</h1><p>比较最新、上一代和旧旗舰的长期年均成本。</p></div></div>
-    <section class="block"><div class="block-head"><h2>策略比较</h2><span>以典型 256GB 路径计算</span></div><div id="strategyTable" class="table-wrap"></div></section>
-    <div class="note-grid" id="strategyNotes"></div>
+  <section id="view-macbook" class="view" role="tabpanel" hidden>
+    <div class="section-title"><div><h1>MacBook Pro</h1><p>M1 至 M5 Pro/Max 的规格、国行价格、二手买卖价差和 1–4 年折旧趋势。</p></div></div>
+    <div class="toolbar mac-toolbar" aria-label="MacBook Pro 选择">
+      <label>机型<select id="macModelSelect"></select></label>
+      <label>趋势口径<select id="macTrendMode"><option value="personal">个人转卖</option><option value="recycle">平台回收</option></select></label>
+    </div>
+
+    <div id="macKpis" class="kpi-strip" aria-live="polite"></div>
+
+    <section class="block trend-block">
+      <div class="block-head"><h2>1–4 年二手价格趋势</h2><span id="macTrendMeta">按当前二手样本校准</span></div>
+      <div class="trend-layout">
+        <div id="macTrendChart" class="trend-chart" aria-label="MacBook Pro 二手价格趋势图"></div>
+        <div id="macTrendTable" class="trend-table"></div>
+      </div>
+      <p class="block-note">高配 Max、超大内存和大容量 SSD 的升级费用，在二手市场通常不能按原价等比例回收；曲线按所列代表配置计算。</p>
+    </section>
+
+    <div class="split mac-main-split">
+      <aside class="block model-summary">
+        <div class="block-head"><h2>所选配置</h2><span id="macModelDate"></span></div>
+        <div id="macBrief"></div>
+      </aside>
+      <section class="block">
+        <div class="block-head"><h2>当前价格样本</h2><span>买入 / 个人转卖 / 平台回收</span></div>
+        <div id="macSelectedMarket" class="table-wrap"></div>
+      </section>
+    </div>
+
+    <section class="block">
+      <div class="block-head"><h2>MacBook Pro 机型汇总</h2><span id="macModelCount"></span></div>
+      <div id="macModelsTable" class="table-wrap tall"></div>
+    </section>
   </section>
 
   <section id="view-method" class="view" role="tabpanel" hidden>
-    <div class="section-title"><div><h1>数据口径</h1><p>区分报价、成交、回收和参考区间，避免错误比较。</p></div></div>
+    <div class="section-title"><div><h1>数据口径</h1><p>同时说明 iPhone 与 MacBook Pro 的报价、成交、回收和趋势估值口径。</p></div></div>
     <div class="split method-split">
       <section class="block prose">
         <h2>怎么看这些价格</h2>
@@ -131,6 +177,7 @@
           <li><b>买入价</b>是获得手机需要支付的金额；<b>退出价</b>是出售手机实际收到的金额。</li>
           <li><b>即时价差</b>反映平台零售与回收之间的差距，不等于自然折旧。</li>
           <li><b>持有成本</b> = 买入价 − 预计退出价 + 交易费用 + 维修或电池费用。</li>
+          <li><b>1–4 年趋势</b>以首发价为起点，再用当前同配置二手样本校准分层折旧曲线。</li>
           <li>只有容量、成色、电池健康和维修历史接近的记录才适合直接比较。</li>
         </ol>
         <h2>数据标记</h2>
@@ -158,7 +205,7 @@
 
 <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
-<footer><span id="footerMeta">价格仅供比较，成交前请复核。</span></footer>
+<footer><span id="footerMeta">价格与趋势仅供比较，成交前请复核。</span></footer>
 <script src="app.js"></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
-const state={models:[],market:[],strategies:[],sources:[],audit:{},selectedModel:null,dataDate:''};
+const state={models:[],market:[],macbook_models:[],macbook_market:[],strategies:[],sources:[],audit:{},selectedModel:null,dataDate:''};
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const UI_KEY='ivl.ui.v3', THEME_KEY='ivl.theme';
-const defaults={view:'analysis',modelId:'iphone-15-pro-max',detailModelId:'iphone-15-pro-max',storage:'256GB',holdYears:1,deprRate:14,fees:250,repair:0,marketSearch:'',marketKind:'',confidence:'',modelSearch:'',year:'',tier:'',aiOnly:false};
+const UI_KEY='avl.ui.v4', THEME_KEY='ivl.theme';
+const defaults={view:'analysis',modelId:'iphone-15-pro-max',detailModelId:'iphone-15-pro-max',storage:'256GB',holdYears:1,deprRate:14,fees:250,repair:0,marketSearch:'',marketKind:'',confidence:'',modelSearch:'',year:'',tier:'',aiOnly:false,macModelId:'mbp-14-m3pro-2023',macTrendMode:'personal'};
 let ui={...defaults,...readJson(UI_KEY)};
 let toastTimer=0;
 
@@ -20,11 +20,11 @@ function sourceMap(){return Object.fromEntries(state.sources.map(x=>[x.id,x]))}
 function publicNote(value){return String(value??'').replaceAll('公开挂牌与市场折旧模型形成的参考区间','综合公开挂牌与历史折旧形成的参考区间').replaceAll('平台检测价差演示','平台检测前后价差说明').replaceAll('模型估算','参考区间')}
 
 async function load(){
-  const files=['models','market','strategies','sources','audit'];
+  const files=['models','market','macbook_models','macbook_market','strategies','sources','audit'];
   const data=await Promise.all(files.map(f=>fetch(`data/${f}.json`,{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error('DATA_LOAD');return r.json()})));
   files.forEach((f,i)=>state[f]=data[i]);
   if(!Array.isArray(state.models)||!Array.isArray(state.market)||!state.models.length)throw new Error('DATA_INVALID');
-  state.dataDate=state.market.map(x=>x.date).filter(Boolean).sort().at(-1)||state.sources.map(x=>x.accessed).filter(Boolean).sort().at(-1)||'';
+  state.dataDate=[...state.market,...state.macbook_market].map(x=>x.date).filter(Boolean).sort().at(-1)||state.sources.map(x=>x.accessed).filter(Boolean).sort().at(-1)||'';
   init();
 }
 
@@ -36,7 +36,7 @@ function init(){
   setupDialog();
   setupExports();
   $('#headerMeta').textContent=state.dataDate?`更新 ${state.dataDate}`:'换机成本';
-  $('#dataCount').textContent=`${state.models.length} 款机型 · ${state.market.length} 条价格 · 更新 ${state.dataDate||'—'}`;
+  $('#dataCount').textContent=`iPhone ${state.models.length} 款 / ${state.market.length} 条价格 · MacBook Pro ${state.macbook_models.length} 款 / ${state.macbook_market.length} 条价格 · 更新 ${state.dataDate||'—'}`;
   $('#footerMeta').textContent=`数据更新 ${state.dataDate||'—'} · 价格仅供比较，成交前请复核`;
   renderAll();
 }
@@ -125,6 +125,14 @@ function setupFilters(){
   $('#yearFilter').onchange=()=>{ui.year=$('#yearFilter').value;saveUi();renderModels()};
   $('#tierFilter').onchange=()=>{ui.tier=$('#tierFilter').value;saveUi();renderModels()};
   $('#aiOnly').onchange=()=>{ui.aiOnly=$('#aiOnly').checked;saveUi();renderModels()};
+
+  const macSelect=$('#macModelSelect');
+  macSelect.innerHTML=[...state.macbook_models].sort((a,b)=>b.year-a.year||b.launchPrice-a.launchPrice).map(m=>`<option value="${esc(m.id)}">${esc(m.name)} · ${esc(m.memory)}/${esc(m.storage)}</option>`).join('');
+  if(![...macSelect.options].some(x=>x.value===ui.macModelId))ui.macModelId=macSelect.options[0]?.value||'';
+  macSelect.value=ui.macModelId;
+  $('#macTrendMode').value=ui.macTrendMode||'personal';
+  macSelect.onchange=()=>{ui.macModelId=macSelect.value;saveUi();renderMacbook()};
+  $('#macTrendMode').onchange=()=>{ui.macTrendMode=$('#macTrendMode').value;saveUi();renderMacbook()};
 }
 function populateStorage(preferred){
   const id=$('#modelSelect').value;
@@ -165,13 +173,13 @@ function renderAnalysis(){
   const risk=best?riskInfo(best.risk):{text:'—',cls:''};
   const values=[['样本最低买入',minBuy?yuan(minBuy):'—','不同渠道'],['样本最高退出',maxSell?yuan(maxSell):'—','检测条件不同'],['较优即时价差',spreadRoute?yuan(spreadRoute.spread):'—',spreadRoute?pct(spreadRoute.spreadPct):'无可比路径'],[years?'推荐年均成本':'推荐即时损失',best?yuan(best.annual):'—',years?`${years} 年持有`:'立即转卖'],['路径风险',risk.text,best?confidenceTitle[best.b.confidence]:'—',risk.cls]];
   $('#kpis').innerHTML=values.map(v=>`<div class="kpi"><small>${esc(v[0])}</small><strong class="${v[3]||''}">${esc(v[1])}</strong><em>${esc(v[2])}</em></div>`).join('');
-  renderRoutes(routes,years);renderSelectedMarket(rows);renderBrief(model,best,years,fees,repair);
+  renderRoutes(routes,years);renderSelectedMarket(rows);renderBrief(model,best,years,fees,repair);renderIphoneTrend(model,$('#storageSelect').value,rows);
 }
 function renderRoutes(routes,years){
   if(!routes.length){$('#routeTable').innerHTML=emptyHtml('暂无可比较路径','该容量缺少买入价或退出价。');return}
   $('#routeTable').innerHTML=`<table><thead><tr><th>#</th><th>买入渠道</th><th class="num">买入中位</th><th>退出渠道</th><th class="num">当前退出</th><th class="num">即时价差</th><th class="num">${years?years+' 年后退出':'退出金额'}</th><th class="num">${years?'年均成本':'即时损失'}</th><th>风险</th><th>数据</th></tr></thead><tbody>${routes.slice(0,16).map((r,i)=>{const risk=riskInfo(r.risk);return `<tr><td>${i+1}</td><td>${esc(r.b.channel)}<br><span class="tag buy">${esc(kindLabel(r.b.kind))}</span></td><td class="num"><b>${yuan(r.buy)}</b><br><span class="muted">${yuan(r.b.low)}–${yuan(r.b.high)}</span></td><td>${esc(r.s.channel)}<br><span class="tag sell">${esc(kindLabel(r.s.kind))}</span></td><td class="num">${yuan(r.sellNow)}</td><td class="num ${r.spreadPct>.15?'negative':''}">${yuan(r.spread)}<br><span class="muted">${pct(r.spreadPct)}</span></td><td class="num">${yuan(r.exit)}</td><td class="num ${r.annual<0?'negative':''}"><b>${yuan(r.annual)}</b>${r.anomaly?'<br><span class="tag risk-high">需核验</span>':''}</td><td><span class="tag ${risk.cls}">${risk.text}</span></td><td><span class="tag ${r.b.confidence}" title="${confidenceTitle[r.b.confidence]}">${confidenceLabel[r.b.confidence]}</span> <span class="tag ${r.s.confidence}" title="${confidenceTitle[r.s.confidence]}">${confidenceLabel[r.s.confidence]}</span></td></tr>`}).join('')}</tbody></table>`;
 }
-function kindLabel(k){return ({new_official:'官方新机',new_campaign:'促销新机',used_personal:'个人二手',personal_sale:'个人转卖',used_retail:'平台二手',used_merchant:'商家二手',recycle:'平台回收',recycle_case:'回收案例',trade_in:'官方折抵',used_open_box:'拆封激活',channel_recycle:'渠道回收'})[k]||k}
+function kindLabel(k){return ({new_official:'官方新机',new_campaign:'促销新机',used_personal:'个人二手',personal_sale:'个人转卖',used_retail:'平台二手',used_merchant:'商家二手',recycle:'平台回收',recycle_case:'回收案例',trade_in:'官方折抵',used_open_box:'拆封激活',channel_recycle:'渠道回收',official_refurbished:'官方翻新'})[k]||k}
 function renderSelectedMarket(rows){
   if(!rows.length){$('#selectedMarket').innerHTML=emptyHtml('暂无价格记录','可在“市场价格”中查看其他机型。');return}
   const sm=sourceMap(),sorted=[...rows].sort((a,b)=>a.side.localeCompare(b.side)||mid(a)-mid(b));
@@ -184,6 +192,49 @@ function renderBrief(m,best,years,fees,repair){
   if(!best){$('#costBars').innerHTML='';return}
   const items=[['买入中位',best.buy,false],['当前退出',best.sellNow,false],[years?`${years}年后退出`:'即时价差',years?best.exit:best.spread,!years],['交易+维修',fees+repair,true],['总持有成本',best.total,true]],max=Math.max(...items.map(x=>Math.abs(x[1])),1);
   $('#costBars').innerHTML=items.map(([n,v,loss])=>`<div class="bar-row"><span>${esc(n)}</span><div class="bar-track"><div class="bar-fill ${loss?'loss':''}" style="width:${Math.max(2,Math.abs(v)/max*100)}%"></div></div><b class="${v<0?'negative':''}">${yuan(v)}</b></div>`).join('');
+}
+
+
+const iphoneCurves={
+  'Pro Max':[1,.77,.62,.50,.41],Pro:[1,.75,.60,.48,.39],Plus:[1,.72,.55,.43,.34],mini:[1,.68,.51,.40,.32],SE:[1,.61,.43,.31,.22],Air:[1,.70,.54,.42,.33],e:[1,.66,.49,.37,.28],标准:[1,.69,.52,.40,.31]
+};
+const macCurves={base:[1,.76,.62,.50,.40],pro:[1,.79,.67,.56,.47],max:[1,.73,.59,.47,.38]};
+function parseCapacity(value){const m=String(value||'').match(/([0-9.]+)\s*(TB|GB)/i);if(!m)return 0;return Number(m[1])*(m[2].toUpperCase()==='TB'?1024:1)}
+function iphoneLaunchForStorage(m,storage){
+  if(!m)return 0;const base=parseCapacity(m.baseStorage),target=parseCapacity(storage);if(!base||!target||target<=base)return m.launchPrice;
+  let price=m.launchPrice,current=base;
+  while(current<target){const next=current<128?128:current<256?256:current<512?512:1024;let add=1000;if(current<128)add=500;else if(current>=256)add=2000;else if(m.year<=2022)add=900;price+=add;current=next;if(current>=1024&&target>1024){price+=4000;break}}
+  return price;
+}
+function monthsBetween(a,b){const x=new Date(`${a}-01T00:00:00`),y=new Date(`${b}T00:00:00`);return Math.max(0,(y-x)/(1000*60*60*24*30.4375))}
+function currentMarketAnchor(rows,mode='personal'){
+  const preferred=mode==='recycle'?rows.filter(r=>r.side==='sell'&&['recycle','recycle_case','channel_recycle','trade_in'].includes(r.kind)):rows.filter(r=>r.side==='sell'&&r.kind==='personal_sale');
+  const pool=preferred.length?preferred:rows.filter(r=>r.side==='sell');
+  if(!pool.length)return null;return pool.sort((a,b)=>mid(b)-mid(a))[0];
+}
+function interpolateCurve(curve,age){const a=Math.max(0,Math.min(4,age)),lo=Math.floor(a),hi=Math.ceil(a);if(lo===hi)return curve[lo];return curve[lo]+(curve[hi]-curve[lo])*(a-lo)}
+function calibratedTrend({launch,release,curve,rows,mode='personal'}){
+  const age=Math.max(.15,Math.min(4,monthsBetween(release,state.dataDate)/12));
+  const anchor=currentMarketAnchor(rows,mode);let adjustment=1;
+  if(anchor&&launch>0){const target=Math.max(.16,Math.min(.96,mid(anchor)/launch));const base=interpolateCurve(curve,age);adjustment=Math.max(.72,Math.min(1.22,target/base))}
+  const points=[{year:0,label:'首发',ratio:1,price:launch}];let prev=launch;
+  for(let y=1;y<=4;y++){const ratio=Math.min(.96,curve[y]*Math.pow(adjustment,y/Math.max(age,1)));let price=Math.round(launch*ratio/10)*10;price=Math.min(prev-10,price);price=Math.max(0,price);points.push({year:y,label:`第 ${y} 年`,ratio:price/launch,price});prev=price}
+  return {points,anchor,age};
+}
+function trendSvg(points){
+  const W=760,H=244,L=56,R=24,T=24,B=38,max=Math.max(...points.map(x=>x.price))*1.06,min=0,plotW=W-L-R,plotH=H-T-B;
+  const x=i=>L+plotW*i/(points.length-1),y=v=>T+plotH*(1-(v-min)/(max-min||1));
+  const grid=[0,.25,.5,.75,1].map(q=>{const val=max*(1-q),yy=T+plotH*q;return `<line class=\"chart-grid\" x1=\"${L}\" y1=\"${yy}\" x2=\"${W-R}\" y2=\"${yy}\"/><text class=\"chart-axis\" x=\"${L-8}\" y=\"${yy+3}\" text-anchor=\"end\">${Math.round(val/1000)}k</text>`}).join('');
+  const path=points.map((p,i)=>`${i?'L':'M'} ${x(i)} ${y(p.price)}`).join(' ');
+  const marks=points.map((p,i)=>`<g><circle class=\"chart-point\" cx=\"${x(i)}\" cy=\"${y(p.price)}\" r=\"4\"/><text class=\"chart-value\" x=\"${x(i)}\" y=\"${Math.max(14,y(p.price)-10)}\" text-anchor=\"middle\">${Math.round(p.price/100)/10}k</text><text class=\"chart-axis\" x=\"${x(i)}\" y=\"${H-13}\" text-anchor=\"middle\">${esc(p.label)}</text></g>`).join('');
+  return `<svg viewBox=\"0 0 ${W} ${H}\" role=\"img\" aria-label=\"价格随年份下降的折线图\">${grid}<path class=\"chart-line\" d=\"${path}\" fill=\"none\"/>${marks}</svg>`;
+}
+function trendTableHtml(points){return `<table><thead><tr><th>时间</th><th class=\"num\">参考价格</th><th class=\"num\">较首发减少</th><th class=\"num\">残值率</th></tr></thead><tbody>${points.map((p,i)=>`<tr><td>${esc(p.label)}</td><td class=\"num\"><b>${yuan(p.price)}</b></td><td class=\"num ${i?'negative':''}\">${i?yuan(points[0].price-p.price):'—'}</td><td class=\"num\">${Math.round(p.ratio*100)}%</td></tr>`).join('')}</tbody></table>`}
+function renderIphoneTrend(model,storage,rows){
+  if(!model){$('#iphoneTrendChart').innerHTML='';$('#iphoneTrendTable').innerHTML='';return}
+  const launch=iphoneLaunchForStorage(model,storage),curve=iphoneCurves[model.tier]||iphoneCurves['标准'],trend=calibratedTrend({launch,release:model.release,curve,rows,mode:'personal'});
+  $('#iphoneTrendChart').innerHTML=trendSvg(trend.points);$('#iphoneTrendTable').innerHTML=trendTableHtml(trend.points);
+  $('#iphoneTrendMeta').textContent=`${model.name} · ${storage} · 当前样本 ${trend.anchor?yuan(mid(trend.anchor)):'不足'}`;
 }
 
 function marketCategory(r){if(r.side==='sell')return 'sell';if(r.kind.startsWith('new'))return 'new';return 'used'}
@@ -219,6 +270,32 @@ function setupDialog(){
 }
 function openModelDialog(){const dialog=$('#modelDialog');if(!dialog.open)dialog.showModal()}
 
+
+function macRows(id){return state.macbook_market.filter(r=>r.modelId===id)}
+function renderMacbook(){
+  const id=$('#macModelSelect')?.value||ui.macModelId,m=state.macbook_models.find(x=>x.id===id);if(!m)return;
+  const rows=macRows(id),mode=$('#macTrendMode')?.value||'personal',buys=buyRows(rows.filter(r=>r.analysisEligible!==false)),sells=sellRows(rows.filter(r=>r.analysisEligible!==false));
+  const personal=rows.filter(r=>r.kind==='personal_sale'),recycles=rows.filter(r=>['recycle','recycle_case','channel_recycle','trade_in'].includes(r.kind));
+  const minBuy=buys.length?Math.min(...buys.map(mid)):0,personalSell=personal.length?Math.max(...personal.map(mid)):0,recycleSell=recycles.length?Math.max(...recycles.map(mid)):0,spread=minBuy-(mode==='recycle'?recycleSell:personalSell);
+  const curve=macCurves[m.curve]||macCurves.pro,trend=calibratedTrend({launch:m.launchPrice,release:m.release,curve,rows,mode});
+  const y4=trend.points[4];
+  $('#macKpis').innerHTML=[['中国首发',yuan(m.launchPrice),`${m.memory}/${m.storage}`],['个人二手买入',minBuy?yuan(minBuy):'—','样本中位低位'],['个人转卖',personalSell?yuan(personalSell):'—','正常机况'],['平台回收',recycleSell?yuan(recycleSell):'—','检测后可能变化'],['第 4 年参考',yuan(y4.price),`${Math.round(y4.ratio*100)}% 残值`]].map(v=>`<div class=\"kpi\"><small>${esc(v[0])}</small><strong>${esc(v[1])}</strong><em>${esc(v[2])}</em></div>`).join('');
+  $('#macTrendChart').innerHTML=trendSvg(trend.points);$('#macTrendTable').innerHTML=trendTableHtml(trend.points);$('#macTrendMeta').textContent=`${m.name} · ${m.memory}/${m.storage} · ${mode==='recycle'?'平台回收':'个人转卖'}口径`;
+  $('#macModelDate').textContent=m.release;
+  const current=m.currentOfficialPrice?`<span class=\"muted\">当前官方 ${yuan(m.currentOfficialPrice)}</span>`:'';
+  $('#macBrief').innerHTML=`<div class=\"brief-title\"><div><h3>${esc(m.name)}</h3><span class=\"muted\">${esc(m.memory)} / ${esc(m.storage)}</span></div><div class=\"price\">${yuan(m.launchPrice)}${current}</div></div><div class=\"brief-grid\">${[['芯片',`${m.chip} · ${m.cpuCores} 核 CPU / ${m.gpuCores} 核 GPU`],['内存',`${m.memory} · 最高 ${m.maxMemory}`],['屏幕',m.display],['续航',`最长 ${m.batteryHours} 小时视频播放`],['重量',`${m.weightKg}kg`],['接口',m.ports]].map(x=>`<div class=\"brief-item\"><small>${esc(x[0])}</small>${esc(x[1])}</div>`).join('')}</div><div class=\"brief-text\"><p><b>更新：</b>${esc(m.keyUpdates)}</p><p class=\"positive\"><b>优点：</b>${esc(m.pros)}</p><p class=\"negative\"><b>缺点：</b>${esc(m.cons)}</p><p><b>判断：</b>${esc(m.verdict)}</p></div>`;
+  renderMacMarket(rows);renderMacModels(id);
+}
+function renderMacMarket(rows){
+  const sm=sourceMap(),sorted=[...rows].sort((a,b)=>a.side.localeCompare(b.side)||mid(a)-mid(b));
+  $('#macSelectedMarket').innerHTML=`<table><thead><tr><th>方向</th><th>渠道</th><th>类别</th><th class=\"num\">价格区间</th><th class=\"num\">中位</th><th>数据</th><th>条件/说明</th></tr></thead><tbody>${sorted.map(r=>{const source=sm[r.sourceId];return `<tr><td><span class=\"tag ${r.side}\">${r.side==='buy'?'买入':'卖出'}</span></td><td>${esc(r.channel)}</td><td>${esc(kindLabel(r.kind))}</td><td class=\"num\">${yuan(r.low)}–${yuan(r.high)}</td><td class=\"num\"><b>${yuan(mid(r))}</b></td><td><span class=\"tag ${r.confidence}\">${confidenceLabel[r.confidence]}</span></td><td class=\"wrap\">${esc(r.condition)}<br><span class=\"muted\">${esc(publicNote(r.note))}${source?` · ${esc(source.publisher)}`:''}</span></td></tr>`}).join('')}</tbody></table>`;
+}
+function renderMacModels(selected){
+  const list=[...state.macbook_models].sort((a,b)=>b.year-a.year||b.launchPrice-a.launchPrice);$('#macModelCount').textContent=`${list.length} 款代表配置`;
+  $('#macModelsTable').innerHTML=`<table><thead><tr><th>年份</th><th>机型 / 配置</th><th class=\"num\">首发价</th><th>芯片</th><th>CPU / GPU</th><th>内存 / SSD</th><th>屏幕</th><th>续航</th><th>重量</th><th>接口</th><th>关键更新</th><th>购买判断</th></tr></thead><tbody>${list.map(m=>`<tr data-mac-id=\"${esc(m.id)}\" class=\"clickable ${selected===m.id?'selected':''}\" tabindex=\"0\"><td>${m.year}</td><td><b>${esc(m.name)}</b><br><span class=\"muted\">${esc(m.memory)} / ${esc(m.storage)}</span></td><td class=\"num\">${yuan(m.launchPrice)}${m.currentOfficialPrice?`<br><span class=\"muted\">当前 ${yuan(m.currentOfficialPrice)}</span>`:''}</td><td>${esc(m.chip)}</td><td>${m.cpuCores} 核 / ${m.gpuCores} 核</td><td>${esc(m.memory)} / ${esc(m.storage)}</td><td>${esc(m.display)}</td><td>${m.batteryHours}h</td><td>${m.weightKg}kg</td><td class=\"wrap\">${esc(m.ports)}</td><td class=\"wrap\">${esc(m.keyUpdates)}</td><td class=\"wrap\">${esc(m.verdict)}</td></tr>`).join('')}</tbody></table>`;
+  $$('#macModelsTable tbody tr').forEach(tr=>{const choose=()=>{$('#macModelSelect').value=tr.dataset.macId;ui.macModelId=tr.dataset.macId;saveUi();renderMacbook();window.scrollTo({top:0,behavior:'smooth'})};tr.onclick=choose;tr.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();choose()}}});
+}
+
 function renderStrategies(){
   const reps={'latest-yearly':'iphone-17-pro-max','lastgen-yearly':'iphone-16-pro-max','twoyear-hold2':'iphone-15-pro-max','threeyear-hold3':'iphone-14-pro-max','standard-new-hold3':'iphone-17'};
   const dep=clamp(ui.deprRate,0,60,14)/100;
@@ -235,14 +312,14 @@ function renderSources(){
 }
 
 function setupExports(){
-  $('#exportJson').onclick=()=>{const data={dataDate:state.dataDate,models:state.models,market:state.market,strategies:state.strategies,sources:state.sources,audit:state.audit};download(`iphone-value-lab-${state.dataDate||'data'}.json`,JSON.stringify(data,null,2),'application/json');$('#exportMenu').hidden=true;$('#exportToggle').setAttribute('aria-expanded','false');showToast('JSON 已导出')};
-  $('#exportCsv').onclick=()=>{const map=Object.fromEntries(state.models.map(m=>[m.id,m]));const headers=['日期','机型','容量','方向','渠道','类别','低位','高位','中位','机况','数据等级','备注'];const lines=[headers.map(csv).join(',')];state.market.forEach(r=>lines.push([r.date,map[r.modelId]?.name,r.storage,r.side==='buy'?'买入':'卖出',r.channel,kindLabel(r.kind),r.low,r.high,mid(r),r.condition,confidenceLabel[r.confidence],publicNote(r.note)].map(csv).join(',')));download(`iphone-market-${state.dataDate||'data'}.csv`,'\ufeff'+lines.join('\n'),'text/csv;charset=utf-8');$('#exportMenu').hidden=true;$('#exportToggle').setAttribute('aria-expanded','false');showToast('CSV 已导出')};
+  $('#exportJson').onclick=()=>{const data={dataDate:state.dataDate,iphoneModels:state.models,iphoneMarket:state.market,macbookModels:state.macbook_models,macbookMarket:state.macbook_market,strategies:state.strategies,sources:state.sources,audit:state.audit};download(`iphone-value-lab-${state.dataDate||'data'}.json`,JSON.stringify(data,null,2),'application/json');$('#exportMenu').hidden=true;$('#exportToggle').setAttribute('aria-expanded','false');showToast('JSON 已导出')};
+  $('#exportCsv').onclick=()=>{const map=Object.fromEntries([...state.models,...state.macbook_models].map(m=>[m.id,m]));const headers=['产品','日期','机型','容量/配置','方向','渠道','类别','低位','高位','中位','机况','数据等级','备注'];const lines=[headers.map(csv).join(',')];[...state.market.map(r=>({...r,product:'iPhone'})),...state.macbook_market.map(r=>({...r,product:'MacBook Pro',storage:map[r.modelId]?`${map[r.modelId].memory}/${map[r.modelId].storage}`:r.storage}))].forEach(r=>lines.push([r.product,r.date,map[r.modelId]?.name,r.storage,r.side==='buy'?'买入':'卖出',r.channel,kindLabel(r.kind),r.low,r.high,mid(r),r.condition,confidenceLabel[r.confidence],publicNote(r.note)].map(csv).join(',')));download(`apple-market-${state.dataDate||'data'}.csv`,'\ufeff'+lines.join('\n'),'text/csv;charset=utf-8');$('#exportMenu').hidden=true;$('#exportToggle').setAttribute('aria-expanded','false');showToast('CSV 已导出')};
 }
 function csv(v){return `"${String(v??'').replaceAll('"','""')}"`}
 function download(name,text,type){const url=URL.createObjectURL(new Blob([text],{type})),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000)}
 function showToast(message){const el=$('#toast');clearTimeout(toastTimer);el.textContent=message;el.classList.add('show');toastTimer=setTimeout(()=>el.classList.remove('show'),2200)}
 function emptyHtml(title,text){return `<div class="empty"><strong>${esc(title)}</strong><span>${esc(text)}</span></div>`}
-function renderAll(){renderAnalysis();renderMarket();renderModels();renderStrategies();renderSources()}
+function renderAll(){renderAnalysis();renderMarket();renderModels();renderMacbook();renderStrategies();renderSources()}
 function showLoadError(){
   $('#dataCount').textContent='数据读取失败';
   $('#appMain').innerHTML='<section class="error-shell"><h2>暂时无法读取数据</h2><p>请检查网络连接后重试。</p><button id="retryLoad" class="primary-button" type="button">重新加载</button></section>';

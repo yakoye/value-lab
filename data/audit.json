@@ -1,9 +1,13 @@
 {
   "models": 31,
   "market_records": 202,
-  "sources": 18,
+  "sources": 34,
   "verified": 10,
   "samples": 6,
   "modelled": 186,
-  "missing_market_models": []
+  "missing_market_models": [],
+  "iphone_models": 31,
+  "iphone_market_records": 202,
+  "macbook_models": 16,
+  "macbook_market_records": 68
 }

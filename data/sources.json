@@ -160,5 +160,149 @@
     "type": "method",
     "accessed": "2026-07-10",
     "note": "依据公开样本、机龄、容量、平台零售/回收价差建立参考区间；不是平台实时报价。"
+  },
+  {
+    "id": "apple-mbp-identify",
+    "title": "识别 MacBook Pro 机型",
+    "publisher": "Apple 支持",
+    "url": "https://support.apple.com/zh-cn/108052",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "历代 MacBook Pro 机型、年份和识别信息。"
+  },
+  {
+    "id": "apple-mbp-m1-news",
+    "title": "新一代 Mac 携手登场",
+    "publisher": "Apple Newsroom",
+    "url": "https://www.apple.com.cn/newsroom/2020/11/introducing-the-next-generation-of-mac/",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "13 英寸 M1 MacBook Pro 首发价格与定位。"
+  },
+  {
+    "id": "apple-mbp-m1pro-news",
+    "title": "Apple 推出颠覆性的 MacBook Pro",
+    "publisher": "Apple Newsroom",
+    "url": "https://www.apple.com.cn/newsroom/2021/10/apple-unveils-game-changing-macbook-pro/",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "14/16 英寸 M1 Pro/Max 机型首发价格与关键更新。"
+  },
+  {
+    "id": "apple-mbp-m2-news",
+    "title": "Apple 推出搭载 M2 Pro 与 M2 Max 的 MacBook Pro",
+    "publisher": "Apple Newsroom",
+    "url": "https://www.apple.com.cn/newsroom/2023/01/apple-unveils-macbook-pro-featuring-m2-pro-and-m2-max/",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "M2 Pro/Max 机型首发价格和主要规格。"
+  },
+  {
+    "id": "apple-mbp-m3-news",
+    "title": "Apple 推出搭载 M3 系列芯片的 MacBook Pro",
+    "publisher": "Apple Newsroom",
+    "url": "https://www.apple.com.cn/newsroom/2023/10/apple-unveils-new-macbook-pro-featuring-m3-chips/",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "M3、M3 Pro、M3 Max 机型首发价格与关键升级。"
+  },
+  {
+    "id": "apple-mbp-m3-spec",
+    "title": "MacBook Pro（M3 Pro 或 M3 Max）技术规格",
+    "publisher": "Apple 支持",
+    "url": "https://support.apple.com/zh-cn/117736",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "M3 Pro/Max 的 CPU、GPU、内存、屏幕、续航和接口。"
+  },
+  {
+    "id": "apple-mbp-m4-news",
+    "title": "Apple 推出搭载 M4 系列芯片的 MacBook Pro",
+    "publisher": "Apple Newsroom",
+    "url": "https://www.apple.com.cn/newsroom/2024/10/apples-new-macbook-pro-features-the-incredibly-powerful-m4-family-of-chips/",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "M4 系列首发价格、16GB/24GB 起步、雷雳 5、摄像头和续航。"
+  },
+  {
+    "id": "apple-mbp-m5-news",
+    "title": "Apple 发布搭载 M5 芯片的 14 英寸 MacBook Pro",
+    "publisher": "Apple Newsroom",
+    "url": "https://www.apple.com.cn/newsroom/2025/10/apple-unveils-new-14-inch-macbook-pro-with-the-m5-chip/",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "M5 基础款首发价格、AI/图形更新和续航。"
+  },
+  {
+    "id": "apple-mbp-m5-spec",
+    "title": "MacBook Pro（14 英寸，M5）技术规格",
+    "publisher": "Apple 支持",
+    "url": "https://support.apple.com/zh-cn/125405",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "M5 基础款芯片、内存、存储和媒体引擎。"
+  },
+  {
+    "id": "apple-mbp-m5pro-news",
+    "title": "Apple 推出搭载 M5 Pro 与 M5 Max 的 MacBook Pro",
+    "publisher": "Apple Newsroom",
+    "url": "https://www.apple.com.cn/newsroom/2026/03/apple-introduces-macbook-pro-with-all-new-m5-pro-and-m5-max/",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "2026 年 M5 Pro/Max 机型首发价格和上市时间。"
+  },
+  {
+    "id": "apple-mbp-m5pro-spec",
+    "title": "MacBook Pro（M5 Pro 或 M5 Max）技术规格",
+    "publisher": "Apple 支持",
+    "url": "https://support.apple.com/zh-cn/126318",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "M5 Pro/Max CPU、GPU、统一内存与带宽规格。"
+  },
+  {
+    "id": "apple-mbp-current",
+    "title": "购买 MacBook Pro",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/shop/buy-mac/macbook-pro",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "当前在售尺寸、芯片、标准配置和官方价格。"
+  },
+  {
+    "id": "apple-mbp-refurb",
+    "title": "Apple 认证翻新 MacBook Pro",
+    "publisher": "Apple 中国",
+    "url": "https://www.apple.com.cn/shop/refurbished/mac/macbook-pro",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "认证翻新机当前库存和价格，可作为二手平台价格的上沿参考。"
+  },
+  {
+    "id": "mac-market-news-2026",
+    "title": "二手 MacBook 价格短期波动报道",
+    "publisher": "新浪/都市快报",
+    "url": "https://www.sina.cn/news/detail/5316340560692654.html",
+    "type": "market_report",
+    "accessed": "2026-07-11",
+    "note": "2026 年 6–7 月部分 MacBook Pro 二手成交底价短期上涨，说明价格需要带日期。"
+  },
+  {
+    "id": "mac-swappa-2021",
+    "title": "MacBook Pro 14 英寸（2021）成交价格",
+    "publisher": "Swappa",
+    "url": "https://swappa.com/prices/macbook-pro-2021-14",
+    "type": "market_report",
+    "accessed": "2026-07-11",
+    "note": "海外实际成交样本，仅用于验证旧款 M1 Pro 的大致残值区间，不直接等同中国价格。"
+  },
+  {
+    "id": "mac-market-model",
+    "title": "MacBook Pro 中国二手参考区间方法",
+    "publisher": "Apple Value Lab",
+    "url": "SOURCES.md#macbook-pro-二手价格口径",
+    "type": "secondary",
+    "accessed": "2026-07-11",
+    "note": "综合官方首发价、公开成交线索、同代平台价差和机龄曲线生成；不是平台实时抓取报价。"
   }
 ]
