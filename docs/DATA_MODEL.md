@@ -53,7 +53,7 @@ storage
 ```text
 modelId
 side: buy | sell
-kind: new_official | used_retail | private | recycle | trade_in
+kind: new_launch | new_official | new_retail | used_personal | used_retail | personal_sale | recycle | trade_in
 channel
 storage
 network
@@ -149,3 +149,25 @@ updated
 - `launch_cto_reference`：历史 Mac 定制配置梯度参考。
 
 所有配置均有对应买入和卖出市场记录。没有独立成交样本的配置，会使用同机型接近配置、官方/历史配置价差和二手残值比例换算，统一标记为“参考”。
+
+
+## v0.5.2 新品价格基准
+
+成本计算不再只显示用户选中的买入价，而是先展示同一配置的新品价格基准：
+
+```text
+官方首发价
+Apple 官网当前价
+京东自营新品价
+天猫 Apple Store 新品价
+拼多多百亿补贴新品价
+当前最低新机价
+```
+
+口径：
+
+- `new_launch`：产品发布时的官方定价，用于长期折旧基准，不代表当前可购买价格。
+- `new_official`：Apple 中国在线商店当前在售价格。
+- `new_retail`：电商当前新品参考区间，必须保存渠道、日期、可信度和计算/采样说明。
+- 新品参考与二手买入、个人转卖、平台回收严格分离。
+- 没有可核实当前价格的已停产产品显示“已停售”或“暂无可信当前价”，不能把首发价冒充当前价格。

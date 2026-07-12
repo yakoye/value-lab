@@ -11,7 +11,7 @@
   "macbook_models": 16,
   "macbook_market_records": 68,
   "configurationPricing": {
-    "updated": "2026-07-11",
+    "updated": "2026-07-12",
     "models": {
       "iphone": 37,
       "ipad": 18,
@@ -42,6 +42,24 @@
         "after": 746
       }
     },
-    "rule": "Every selectable configuration has an explicit launch price and at least one explicit current market path; estimated configurations are labelled reference."
+    "rule": "Every selectable configuration has an explicit launch price and at least one explicit current market path; estimated configurations are labelled reference.",
+    "marketExpansionV052": {
+      "market.json": 979,
+      "ipad_market.json": 1232,
+      "macbook_air_market.json": 1020,
+      "macbook_market.json": 1246
+    }
+  },
+  "newPriceBenchmark": {
+    "updated": "2026-07-12",
+    "channels": [
+      "官方首发价",
+      "Apple 官网",
+      "京东自营",
+      "天猫 Apple Store",
+      "拼多多百亿补贴"
+    ],
+    "rule": "Official launch and current Apple prices are separated from retailer reference ranges. Retailer reference ranges are explicitly labelled reference and include date/confidence.",
+    "marketRecordsTotal": 4477
   }
 }

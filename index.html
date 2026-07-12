@@ -57,6 +57,11 @@
       <button data-product="macbook-air" type="button">MacBook Air</button>
       <button data-product="macbook" type="button">MacBook Pro</button>
     </div>
+    <section class="block new-price-block">
+      <div class="block-head"><div><h2>新品购买成本</h2><span id="newPriceMeta">官方首发、官网与电商新品价格</span></div><span id="newPriceNotice"></span></div>
+      <div id="newPriceBenchmarks" class="new-price-grid"></div>
+    </section>
+    <div class="section-title"><div><h2>当前持有成本</h2><span>选择实际买入渠道、持有时间和卖出方式</span></div></div>
     <div id="costControls" class="toolbar"></div>
     <div id="costKpis" class="kpi-strip"></div>
     <section class="block trend-block">
@@ -75,7 +80,7 @@
     <div class="product-tabs" data-product-tabs="market"><button class="active" data-product="iphone" type="button">iPhone</button><button data-product="ipad" type="button">iPad</button><button data-product="macbook-air" type="button">MacBook Air</button><button data-product="macbook" type="button">MacBook Pro</button></div>
     <div class="toolbar market-toolbar">
       <label>搜索<input id="marketSearch" type="search" placeholder="机型、配置、平台、机况"></label>
-      <label>类型<select id="marketSide"><option value="">全部</option><option value="buy">买入</option><option value="sell">卖出</option></select></label>
+      <label>类型<select id="marketSide"><option value="">全部</option><option value="new">新品</option><option value="used-buy">二手买入</option><option value="personal-sell">个人转卖</option><option value="recycle">平台回收</option></select></label>
       <label>数据<select id="marketConfidence"><option value="">全部</option><option value="high">核验</option><option value="medium">样本</option><option value="low">参考</option></select></label>
       <label>平台<select id="marketChannel"><option value="">全部</option></select></label>
     </div>

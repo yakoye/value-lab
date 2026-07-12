@@ -520,5 +520,50 @@
     "type": "reference",
     "accessed": "2026-07-11",
     "note": "基于当前基础配置价格及内存、SSD 可选配置价差规则生成；最终价格以 Apple 配置页为准。"
+  },
+  {
+    "id": "apple-launch-prices",
+    "title": "Apple 产品中国首发价格资料",
+    "publisher": "Apple 中国新闻稿与在线商店",
+    "url": "https://www.apple.com.cn/newsroom/",
+    "type": "official",
+    "accessed": "2026-07-12",
+    "note": "用于各容量和配置的官方首发价格基准。"
+  },
+  {
+    "id": "new-retail-reference",
+    "title": "中国电商新品价格参考模型",
+    "publisher": "Value Lab",
+    "url": "docs/DATA_MODEL.md",
+    "type": "model",
+    "accessed": "2026-07-12",
+    "note": "根据 Apple 官方价、公开促销样本、产品机龄与京东/天猫/拼多多常见渠道折扣形成；不是实时结算页价格。"
+  },
+  {
+    "id": "apple-iphone17pro-current-202607",
+    "title": "iPhone 17 Pro 与 Pro Max 当前中国售价",
+    "publisher": "Apple 中国在线商店",
+    "url": "https://www.apple.com.cn/shop/buy-iphone/iphone-17-pro",
+    "type": "official",
+    "accessed": "2026-07-12",
+    "note": "用于核验 iPhone 17 Pro Max 256GB 等当前官网价格。"
+  },
+  {
+    "id": "jd-iphone17-promo-sample-202602",
+    "title": "京东 iPhone 17 Pro Max 促销价格样本",
+    "publisher": "中关村在线 / 京东商城",
+    "url": "https://mobile.zol.com.cn/1133/11331284.html",
+    "type": "sample",
+    "accessed": "2026-07-12",
+    "note": "2026-02-11 iPhone 17 Pro Max 512GB 到手价 11699 元样本；只作为渠道折扣参考。"
+  },
+  {
+    "id": "pdd-iphone17-promo-sample-202509",
+    "title": "拼多多百亿补贴 iPhone 17 系列价格样本",
+    "publisher": "中国经营网",
+    "url": "https://www.cb.com.cn/index/show/gszx/cv/cv135311321332",
+    "type": "sample",
+    "accessed": "2026-07-12",
+    "note": "2025-09 iPhone 17 Pro Max 256GB 低至 8999 元样本；优惠券和库存具有时效性。"
   }
 ]
