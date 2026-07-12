@@ -502,5 +502,23 @@
     "type": "model",
     "accessed": "2026-07-11",
     "note": "根据官方首发价、机龄和渠道价差生成。"
+  },
+  {
+    "id": "apple-current-config-prices",
+    "title": "Apple 中国当前 iPhone、iPad 配置价格",
+    "publisher": "Apple 中国在线商店",
+    "url": "https://www.apple.com.cn/store",
+    "type": "official",
+    "accessed": "2026-07-11",
+    "note": "用于当前在售 iPhone 与 iPad 的容量、网络版本价格，以及当前基础 Mac 配置价格。"
+  },
+  {
+    "id": "apple-config-price-reference",
+    "title": "Apple Mac 可选配置价格参考",
+    "publisher": "Value Lab / Apple 中国在线商店",
+    "url": "https://www.apple.com.cn/shop/buy-mac",
+    "type": "reference",
+    "accessed": "2026-07-11",
+    "note": "基于当前基础配置价格及内存、SSD 可选配置价差规则生成；最终价格以 Apple 配置页为准。"
   }
 ]

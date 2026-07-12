@@ -119,3 +119,33 @@ status
 source
 updated
 ```
+
+## v0.5.1 配置价格模型
+
+每个可选择配置现在都使用显式 `configurations` 数组，不再只保存基础容量：
+
+- iPhone：按容量区分。
+- iPad：按容量与 Wi-Fi / 蜂窝网络区分。
+- MacBook Air / Pro：按统一内存与 SSD 容量区分。
+
+每个配置包含：
+
+```json
+{
+  "id": "24gb-1tb",
+  "memory": "24GB",
+  "storage": "1TB",
+  "launchPrice": 19499,
+  "currentOfficialPrice": 19499,
+  "priceBasis": "official_current_estimate"
+}
+```
+
+价格依据分为：
+
+- `official_current`：Apple 当前在线商店可明确核验的配置价格。
+- `official_current_estimate`：当前基础配置与公开选配价差形成的配置参考，结算前需复核。
+- `launch_ladder_reference`：历史容量梯度参考。
+- `launch_cto_reference`：历史 Mac 定制配置梯度参考。
+
+所有配置均有对应买入和卖出市场记录。没有独立成交样本的配置，会使用同机型接近配置、官方/历史配置价差和二手残值比例换算，统一标记为“参考”。

@@ -12,8 +12,8 @@ const PRODUCT_ORDER=['iphone','ipad','macbook-air','macbook'];
 const PRODUCT_META={
   iphone:{label:'iPhone',kind:'phone',modelsKey:'models',marketKey:'market',tierField:'tier',tierLabel:'系列',hasStorage:true},
   ipad:{label:'iPad',kind:'tablet',modelsKey:'ipadModels',marketKey:'ipadMarket',tierField:'tier',tierLabel:'系列',hasStorage:true,hasNetwork:true},
-  'macbook-air':{label:'MacBook Air',kind:'computer',modelsKey:'airModels',marketKey:'airMarket',tierField:'size',tierLabel:'尺寸'},
-  macbook:{label:'MacBook Pro',kind:'computer',modelsKey:'macModels',marketKey:'macMarket',tierField:'size',tierLabel:'尺寸'}
+  'macbook-air':{label:'MacBook Air',kind:'computer',modelsKey:'airModels',marketKey:'airMarket',tierField:'size',tierLabel:'尺寸',hasStorage:true,hasMemory:true},
+  macbook:{label:'MacBook Pro',kind:'computer',modelsKey:'macModels',marketKey:'macMarket',tierField:'size',tierLabel:'尺寸',hasStorage:true,hasMemory:true}
 };
 const productMeta=p=>PRODUCT_META[p]||PRODUCT_META.iphone;
 const productLabel=p=>productMeta(p).label;
@@ -52,6 +52,8 @@ async function loadData(){
   const names=['models','market','ipad_models','ipad_market','macbook_air_models','macbook_air_market','macbook_models','macbook_market','sources','strategies','alternatives','categories','site'];
   const results=await Promise.all(names.map(n=>fetch(`data/${n}.json`).then(r=>{if(!r.ok)throw new Error(n);return r.json()})));
   [state.models,state.market,state.ipadModels,state.ipadMarket,state.airModels,state.airMarket,state.macModels,state.macMarket,state.sources,state.strategies,state.alternatives,state.categories,state.site]=results;
+  const sortModels=list=>list.sort((a,b)=>String(b.release||'').localeCompare(String(a.release||''),'zh-CN')||(+b.launchPrice||0)-(+a.launchPrice||0)||String(a.name||'').localeCompare(String(b.name||''),'zh-CN'));
+  [state.models,state.ipadModels,state.airModels,state.macModels].forEach(sortModels);
 }
 
 function parseStorage(s){
@@ -73,45 +75,43 @@ const storagePremium = (product,gb) => {
   if(map[gb]!=null)return map[gb];
   return Math.max(0,(Math.log2(Math.max(32,gb)/32))*850);
 };
-function adjustedLaunch(product,model,storage,network=''){
-  if(!model)return 0;
+function modelConfigurations(model){return Array.isArray(model?.configurations)&&model.configurations.length?model.configurations:[]}
+function configMatches(c,storage='',network='',memory=''){
+  return (!storage||c.storage===storage)&&(!network||c.network===network)&&(!memory||c.memory===memory);
+}
+function selectedConfiguration(product,model,storage='',network='',memory=''){
+  const configs=modelConfigurations(model);
+  return configs.find(c=>configMatches(c,storage,network,memory))||configs.find(c=>
+    (!storage||c.storage===storage)&&(!network||c.network===network))||configs[0]||null;
+}
+function adjustedLaunch(product,model,storage='',network='',memory=''){
+  if(!model)return 0;const c=selectedConfiguration(product,model,storage,network,memory);
+  if(c?.launchPrice)return c.launchPrice;
   let price=model.launchPrice||0;
-  if(storage && model.baseStorage)price+=storagePremium(product,storageGB(storage))-storagePremium(product,storageGB(model.baseStorage));
+  if(storage && (model.baseStorage||model.storage))price+=storagePremium(product,storageGB(storage))-storagePremium(product,storageGB(model.baseStorage||model.storage));
   if(product==='ipad' && network==='Wi-Fi + 蜂窝网络')price+=model.cellularPremium||1000;
   return Math.max(0,price);
-}
-function adjustMarketRows(product,rows,storage,network,model){
-  if(!rows.length || !model)return rows;
-  if(network)rows=rows.filter(r=>!r.network||r.network===network);
-  if(!storage)return rows;
-  const exact=rows.filter(r=>!r.storage||r.storage===storage);
-  if(exact.length)return exact;
-  const candidates=rows.filter(r=>r.storage);
-  if(!candidates.length)return rows;
-  const target=storageGB(storage);
-  const nearestStorage=[...new Set(candidates.map(r=>r.storage))].sort((a,b)=>Math.abs(storageGB(a)-target)-Math.abs(storageGB(b)-target))[0];
-  const delta=(storagePremium(product,target)-storagePremium(product,storageGB(nearestStorage)))*0.42;
-  return candidates.filter(r=>r.storage===nearestStorage).map(r=>{
-    if(r.kind==='new_official'){
-      const official=adjustedLaunch(product,model,storage,network);
-      return {...r,storage,network:network||r.network,low:official,high:official,derived:true,note:`按该机型官方容量与网络版本价差换算。`};
-    }
-    return {...r,storage,low:Math.max(0,Math.round(r.low+delta)),high:Math.max(0,Math.round(r.high+delta)),derived:true,note:`由 ${nearestStorage} 参考区间按容量残值换算。`};
-  });
 }
 function productData(product){
   const meta=productMeta(product);return {models:state[meta.modelsKey]||[],market:state[meta.marketKey]||[]};
 }
 function getModel(product,id){return productData(product).models.find(x=>x.id===id)}
-function rowsFor(product,modelId,storage='',network=''){
-  const d=productData(product);let rows=d.market.filter(x=>x.modelId===modelId);
-  if(productMeta(product).hasStorage)rows=adjustMarketRows(product,rows,storage,network,getModel(product,modelId));
+function rowsFor(product,modelId,storage='',network='',memory=''){
+  let rows=productData(product).market.filter(x=>x.modelId===modelId);
+  if(storage)rows=rows.filter(r=>!r.storage||r.storage===storage);
+  if(network)rows=rows.filter(r=>!r.network||r.network===network);
+  if(memory)rows=rows.filter(r=>!r.memory||r.memory===memory);
   return rows;
 }
 function configText(product,model,row={}){
   if(product==='iphone')return row.storage||model?.baseStorage||'—';
   if(product==='ipad')return [row.storage||model?.baseStorage,row.network||'Wi-Fi'].filter(Boolean).join(' · ');
-  return [model?.memory,model?.storage].filter(Boolean).join(' / ');
+  return [row.memory||model?.memory,row.storage||model?.storage].filter(Boolean).join(' / ');
+}
+function configLabel(product,c){
+  if(product==='iphone')return c.storage;
+  if(product==='ipad')return `${c.storage} · ${c.network}`;
+  return `${c.memory} / ${c.storage}`;
 }
 function rowMid(r){return median(r.low,r.high)}
 function confidenceText(v){return ({high:'核验',medium:'样本',low:'参考'})[v]||v||'—'}
@@ -147,19 +147,19 @@ function interpolateCurve(curve,year){
   }
   const a=curve[i],b=curve[i+1]; return a*Math.pow(b/a,f);
 }
-function currentSellAnchor(product,model,storage,network='',channel=''){
-  const rows=rowsFor(product,model.id,storage,network).filter(r=>r.side==='sell'&&(!channel||r.channel===channel));
+function currentSellAnchor(product,model,storage,network='',channel='',memory=''){
+  const rows=rowsFor(product,model.id,storage,network,memory).filter(r=>r.side==='sell'&&(!channel||r.channel===channel));
   if(!rows.length)return 0;return rows.map(rowMid).sort((a,b)=>b-a)[0]||0;
 }
-function currentBuyAnchor(product,model,storage,network='',channel=''){
-  const rows=rowsFor(product,model.id,storage,network).filter(r=>r.side==='buy'&&(!channel||r.channel===channel));
+function currentBuyAnchor(product,model,storage,network='',channel='',memory=''){
+  const rows=rowsFor(product,model.id,storage,network,memory).filter(r=>r.side==='buy'&&(!channel||r.channel===channel));
   if(!rows.length)return 0;return rows.map(rowMid).sort((a,b)=>a-b)[0]||0;
 }
-function calibratedValue(product,model,storage,network,year,side='sell',channel='',manualRate=null){
-  const launch=adjustedLaunch(product,model,storage,network);
+function calibratedValue(product,model,storage,network,year,side='sell',channel='',manualRate=null,memory=''){
+  const launch=adjustedLaunch(product,model,storage,network,memory);
   if(manualRate!=null) return Math.max(0,Math.round(launch*Math.pow(1-manualRate,year)));
   const curve=curveFor(product,model); const base=interpolateCurve(curve,year)*launch;
-  const currentAge=ageYears(model.release); const anchor=side==='buy'?currentBuyAnchor(product,model,storage,network,channel):currentSellAnchor(product,model,storage,network,channel);
+  const currentAge=ageYears(model.release); const anchor=side==='buy'?currentBuyAnchor(product,model,storage,network,channel,memory):currentSellAnchor(product,model,storage,network,channel,memory);
   if(!anchor)return Math.round(base);
   const baseAtAge=interpolateCurve(curve,currentAge)*launch;
   const scale=clamp(anchor/Math.max(1,baseAtAge),.58,1.5);
@@ -236,8 +236,8 @@ function populateStaticFilters(){
 function costDefaults(product){
   if(product==='iphone')return {modelId:'iphone-15-pro-max',storage:'256GB',network:'',buyChannel:'闲鱼个人',sellChannel:'闲鱼个人转卖',hold:2,deprMode:'market',manualRate:16,fees:250,repair:0};
   if(product==='ipad')return {modelId:'ipad-air11-m2-2024',storage:'128GB',network:'Wi-Fi',buyChannel:'闲鱼个人',sellChannel:'闲鱼个人转卖',hold:3,deprMode:'market',manualRate:17,fees:200,repair:0};
-  if(product==='macbook-air')return {modelId:'mba-13-m4-2025',storage:'',network:'',buyChannel:'闲鱼个人',sellChannel:'闲鱼个人转卖',hold:3,deprMode:'market',manualRate:15,fees:300,repair:0};
-  return {modelId:'mbp-14-m3pro-2023',storage:'',network:'',buyChannel:'闲鱼个人',sellChannel:'闲鱼个人转卖',hold:3,deprMode:'market',manualRate:15,fees:300,repair:0};
+  if(product==='macbook-air')return {modelId:'mba-13-m4-2025',storage:'256GB',memory:'16GB',network:'',buyChannel:'闲鱼个人',sellChannel:'闲鱼个人转卖',hold:3,deprMode:'market',manualRate:15,fees:300,repair:0};
+  return {modelId:'mbp-14-m3pro-2023',storage:'512GB',memory:'18GB',network:'',buyChannel:'闲鱼个人',sellChannel:'闲鱼个人转卖',hold:3,deprMode:'market',manualRate:15,fees:300,repair:0};
 }
 function getCostSettings(){
   state.ui.cost=state.ui.cost||{}; const p=state.costProduct;
@@ -246,16 +246,21 @@ function getCostSettings(){
 function renderCost(){
   const p=state.costProduct,d=productData(p),meta=productMeta(p),s=getCostSettings();
   if(!d.models.some(m=>m.id===s.modelId))s.modelId=d.models[0]?.id||'';
-  const model=getModel(p,s.modelId);const storages=meta.hasStorage?parseStorage(model.storageOptions):[];
-  if(meta.hasStorage&&!storages.includes(s.storage))s.storage=storages.includes(model.baseStorage)?model.baseStorage:storages[0];
-  const networks=meta.hasNetwork?String(model.networkOptions||'Wi-Fi').split('/').map(x=>x.trim()).filter(Boolean):[];
+  const model=getModel(p,s.modelId);const configs=modelConfigurations(model);
+  const memories=meta.hasMemory?[...new Set(configs.map(c=>c.memory).filter(Boolean))]:[];
+  if(meta.hasMemory&&!memories.includes(s.memory))s.memory=model.memory||memories[0];
+  const configsByMemory=meta.hasMemory?configs.filter(c=>!s.memory||c.memory===s.memory):configs;
+  const storages=meta.hasStorage?[...new Set(configsByMemory.map(c=>c.storage).filter(Boolean))]:[];
+  if(meta.hasStorage&&!storages.includes(s.storage))s.storage=(model.baseStorage||model.storage||storages[0]);
+  const networks=meta.hasNetwork?[...new Set(configs.filter(c=>c.storage===s.storage).map(c=>c.network).filter(Boolean))]:[];
   if(meta.hasNetwork&&!networks.includes(s.network))s.network=networks[0]||'Wi-Fi';
-  const rows=rowsFor(p,s.modelId,s.storage,s.network);const buyChannels=[...new Set(rows.filter(r=>r.side==='buy').map(r=>r.channel))];const sellChannels=[...new Set(rows.filter(r=>r.side==='sell').map(r=>r.channel))];
+  const rows=rowsFor(p,s.modelId,s.storage,s.network,s.memory);const buyChannels=[...new Set(rows.filter(r=>r.side==='buy').map(r=>r.channel))];const sellChannels=[...new Set(rows.filter(r=>r.side==='sell').map(r=>r.channel))];
   if(!buyChannels.includes(s.buyChannel))s.buyChannel=buyChannels[0]||'';if(!sellChannels.includes(s.sellChannel))s.sellChannel=sellChannels[0]||'';
-  const modelOptions=d.models.map(m=>`<option value="${esc(m.id)}" ${m.id===s.modelId?'selected':''}>${esc(m.name)}${meta.kind==='computer'?` · ${esc(m.memory)}/${esc(m.storage)}`:''}</option>`).join('');
-  const storageControl=meta.hasStorage?`<label>容量<select data-cost="storage">${storages.map(x=>`<option ${x===s.storage?'selected':''}>${esc(x)}</option>`).join('')}</select></label>`:'';
+  const modelOptions=d.models.map(m=>`<option value="${esc(m.id)}" ${m.id===s.modelId?'selected':''}>${esc(m.name)}${meta.kind==='computer'?` · ${esc(m.chip)}`:''}</option>`).join('');
+  const memoryControl=meta.hasMemory?`<label>内存<select data-cost="memory">${memories.map(x=>`<option ${x===s.memory?'selected':''}>${esc(x)}</option>`).join('')}</select></label>`:'';
+  const storageControl=meta.hasStorage?`<label>${meta.kind==='computer'?'SSD':'容量'}<select data-cost="storage">${storages.map(x=>`<option ${x===s.storage?'selected':''}>${esc(x)}</option>`).join('')}</select></label>`:'';
   const networkControl=meta.hasNetwork?`<label>网络<select data-cost="network">${networks.map(x=>`<option ${x===s.network?'selected':''}>${esc(x)}</option>`).join('')}</select></label>`:'';
-  $('#costControls').innerHTML=`<label>机型<select data-cost="modelId">${modelOptions}</select></label>${storageControl}${networkControl}
+  $('#costControls').innerHTML=`<label>机型<select data-cost="modelId">${modelOptions}</select></label>${memoryControl}${storageControl}${networkControl}
     <label>买入方式<select data-cost="buyChannel">${buyChannels.map(x=>`<option ${x===s.buyChannel?'selected':''}>${esc(x)}</option>`).join('')}</select></label>
     <label>卖出方式<select data-cost="sellChannel">${sellChannels.map(x=>`<option ${x===s.sellChannel?'selected':''}>${esc(x)}</option>`).join('')}</select></label>
     <label>持有年限<select data-cost="hold">${[1,2,3,4,5].map(x=>`<option value="${x}" ${+s.hold===x?'selected':''}>${x} 年</option>`).join('')}</select></label>
@@ -263,10 +268,10 @@ function renderCost(){
     <label>年折旧率<input data-cost="manualRate" type="number" min="0" max="60" value="${esc(s.manualRate)}" ${s.deprMode==='manual'?'':'disabled'}></label>
     <label>交易费用<input data-cost="fees" type="number" min="0" step="50" value="${esc(s.fees)}"></label>
     <label>维修 / 电池<input data-cost="repair" type="number" min="0" step="50" value="${esc(s.repair)}"></label>`;
-  $$('[data-cost]').forEach(el=>el.addEventListener('input',()=>{const key=el.dataset.cost;s[key]=['hold','manualRate','fees','repair'].includes(key)?+el.value:el.value;if(key==='modelId'){const m=getModel(p,s.modelId);if(meta.hasStorage)s.storage=parseStorage(m.storageOptions)[0]||m.baseStorage;if(meta.hasNetwork)s.network=String(m.networkOptions||'Wi-Fi').split('/')[0].trim();renderCost()}else if(['storage','network','deprMode'].includes(key)){renderCost()}else renderCostResults();saveState()}));
+  $$('[data-cost]').forEach(el=>{const update=()=>{const key=el.dataset.cost,current=getCostSettings();current[key]=['hold','manualRate','fees','repair'].includes(key)?+el.value:el.value;if(key==='modelId'){const m=getModel(p,current.modelId);current.memory=m.memory||'';current.storage=m.baseStorage||m.storage||'';current.network=meta.hasNetwork?'Wi-Fi':'';renderCost()}else if(['memory','storage','network','deprMode'].includes(key)){renderCost()}else renderCostResults();saveState()};if(el.tagName==='SELECT')el.onchange=update;else el.oninput=update});
   $$('[data-product-tabs="cost"] button').forEach(b=>b.classList.toggle('active',b.dataset.product===p));$$('[data-trend-mode]').forEach(b=>b.classList.toggle('active',b.dataset.trendMode===state.trendMode));renderCostResults();
 }
-function selectedRows(product,settings){return rowsFor(product,settings.modelId,settings.storage,settings.network)}
+function selectedRows(product,settings){return rowsFor(product,settings.modelId,settings.storage,settings.network,settings.memory)}
 function selectedPrice(rows,channel,side){const r=rows.find(x=>x.channel===channel&&x.side===side);return r?rowMid(r):0}
 function costAtHold(product,model,s,hold){
   const rows=selectedRows(product,s);const buy=selectedPrice(rows,s.buyChannel,'buy');const currentSell=selectedPrice(rows,s.sellChannel,'sell');
@@ -277,9 +282,9 @@ function costAtHold(product,model,s,hold){
 }
 function renderCostResults(){
   const p=state.costProduct,s=getCostSettings(),model=getModel(p,s.modelId);if(!model)return;
-  const c=costAtHold(p,model,s,+s.hold||1); const launch=adjustedLaunch(p,model,s.storage,s.network);
+  const c=costAtHold(p,model,s,+s.hold||1); const launch=adjustedLaunch(p,model,s.storage,s.network,s.memory);
   const loss=Math.max(0,c.buy-c.future), lossPct=c.buy?loss/c.buy*100:0;
-  const itemName=productMeta(p).hasStorage?`${model.name} ${s.storage}${s.network?` · ${s.network}`:''}`:`${model.name} ${model.memory}/${model.storage}`;
+  const itemName=productMeta(p).kind==='computer'?`${model.name} ${s.memory}/${s.storage}`:`${model.name} ${s.storage}${s.network?` · ${s.network}`:''}`;
   $('#costKpis').innerHTML=[
     ['买入价格',yuan(c.buy),s.buyChannel],['预计卖出',yuan(c.future),`${s.hold} 年后 · ${s.sellChannel}`],['总持有成本',yuan(c.total),`${num(c.total/c.buy*100)}% 买入价`],
     ['年均成本',yuan(c.annual),'每年'],['月均成本',yuan(c.monthly),'每月'],['累计价值下降',yuan(loss),pct(lossPct)]
@@ -293,7 +298,7 @@ function trendPoints(product,model,s,c,launch){
     const rows=selectedRows(product,s); const buy=selectedPrice(rows,s.buyChannel,'buy')||c.buy;
     return Array.from({length:6},(_,i)=>({label:i===0?'现在':`持有${i}年`,year:i,value:i===0?buy:futureFromNow(product,model,s.storage,buy,i,rate),actualAge:ageYears(model.release)+i}));
   }
-  return Array.from({length:6},(_,i)=>({label:i===0?'首发':`第${i}年`,year:i,value:i===0?launch:calibratedValue(product,model,s.storage,s.network,i,'sell',s.sellChannel,rate),actualAge:i}));
+  return Array.from({length:6},(_,i)=>({label:i===0?'首发':`第${i}年`,year:i,value:i===0?launch:calibratedValue(product,model,s.storage,s.network,i,'sell',s.sellChannel,rate,s.memory),actualAge:i}));
 }
 function renderTrend(product,model,s,c,launch,itemName){
   const points=trendPoints(product,model,s,c,launch); const values=points.map(x=>x.value); const max=Math.max(...values)*1.08,min=Math.min(...values)*.88;
@@ -331,7 +336,7 @@ function renderMarket(){
 }
 function filteredMarket(){
   const p=state.marketProduct,d=productData(p),q=($('#marketSearch').value||'').trim().toLowerCase(),side=$('#marketSide').value,conf=$('#marketConfidence').value,ch=$('#marketChannel').value;
-  return d.market.filter(r=>{const m=d.models.find(x=>x.id===r.modelId);const hay=JSON.stringify([m?.name,m?.chip,m?.memory,m?.storage,r.channel,r.condition,r.storage,r.network]).toLowerCase();return (!q||hay.includes(q))&&(!side||r.side===side)&&(!conf||r.confidence===conf)&&(!ch||r.channel===ch)});
+  return d.market.filter(r=>{const m=d.models.find(x=>x.id===r.modelId);const hay=JSON.stringify([m?.name,m?.chip,r.memory,m?.memory,r.storage,m?.storage,r.channel,r.condition,r.network]).toLowerCase();return (!q||hay.includes(q))&&(!side||r.side===side)&&(!conf||r.confidence===conf)&&(!ch||r.channel===ch)}).sort((a,b)=>{const ma=d.models.find(x=>x.id===a.modelId),mb=d.models.find(x=>x.id===b.modelId);return String(mb?.release||'').localeCompare(String(ma?.release||''),'zh-CN')||String(ma?.name||'').localeCompare(String(mb?.name||''),'zh-CN')||storageGB(a.storage)-storageGB(b.storage)||String(a.memory||'').localeCompare(String(b.memory||''),'zh-CN')});
 }
 function renderMarketTable(){
   const p=state.marketProduct,d=productData(p),rows=filteredMarket();$('#marketCount').textContent=`${rows.length} 条`;
@@ -345,13 +350,17 @@ function renderBuy(){
   $('#buyYear').innerHTML='<option value="">全部</option>'+years.map(x=>`<option value="${x}" ${String(state.ui.buyYear||'')===String(x)?'selected':''}>${x}</option>`).join('');
   $('#buyTierLabel').firstChild.textContent=meta.tierLabel;$('#buyTier').innerHTML='<option value="">全部</option>'+tiers.map(x=>`<option ${state.ui.buyTier===x?'selected':''}>${esc(x)}</option>`).join('');renderBuyList();
 }
-function currentReferencePrice(product,model){
-  if(!model)return 0;const meta=productMeta(product);const storage=meta.hasStorage?(parseStorage(model.storageOptions).includes('256GB')?'256GB':model.baseStorage):'';const network=meta.hasNetwork?'Wi-Fi':'';
-  const rows=rowsFor(product,model.id,storage,network).filter(r=>r.side==='buy'&&r.channel!=='Apple 官网');const used=rows.length?Math.min(...rows.map(rowMid)):0;return used||model.currentOfficialPrice||model.launchPrice;
+function currentReferencePrice(product,model,storage='',network='',memory=''){
+  if(!model)return 0;const meta=productMeta(product);const c=selectedConfiguration(product,model,storage||model.baseStorage||model.storage,network||(meta.hasNetwork?'Wi-Fi':''),memory||model.memory);
+  const rows=rowsFor(product,model.id,c?.storage||storage,c?.network||network,c?.memory||memory).filter(r=>r.side==='buy'&&r.channel!=='Apple 官网');
+  const used=rows.length?Math.min(...rows.map(rowMid)):0;return used||c?.currentOfficialPrice||c?.launchPrice||model.currentOfficialPrice||model.launchPrice;
+}
+function configurationReferenceRows(product,model){
+  return modelConfigurations(model).map(c=>({c,price:currentReferencePrice(product,model,c.storage,c.network,c.memory)}));
 }
 function filteredBuyModels(){
   const p=state.buyProduct,d=productData(p),meta=productMeta(p),q=($('#buySearch').value||'').toLowerCase(),year=$('#buyYear').value,tier=$('#buyTier').value,budget=+$('#buyBudget').value||Infinity,used=$('#buyUsed').checked;
-  return d.models.filter(m=>{const price=used?currentReferencePrice(p,m):(m.currentOfficialPrice||m.launchPrice);const hay=JSON.stringify(m).toLowerCase();return (!q||hay.includes(q))&&(!year||String(m.year)===year)&&(!tier||m[meta.tierField]===tier)&&price<=budget});
+  return d.models.filter(m=>{const price=used?currentReferencePrice(p,m):(m.currentOfficialPrice||m.launchPrice);const hay=JSON.stringify(m).toLowerCase();return (!q||hay.includes(q))&&(!year||String(m.year)===year)&&(!tier||m[meta.tierField]===tier)&&price<=budget}).sort((a,b)=>String(b.release||'').localeCompare(String(a.release||''),'zh-CN')||(+b.launchPrice||0)-(+a.launchPrice||0)||String(a.name||'').localeCompare(String(b.name||''),'zh-CN'));
 }
 function compactSpec(product,m){
   if(product==='iphone')return `${m.ramGB}GB · ${m.storageOptions}`;
@@ -370,7 +379,8 @@ function productDetailGrid(product,m){
 }
 function showBuyDetail(){
   const p=state.buyProduct,m=getModel(p,state.selectedBuyId);if(!m){$('#buyDetail').innerHTML='<div class="empty">选择产品查看详情</div>';return}const price=currentReferencePrice(p,m),grid=productDetailGrid(p,m);
-  $('#buyDetail').innerHTML=`<h3 class="detail-title">${esc(m.name)}</h3><div class="detail-sub">${esc(m.release)} · 首发 ${yuan(m.launchPrice)} · 当前参考 ${yuan(price)}</div><div class="detail-grid">${grid.map(([a,b])=>`<div class="detail-cell"><span>${esc(a)}</span><b>${esc(b)}</b></div>`).join('')}</div><div class="detail-section"><h3>关键更新</h3><p>${esc(m.keyUpdates)}</p></div><div class="detail-section"><h3>优点</h3><p>${esc(m.pros)}</p></div><div class="detail-section"><h3>缺点</h3><p>${esc(m.cons)}</p></div><div class="detail-section"><h3>购买判断</h3><p>${esc(m.verdict)}</p></div><div class="detail-actions"><button id="detailCostButton" class="primary-button" type="button">计算持有成本</button><button id="detailOwnedButton" class="text-button" type="button">加入我的物品</button></div>`;
+  const configRows=configurationReferenceRows(p,m);const configTable=configRows.length?`<div class="detail-section"><h3>配置价格</h3><div class="table-wrap config-price-table"><table><thead><tr><th>配置</th><th class="num">首发价</th><th class="num">当前参考</th><th>依据</th></tr></thead><tbody>${configRows.map(({c,price})=>`<tr><td>${esc(configLabel(p,c))}</td><td class="num">${yuan(c.launchPrice)}</td><td class="num"><b>${yuan(price)}</b></td><td>${c.priceBasis==='official_current'?'官方在售':c.priceBasis==='official_current_estimate'?'官方配置参考':'参考估值'}</td></tr>`).join('')}</tbody></table></div></div>`:'';
+  $('#buyDetail').innerHTML=`<h3 class="detail-title">${esc(m.name)}</h3><div class="detail-sub">${esc(m.release)} · 首发 ${yuan(m.launchPrice)} · 当前参考 ${yuan(price)} · ${configRows.length} 个配置</div><div class="detail-grid">${grid.map(([a,b])=>`<div class="detail-cell"><span>${esc(a)}</span><b>${esc(b)}</b></div>`).join('')}</div>${configTable}<div class="detail-section"><h3>关键更新</h3><p>${esc(m.keyUpdates)}</p></div><div class="detail-section"><h3>优点</h3><p>${esc(m.pros)}</p></div><div class="detail-section"><h3>缺点</h3><p>${esc(m.cons)}</p></div><div class="detail-section"><h3>购买判断</h3><p>${esc(m.verdict)}</p></div><div class="detail-actions"><button id="detailCostButton" class="primary-button" type="button">计算持有成本</button><button id="detailOwnedButton" class="text-button" type="button">加入我的物品</button></div>`;
   $('#detailCostButton').onclick=()=>{state.costProduct=p;getCostSettings().modelId=m.id;switchView('cost');renderCost()};$('#detailOwnedButton').onclick=()=>openOwnedDialog(p,m.id,price);
 }
 
@@ -430,7 +440,7 @@ function openOwnedDialog(type=state.costProduct,modelId='',price=0){
   $('#ownedType').value=type;populateOwnedModels(modelId);$('#ownedDate').value=today();$('#ownedPrice').value=Math.round(price||currentReferencePrice(type,getModel(type,$('#ownedModel').value))||0);$('#ownedNote').value='';$('#ownedDialog').showModal();
 }
 function populateOwnedModels(selected=''){
-  const type=$('#ownedType').value,d=productData(type),meta=productMeta(type);$('#ownedModel').innerHTML=d.models.map(m=>`<option value="${esc(m.id)}" ${m.id===selected?'selected':''}>${esc(m.name)}${meta.kind==='computer'?` · ${esc(m.memory)}/${esc(m.storage)}`:''}</option>`).join('');
+  const type=$('#ownedType').value,d=productData(type),meta=productMeta(type);$('#ownedModel').innerHTML=d.models.map(m=>`<option value="${esc(m.id)}" ${m.id===selected?'selected':''}>${esc(m.name)} · ${esc(m.release)}${meta.kind==='computer'?` · ${esc(m.memory)}/${esc(m.storage)}`:''}</option>`).join('');
 }
 function saveOwnedItem(){
   const type=$('#ownedType').value,modelId=$('#ownedModel').value,date=$('#ownedDate').value,price=+$('#ownedPrice').value,note=$('#ownedNote').value.trim();if(!modelId||!date||!price){toast('请完整填写');return}
@@ -442,7 +452,7 @@ function renderGlobalSearch(){
   const q=$('#globalSearch').value.trim().toLowerCase();if(!q){$('#globalSearchResults').innerHTML='<div class="empty">输入产品、品牌、需求或平替方案</div>';return}
   const productHits=PRODUCT_ORDER.map(p=>({p,items:productData(p).models.filter(m=>JSON.stringify(m).toLowerCase().includes(q)).slice(0,5)}));const alts=state.alternatives.filter(a=>JSON.stringify(a).toLowerCase().includes(q)).slice(0,8);
   const group=(title,items,fn)=>items.length?`<div class="search-group"><h3>${title}</h3>${items.map(fn).join('')}</div>`:'';
-  const productsHtml=productHits.map(g=>group(productLabel(g.p),g.items,m=>`<button class="search-result" data-global-product="${g.p}" data-id="${m.id}"><b>${esc(m.name)}</b> · ${esc(m.chip)}</button>`)).join('');
+  const productsHtml=productHits.map(g=>group(productLabel(g.p),g.items,m=>`<button class="search-result" data-global-product="${g.p}" data-id="${m.id}"><b>${esc(m.name)}</b> · ${esc(m.release)} · ${esc(m.chip)}</button>`)).join('');
   $('#globalSearchResults').innerHTML=productsHtml+group('生活平替',alts,a=>`<button class="search-result" data-global-alt="${a.id}"><b>${esc(a.original)}</b> → ${esc(a.alternative)}</button>`)+(productHits.some(g=>g.items.length)||alts.length?'':'<div class="empty">没有找到相关内容</div>');
   $$('[data-global-product]').forEach(b=>b.addEventListener('click',()=>{state.buyProduct=b.dataset.globalProduct;state.selectedBuyId=b.dataset.id;$('#searchDialog').close();switchView('buy');renderBuy()}));$$('[data-global-alt]').forEach(b=>b.addEventListener('click',()=>{state.selectedAlternativeId=b.dataset.globalAlt;$('#searchDialog').close();switchView('alternatives');renderAlternatives()}));
 }

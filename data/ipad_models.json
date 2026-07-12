@@ -1,323 +1,102 @@
 [
   {
-    "id": "ipad-8-2020",
-    "name": "iPad（第8代）",
-    "year": 2020,
-    "release": "2020-09",
-    "tier": "iPad",
-    "size": "10.2 英寸",
-    "chip": "A12 Bionic",
-    "cpuCores": 6,
-    "gpuCores": 4,
-    "memory": "3GB（拆解口径）",
-    "baseStorage": "32GB",
-    "storageOptions": "32/128GB",
-    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
-    "launchPrice": 2499,
-    "cellularPremium": 1000,
-    "currentOfficialPrice": null,
-    "display": "10.2 英寸 Retina / 60Hz",
-    "weightKg": 0.49,
-    "batteryHours": 10,
-    "ports": "Lightning",
-    "camera": "8MP 后摄 / 1.2MP 前摄",
-    "pencil": "Apple Pencil（第一代）",
-    "keyUpdates": "A12 性能升级，保留 Home 键与 Lightning。",
-    "pros": "二手便宜、基础学习和视频够用",
-    "cons": "32GB 太小、非全贴合屏、接口旧",
-    "verdict": "只建议 128GB 低价机型",
-    "curve": "base",
-    "sourceIds": [
-      "apple-ipad8-news"
-    ]
-  },
-  {
-    "id": "ipad-9-2021",
-    "name": "iPad（第9代）",
-    "year": 2021,
-    "release": "2021-09",
-    "tier": "iPad",
-    "size": "10.2 英寸",
-    "chip": "A13 Bionic",
-    "cpuCores": 6,
-    "gpuCores": 4,
-    "memory": "3GB（拆解口径）",
-    "baseStorage": "64GB",
-    "storageOptions": "64/256GB",
-    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
-    "launchPrice": 2499,
-    "cellularPremium": 1000,
-    "currentOfficialPrice": null,
-    "display": "10.2 英寸 Retina / 60Hz",
-    "weightKg": 0.49,
-    "batteryHours": 10,
-    "ports": "Lightning",
-    "camera": "8MP 后摄 / 12MP 超广角前摄",
-    "pencil": "Apple Pencil（第一代）",
-    "keyUpdates": "A13、人物居中、64GB 起步。",
-    "pros": "成熟稳定、基础用途性价比高",
-    "cons": "旧外观、非全贴合屏、Lightning",
-    "verdict": "低预算学习与看视频的稳妥选择",
-    "curve": "base",
-    "sourceIds": [
-      "apple-ipad-identify"
-    ]
-  },
-  {
-    "id": "ipad-10-2022",
-    "name": "iPad（第10代）",
-    "year": 2022,
-    "release": "2022-10",
-    "tier": "iPad",
-    "size": "10.9 英寸",
-    "chip": "A14 Bionic",
-    "cpuCores": 6,
-    "gpuCores": 4,
-    "memory": "4GB（拆解口径）",
-    "baseStorage": "64GB",
-    "storageOptions": "64/256GB",
-    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
-    "launchPrice": 3599,
-    "cellularPremium": 1200,
-    "currentOfficialPrice": null,
-    "display": "10.9 英寸 Liquid Retina / 60Hz",
-    "weightKg": 0.477,
-    "batteryHours": 10,
-    "ports": "USB-C / USB 2",
-    "camera": "12MP 后摄 / 横向 12MP 前摄",
-    "pencil": "Apple Pencil（USB-C/第一代）",
-    "keyUpdates": "全面屏外观、USB-C、横向前摄。",
-    "pros": "外观现代、横屏视频会议方便",
-    "cons": "64GB 起步、屏幕仍非全贴合、Pencil 兼容复杂",
-    "verdict": "折扣或二手价格合适时值得买",
-    "curve": "base",
-    "sourceIds": [
-      "apple-ipad-identify"
-    ]
-  },
-  {
-    "id": "ipad-a16-2025",
-    "name": "iPad 11 英寸（A16）",
-    "year": 2025,
-    "release": "2025-03",
-    "tier": "iPad",
-    "size": "11 英寸",
-    "chip": "A16",
-    "cpuCores": 5,
-    "gpuCores": 4,
-    "memory": "6GB（行业口径）",
-    "baseStorage": "128GB",
-    "storageOptions": "128/256/512GB",
-    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
-    "launchPrice": 2999,
-    "cellularPremium": 1200,
-    "currentOfficialPrice": 2999,
-    "display": "11 英寸 Liquid Retina / 60Hz",
-    "weightKg": 0.477,
-    "batteryHours": 10,
-    "ports": "USB-C / USB 2",
-    "camera": "12MP 后摄 / 横向 12MP 前摄",
-    "pencil": "Apple Pencil（USB-C/第一代）",
-    "keyUpdates": "A16、128GB 起步、延续横向前摄。",
-    "pros": "当前入门 iPad，容量和价格均衡",
-    "cons": "不支持 Apple Intelligence、非全贴合屏",
-    "verdict": "娱乐、网课和轻办公首选入门款",
-    "curve": "base",
-    "sourceIds": [
-      "apple-ipad-a16-spec"
-    ]
-  },
-  {
-    "id": "ipad-mini6-2021",
-    "name": "iPad mini（第6代）",
-    "year": 2021,
-    "release": "2021-09",
-    "tier": "mini",
-    "size": "8.3 英寸",
-    "chip": "A15 Bionic",
-    "cpuCores": 6,
-    "gpuCores": 5,
-    "memory": "4GB（拆解口径）",
-    "baseStorage": "64GB",
-    "storageOptions": "64/256GB",
-    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
-    "launchPrice": 3799,
-    "cellularPremium": 1200,
-    "currentOfficialPrice": null,
-    "display": "8.3 英寸 Liquid Retina / 60Hz",
-    "weightKg": 0.293,
-    "batteryHours": 10,
-    "ports": "USB-C / 5Gbps",
-    "camera": "12MP 后摄 / 12MP 前摄",
-    "pencil": "Apple Pencil（第二代）",
-    "keyUpdates": "全面屏、A15、USB-C、极致便携。",
-    "pros": "单手阅读、游戏和飞行图导航优秀",
-    "cons": "64GB 起步、果冻屏争议、屏幕较小",
-    "verdict": "需要小尺寸才值得，优先 256GB",
-    "curve": "mini",
-    "sourceIds": [
-      "apple-ipad-identify"
-    ]
-  },
-  {
-    "id": "ipad-mini-a17-2024",
-    "name": "iPad mini（A17 Pro）",
-    "year": 2024,
-    "release": "2024-10",
-    "tier": "mini",
-    "size": "8.3 英寸",
-    "chip": "A17 Pro",
-    "cpuCores": 6,
-    "gpuCores": 5,
-    "memory": "8GB（行业口径）",
-    "baseStorage": "128GB",
-    "storageOptions": "128/256/512GB",
-    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
-    "launchPrice": 3999,
-    "cellularPremium": 1200,
-    "currentOfficialPrice": 3999,
-    "display": "8.3 英寸 Liquid Retina / 60Hz",
-    "weightKg": 0.293,
-    "batteryHours": 10,
-    "ports": "USB-C / 10Gbps",
-    "camera": "12MP 后摄 / 12MP 前摄",
-    "pencil": "Apple Pencil Pro / USB-C",
-    "keyUpdates": "A17 Pro、128GB 起步、Apple Intelligence、Pencil Pro。",
-    "pros": "最强小平板、接口更快、容量更合理",
-    "cons": "仍是 60Hz，价格接近大屏 Air",
-    "verdict": "便携优先且确实需要小尺寸时购买",
-    "curve": "mini",
-    "sourceIds": [
-      "apple-ipad-mini-a17-news"
-    ]
-  },
-  {
-    "id": "ipad-air4-2020",
-    "name": "iPad Air（第4代）",
-    "year": 2020,
-    "release": "2020-10",
-    "tier": "Air",
-    "size": "10.9 英寸",
-    "chip": "A14 Bionic",
-    "cpuCores": 6,
-    "gpuCores": 4,
-    "memory": "4GB（拆解口径）",
-    "baseStorage": "64GB",
-    "storageOptions": "64/256GB",
-    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
-    "launchPrice": 4799,
-    "cellularPremium": 1000,
-    "currentOfficialPrice": null,
-    "display": "10.9 英寸 Liquid Retina / 60Hz",
-    "weightKg": 0.458,
-    "batteryHours": 10,
-    "ports": "USB-C / 5Gbps",
-    "camera": "12MP 后摄 / 7MP 前摄",
-    "pencil": "Apple Pencil（第二代）",
-    "keyUpdates": "全面屏、A14、USB-C、Touch ID 顶键。",
-    "pros": "屏幕和机身优于基础 iPad，二手价格低",
-    "cons": "64GB、内存较小、不支持 Apple Intelligence",
-    "verdict": "二手低价时适合笔记和轻办公",
-    "curve": "air",
-    "sourceIds": [
-      "apple-ipadair4-news"
-    ]
-  },
-  {
-    "id": "ipad-air5-m1-2022",
-    "name": "iPad Air（M1）",
-    "year": 2022,
-    "release": "2022-03",
-    "tier": "Air",
-    "size": "10.9 英寸",
-    "chip": "M1",
-    "cpuCores": 8,
-    "gpuCores": 8,
-    "memory": "8GB",
-    "baseStorage": "64GB",
-    "storageOptions": "64/256GB",
-    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
-    "launchPrice": 4399,
-    "cellularPremium": 1100,
-    "currentOfficialPrice": null,
-    "display": "10.9 英寸 Liquid Retina / 60Hz",
-    "weightKg": 0.461,
-    "batteryHours": 10,
-    "ports": "USB-C / 10Gbps",
-    "camera": "12MP 后摄 / 12MP 前摄",
-    "pencil": "Apple Pencil（第二代）",
-    "keyUpdates": "M1、8GB 内存、5G 蜂窝。",
-    "pros": "性能充足、支持台前调度和 Apple Intelligence",
-    "cons": "64GB 起步严重限制，60Hz",
-    "verdict": "二手优先 256GB，仍是高性价比 Air",
-    "curve": "air",
-    "sourceIds": [
-      "apple-ipad-identify"
-    ]
-  },
-  {
-    "id": "ipad-air11-m2-2024",
-    "name": "iPad Air 11 英寸（M2）",
-    "year": 2024,
-    "release": "2024-05",
-    "tier": "Air",
-    "size": "11 英寸",
-    "chip": "M2",
-    "cpuCores": 8,
-    "gpuCores": 9,
-    "memory": "8GB",
-    "baseStorage": "128GB",
-    "storageOptions": "128/256/512GB/1TB",
-    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
-    "launchPrice": 4799,
-    "cellularPremium": 1000,
-    "currentOfficialPrice": null,
-    "display": "11 英寸 Liquid Retina / 60Hz",
-    "weightKg": 0.462,
-    "batteryHours": 10,
-    "ports": "USB-C / 10Gbps",
-    "camera": "12MP 后摄 / 横向 12MP 前摄",
-    "pencil": "Apple Pencil Pro / USB-C",
-    "keyUpdates": "M2、横向前摄、128GB 起步、Pencil Pro。",
-    "pros": "尺寸、性能、容量和配件平衡",
-    "cons": "60Hz、与 Pro 差距主要在屏幕",
-    "verdict": "二手价格合理时是主流 iPad 甜点款",
-    "curve": "air",
-    "sourceIds": [
-      "apple-ipadair-m2-news"
-    ]
-  },
-  {
-    "id": "ipad-air13-m2-2024",
-    "name": "iPad Air 13 英寸（M2）",
-    "year": 2024,
-    "release": "2024-05",
+    "id": "ipad-air13-m4-2026",
+    "name": "iPad Air 13 英寸（M4）",
+    "year": 2026,
+    "release": "2026-03",
     "tier": "Air",
     "size": "13 英寸",
-    "chip": "M2",
+    "chip": "M4",
     "cpuCores": 8,
     "gpuCores": 9,
-    "memory": "8GB",
+    "memory": "12GB",
     "baseStorage": "128GB",
     "storageOptions": "128/256/512GB/1TB",
     "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
     "launchPrice": 6499,
-    "cellularPremium": 1000,
-    "currentOfficialPrice": null,
+    "cellularPremium": 1300,
+    "currentOfficialPrice": 7699,
     "display": "13 英寸 Liquid Retina / 60Hz",
-    "weightKg": 0.617,
+    "weightKg": 0.62,
     "batteryHours": 10,
     "ports": "USB-C / 10Gbps",
     "camera": "12MP 后摄 / 横向 12MP 前摄",
     "pencil": "Apple Pencil Pro / USB-C",
-    "keyUpdates": "首款 13 英寸 Air、M2、横向前摄。",
-    "pros": "大屏生产力和影音体验好，价格低于 Pro",
-    "cons": "更重、60Hz、键盘配件成本高",
-    "verdict": "明确需要大屏且不需要 ProMotion 时购买",
+    "keyUpdates": "M4、12GB 内存、Wi‑Fi 7、13 英寸大屏。",
+    "pros": "大屏、性能、内存和续航平衡",
+    "cons": "便携性一般、60Hz、配件昂贵",
+    "verdict": "大屏学习、绘画和移动办公用户首选",
     "curve": "air",
     "sourceIds": [
-      "apple-ipadair-m2-news"
-    ]
+      "apple-ipadair-m4-news"
+    ],
+    "configurations": [
+      {
+        "id": "128gb-wifi",
+        "storage": "128GB",
+        "network": "Wi-Fi",
+        "launchPrice": 6499,
+        "currentOfficialPrice": 7699,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "128gb-cellular",
+        "storage": "128GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 7799,
+        "currentOfficialPrice": 8999,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "256gb-wifi",
+        "storage": "256GB",
+        "network": "Wi-Fi",
+        "launchPrice": 7299,
+        "currentOfficialPrice": 8199,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "256gb-cellular",
+        "storage": "256GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 8599,
+        "currentOfficialPrice": 9499,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "512gb-wifi",
+        "storage": "512GB",
+        "network": "Wi-Fi",
+        "launchPrice": 8899,
+        "currentOfficialPrice": 9899,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "512gb-cellular",
+        "storage": "512GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 10199,
+        "currentOfficialPrice": 11199,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "1tb-wifi",
+        "storage": "1TB",
+        "network": "Wi-Fi",
+        "launchPrice": 11199,
+        "currentOfficialPrice": 12399,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "1tb-cellular",
+        "storage": "1TB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 12499,
+        "currentOfficialPrice": 13699,
+        "priceBasis": "official_current"
+      }
+    ],
+    "configurationCount": 8
   },
   {
     "id": "ipad-air11-m4-2026",
@@ -335,7 +114,7 @@
     "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
     "launchPrice": 4799,
     "cellularPremium": 1300,
-    "currentOfficialPrice": 4799,
+    "currentOfficialPrice": 5999,
     "display": "11 英寸 Liquid Retina / 60Hz",
     "weightKg": 0.46,
     "batteryHours": 10,
@@ -349,199 +128,74 @@
     "curve": "air",
     "sourceIds": [
       "apple-ipadair-m4-news"
-    ]
-  },
-  {
-    "id": "ipad-air13-m4-2026",
-    "name": "iPad Air 13 英寸（M4）",
-    "year": 2026,
-    "release": "2026-03",
-    "tier": "Air",
-    "size": "13 英寸",
-    "chip": "M4",
-    "cpuCores": 8,
-    "gpuCores": 9,
-    "memory": "12GB",
-    "baseStorage": "128GB",
-    "storageOptions": "128/256/512GB/1TB",
-    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
-    "launchPrice": 6499,
-    "cellularPremium": 1300,
-    "currentOfficialPrice": 6499,
-    "display": "13 英寸 Liquid Retina / 60Hz",
-    "weightKg": 0.62,
-    "batteryHours": 10,
-    "ports": "USB-C / 10Gbps",
-    "camera": "12MP 后摄 / 横向 12MP 前摄",
-    "pencil": "Apple Pencil Pro / USB-C",
-    "keyUpdates": "M4、12GB 内存、Wi‑Fi 7、13 英寸大屏。",
-    "pros": "大屏、性能、内存和续航平衡",
-    "cons": "便携性一般、60Hz、配件昂贵",
-    "verdict": "大屏学习、绘画和移动办公用户首选",
-    "curve": "air",
-    "sourceIds": [
-      "apple-ipadair-m4-news"
-    ]
-  },
-  {
-    "id": "ipad-pro11-m1-2021",
-    "name": "iPad Pro 11 英寸（M1）",
-    "year": 2021,
-    "release": "2021-05",
-    "tier": "Pro",
-    "size": "11 英寸",
-    "chip": "M1",
-    "cpuCores": 8,
-    "gpuCores": 8,
-    "memory": "8GB",
-    "baseStorage": "128GB",
-    "storageOptions": "128/256/512GB/1TB/2TB",
-    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
-    "launchPrice": 6199,
-    "cellularPremium": 1200,
-    "currentOfficialPrice": null,
-    "display": "11 英寸 Liquid Retina / 120Hz",
-    "weightKg": 0.466,
-    "batteryHours": 10,
-    "ports": "雷雳 / USB 4",
-    "camera": "12MP + 10MP 双摄 / LiDAR",
-    "pencil": "Apple Pencil（第二代）",
-    "keyUpdates": "M1、雷雳接口、5G。",
-    "pros": "120Hz、性能强、二手价格成熟",
-    "cons": "无 mini‑LED，机龄较高",
-    "verdict": "二手高性价比 Pro，重点检查屏幕和电池",
-    "curve": "pro",
-    "sourceIds": [
-      "apple-ipad-identify"
-    ]
-  },
-  {
-    "id": "ipad-pro129-m1-2021",
-    "name": "iPad Pro 12.9 英寸（M1）",
-    "year": 2021,
-    "release": "2021-05",
-    "tier": "Pro",
-    "size": "12.9 英寸",
-    "chip": "M1",
-    "cpuCores": 8,
-    "gpuCores": 8,
-    "memory": "8GB",
-    "baseStorage": "128GB",
-    "storageOptions": "128/256/512GB/1TB/2TB",
-    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
-    "launchPrice": 8499,
-    "cellularPremium": 1200,
-    "currentOfficialPrice": null,
-    "display": "12.9 英寸 Liquid Retina XDR / 120Hz",
-    "weightKg": 0.682,
-    "batteryHours": 10,
-    "ports": "雷雳 / USB 4",
-    "camera": "12MP + 10MP 双摄 / LiDAR",
-    "pencil": "Apple Pencil（第二代）",
-    "keyUpdates": "M1、mini‑LED XDR、雷雳接口。",
-    "pros": "大屏 mini‑LED、二手价格较低",
-    "cons": "重、屏幕可能出现光晕、配件昂贵",
-    "verdict": "大屏创作和影音的二手高性价比选择",
-    "curve": "pro",
-    "sourceIds": [
-      "apple-ipad-identify"
-    ]
-  },
-  {
-    "id": "ipad-pro11-m4-2024",
-    "name": "iPad Pro 11 英寸（M4）",
-    "year": 2024,
-    "release": "2024-05",
-    "tier": "Pro",
-    "size": "11 英寸",
-    "chip": "M4",
-    "cpuCores": 9,
-    "gpuCores": 10,
-    "memory": "8GB",
-    "baseStorage": "256GB",
-    "storageOptions": "256/512GB/1TB/2TB",
-    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
-    "launchPrice": 8999,
-    "cellularPremium": 1500,
-    "currentOfficialPrice": null,
-    "display": "11 英寸 Ultra Retina XDR OLED / 120Hz",
-    "weightKg": 0.444,
-    "batteryHours": 10,
-    "ports": "雷雳 / USB 4",
-    "camera": "12MP 后摄 / 横向 12MP 原深感",
-    "pencil": "Apple Pencil Pro / USB-C",
-    "keyUpdates": "串联 OLED、极薄机身、M4、全新妙控键盘。",
-    "pros": "顶级屏幕、轻薄、性能强",
-    "cons": "售价高、配件成本高、单后摄",
-    "verdict": "重视屏幕和专业创作才值得",
-    "curve": "pro",
-    "sourceIds": [
-      "apple-ipadpro-m4-news"
-    ]
-  },
-  {
-    "id": "ipad-pro13-m4-2024",
-    "name": "iPad Pro 13 英寸（M4）",
-    "year": 2024,
-    "release": "2024-05",
-    "tier": "Pro",
-    "size": "13 英寸",
-    "chip": "M4",
-    "cpuCores": 9,
-    "gpuCores": 10,
-    "memory": "8GB",
-    "baseStorage": "256GB",
-    "storageOptions": "256/512GB/1TB/2TB",
-    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
-    "launchPrice": 11499,
-    "cellularPremium": 1500,
-    "currentOfficialPrice": null,
-    "display": "13 英寸 Ultra Retina XDR OLED / 120Hz",
-    "weightKg": 0.579,
-    "batteryHours": 10,
-    "ports": "雷雳 / USB 4",
-    "camera": "12MP 后摄 / 横向 12MP 原深感",
-    "pencil": "Apple Pencil Pro / USB-C",
-    "keyUpdates": "13 英寸串联 OLED、M4、极薄机身。",
-    "pros": "大屏 OLED 和专业应用体验顶级",
-    "cons": "整套成本接近 MacBook Pro",
-    "verdict": "明确需要触控、Pencil 和顶级大屏时购买",
-    "curve": "pro",
-    "sourceIds": [
-      "apple-ipadpro-m4-news"
-    ]
-  },
-  {
-    "id": "ipad-pro11-m5-2025",
-    "name": "iPad Pro 11 英寸（M5）",
-    "year": 2025,
-    "release": "2025-10",
-    "tier": "Pro",
-    "size": "11 英寸",
-    "chip": "M5",
-    "cpuCores": 9,
-    "gpuCores": 10,
-    "memory": "12GB",
-    "baseStorage": "256GB",
-    "storageOptions": "256/512GB/1TB/2TB",
-    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
-    "launchPrice": 8999,
-    "cellularPremium": 1700,
-    "currentOfficialPrice": 8999,
-    "display": "11 英寸 Ultra Retina XDR OLED / 120Hz",
-    "weightKg": 0.444,
-    "batteryHours": 10,
-    "ports": "雷雳 / USB 4",
-    "camera": "12MP 后摄 / 横向 12MP 原深感",
-    "pencil": "Apple Pencil Pro / USB-C",
-    "keyUpdates": "M5、12GB 起步内存、更强设备端 AI。",
-    "pros": "当前最强小尺寸 iPad Pro",
-    "cons": "相对 M4 升级有限、价格高",
-    "verdict": "新购专业设备可选，M4 用户无需升级",
-    "curve": "pro",
-    "sourceIds": [
-      "apple-ipadpro-m5-news"
-    ]
+    ],
+    "configurations": [
+      {
+        "id": "128gb-wifi",
+        "storage": "128GB",
+        "network": "Wi-Fi",
+        "launchPrice": 4799,
+        "currentOfficialPrice": 5999,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "128gb-cellular",
+        "storage": "128GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 6099,
+        "currentOfficialPrice": 7299,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "256gb-wifi",
+        "storage": "256GB",
+        "network": "Wi-Fi",
+        "launchPrice": 5599,
+        "currentOfficialPrice": 6499,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "256gb-cellular",
+        "storage": "256GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 6899,
+        "currentOfficialPrice": 7799,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "512gb-wifi",
+        "storage": "512GB",
+        "network": "Wi-Fi",
+        "launchPrice": 7199,
+        "currentOfficialPrice": 8199,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "512gb-cellular",
+        "storage": "512GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 8499,
+        "currentOfficialPrice": 9499,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "1tb-wifi",
+        "storage": "1TB",
+        "network": "Wi-Fi",
+        "launchPrice": 9499,
+        "currentOfficialPrice": 10699,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "1tb-cellular",
+        "storage": "1TB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 10799,
+        "currentOfficialPrice": 11999,
+        "priceBasis": "official_current"
+      }
+    ],
+    "configurationCount": 8
   },
   {
     "id": "ipad-pro13-m5-2025",
@@ -573,6 +227,1366 @@
     "curve": "pro",
     "sourceIds": [
       "apple-ipadpro-m5-news"
-    ]
+    ],
+    "configurations": [
+      {
+        "id": "256gb-wifi",
+        "storage": "256GB",
+        "network": "Wi-Fi",
+        "launchPrice": 11499,
+        "currentOfficialPrice": 11499,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "256gb-cellular",
+        "storage": "256GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 13199,
+        "currentOfficialPrice": 13199,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "512gb-wifi",
+        "storage": "512GB",
+        "network": "Wi-Fi",
+        "launchPrice": 13199,
+        "currentOfficialPrice": 13199,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "512gb-cellular",
+        "storage": "512GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 14899,
+        "currentOfficialPrice": 14899,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "1tb-wifi",
+        "storage": "1TB",
+        "network": "Wi-Fi",
+        "launchPrice": 15799,
+        "currentOfficialPrice": 15799,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "1tb-cellular",
+        "storage": "1TB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 17499,
+        "currentOfficialPrice": 17499,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "2tb-wifi",
+        "storage": "2TB",
+        "network": "Wi-Fi",
+        "launchPrice": 18999,
+        "currentOfficialPrice": 18999,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "2tb-cellular",
+        "storage": "2TB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 20699,
+        "currentOfficialPrice": 20699,
+        "priceBasis": "official_current"
+      }
+    ],
+    "configurationCount": 8
+  },
+  {
+    "id": "ipad-pro11-m5-2025",
+    "name": "iPad Pro 11 英寸（M5）",
+    "year": 2025,
+    "release": "2025-10",
+    "tier": "Pro",
+    "size": "11 英寸",
+    "chip": "M5",
+    "cpuCores": 9,
+    "gpuCores": 10,
+    "memory": "12GB",
+    "baseStorage": "256GB",
+    "storageOptions": "256/512GB/1TB/2TB",
+    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
+    "launchPrice": 8999,
+    "cellularPremium": 1700,
+    "currentOfficialPrice": 8999,
+    "display": "11 英寸 Ultra Retina XDR OLED / 120Hz",
+    "weightKg": 0.444,
+    "batteryHours": 10,
+    "ports": "雷雳 / USB 4",
+    "camera": "12MP 后摄 / 横向 12MP 原深感",
+    "pencil": "Apple Pencil Pro / USB-C",
+    "keyUpdates": "M5、12GB 起步内存、更强设备端 AI。",
+    "pros": "当前最强小尺寸 iPad Pro",
+    "cons": "相对 M4 升级有限、价格高",
+    "verdict": "新购专业设备可选，M4 用户无需升级",
+    "curve": "pro",
+    "sourceIds": [
+      "apple-ipadpro-m5-news"
+    ],
+    "configurations": [
+      {
+        "id": "256gb-wifi",
+        "storage": "256GB",
+        "network": "Wi-Fi",
+        "launchPrice": 8999,
+        "currentOfficialPrice": 8999,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "256gb-cellular",
+        "storage": "256GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 10699,
+        "currentOfficialPrice": 10699,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "512gb-wifi",
+        "storage": "512GB",
+        "network": "Wi-Fi",
+        "launchPrice": 10699,
+        "currentOfficialPrice": 10699,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "512gb-cellular",
+        "storage": "512GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 12399,
+        "currentOfficialPrice": 12399,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "1tb-wifi",
+        "storage": "1TB",
+        "network": "Wi-Fi",
+        "launchPrice": 13299,
+        "currentOfficialPrice": 13299,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "1tb-cellular",
+        "storage": "1TB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 14999,
+        "currentOfficialPrice": 14999,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "2tb-wifi",
+        "storage": "2TB",
+        "network": "Wi-Fi",
+        "launchPrice": 16499,
+        "currentOfficialPrice": 16499,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "2tb-cellular",
+        "storage": "2TB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 18199,
+        "currentOfficialPrice": 18199,
+        "priceBasis": "official_current"
+      }
+    ],
+    "configurationCount": 8
+  },
+  {
+    "id": "ipad-a16-2025",
+    "name": "iPad 11 英寸（A16）",
+    "year": 2025,
+    "release": "2025-03",
+    "tier": "iPad",
+    "size": "11 英寸",
+    "chip": "A16",
+    "cpuCores": 5,
+    "gpuCores": 4,
+    "memory": "6GB（行业口径）",
+    "baseStorage": "128GB",
+    "storageOptions": "128/256/512GB",
+    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
+    "launchPrice": 2999,
+    "cellularPremium": 1200,
+    "currentOfficialPrice": 3799,
+    "display": "11 英寸 Liquid Retina / 60Hz",
+    "weightKg": 0.477,
+    "batteryHours": 10,
+    "ports": "USB-C / USB 2",
+    "camera": "12MP 后摄 / 横向 12MP 前摄",
+    "pencil": "Apple Pencil（USB-C/第一代）",
+    "keyUpdates": "A16、128GB 起步、延续横向前摄。",
+    "pros": "当前入门 iPad，容量和价格均衡",
+    "cons": "不支持 Apple Intelligence、非全贴合屏",
+    "verdict": "娱乐、网课和轻办公首选入门款",
+    "curve": "base",
+    "sourceIds": [
+      "apple-ipad-a16-spec"
+    ],
+    "configurations": [
+      {
+        "id": "128gb-wifi",
+        "storage": "128GB",
+        "network": "Wi-Fi",
+        "launchPrice": 2999,
+        "currentOfficialPrice": 3799,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "128gb-cellular",
+        "storage": "128GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 4199,
+        "currentOfficialPrice": 5099,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "256gb-wifi",
+        "storage": "256GB",
+        "network": "Wi-Fi",
+        "launchPrice": 3499,
+        "currentOfficialPrice": 4299,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "256gb-cellular",
+        "storage": "256GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 4699,
+        "currentOfficialPrice": 5599,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "512gb-wifi",
+        "storage": "512GB",
+        "network": "Wi-Fi",
+        "launchPrice": 5199,
+        "currentOfficialPrice": 5999,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "512gb-cellular",
+        "storage": "512GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 6399,
+        "currentOfficialPrice": 7299,
+        "priceBasis": "official_current"
+      }
+    ],
+    "configurationCount": 6
+  },
+  {
+    "id": "ipad-mini-a17-2024",
+    "name": "iPad mini（A17 Pro）",
+    "year": 2024,
+    "release": "2024-10",
+    "tier": "mini",
+    "size": "8.3 英寸",
+    "chip": "A17 Pro",
+    "cpuCores": 6,
+    "gpuCores": 5,
+    "memory": "8GB（行业口径）",
+    "baseStorage": "128GB",
+    "storageOptions": "128/256/512GB",
+    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
+    "launchPrice": 3999,
+    "cellularPremium": 1200,
+    "currentOfficialPrice": 3999,
+    "display": "8.3 英寸 Liquid Retina / 60Hz",
+    "weightKg": 0.293,
+    "batteryHours": 10,
+    "ports": "USB-C / 10Gbps",
+    "camera": "12MP 后摄 / 12MP 前摄",
+    "pencil": "Apple Pencil Pro / USB-C",
+    "keyUpdates": "A17 Pro、128GB 起步、Apple Intelligence、Pencil Pro。",
+    "pros": "最强小平板、接口更快、容量更合理",
+    "cons": "仍是 60Hz，价格接近大屏 Air",
+    "verdict": "便携优先且确实需要小尺寸时购买",
+    "curve": "mini",
+    "sourceIds": [
+      "apple-ipad-mini-a17-news"
+    ],
+    "configurations": [
+      {
+        "id": "128gb-wifi",
+        "storage": "128GB",
+        "network": "Wi-Fi",
+        "launchPrice": 3999,
+        "currentOfficialPrice": 3999,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "128gb-cellular",
+        "storage": "128GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 5199,
+        "currentOfficialPrice": 5299,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "256gb-wifi",
+        "storage": "256GB",
+        "network": "Wi-Fi",
+        "launchPrice": 4799,
+        "currentOfficialPrice": 4799,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "256gb-cellular",
+        "storage": "256GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 5999,
+        "currentOfficialPrice": 6099,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "512gb-wifi",
+        "storage": "512GB",
+        "network": "Wi-Fi",
+        "launchPrice": 6399,
+        "currentOfficialPrice": 6499,
+        "priceBasis": "official_current"
+      },
+      {
+        "id": "512gb-cellular",
+        "storage": "512GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 7599,
+        "currentOfficialPrice": 7799,
+        "priceBasis": "official_current"
+      }
+    ],
+    "configurationCount": 6
+  },
+  {
+    "id": "ipad-pro13-m4-2024",
+    "name": "iPad Pro 13 英寸（M4）",
+    "year": 2024,
+    "release": "2024-05",
+    "tier": "Pro",
+    "size": "13 英寸",
+    "chip": "M4",
+    "cpuCores": 9,
+    "gpuCores": 10,
+    "memory": "8GB",
+    "baseStorage": "256GB",
+    "storageOptions": "256/512GB/1TB/2TB",
+    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
+    "launchPrice": 11499,
+    "cellularPremium": 1500,
+    "currentOfficialPrice": null,
+    "display": "13 英寸 Ultra Retina XDR OLED / 120Hz",
+    "weightKg": 0.579,
+    "batteryHours": 10,
+    "ports": "雷雳 / USB 4",
+    "camera": "12MP 后摄 / 横向 12MP 原深感",
+    "pencil": "Apple Pencil Pro / USB-C",
+    "keyUpdates": "13 英寸串联 OLED、M4、极薄机身。",
+    "pros": "大屏 OLED 和专业应用体验顶级",
+    "cons": "整套成本接近 MacBook Pro",
+    "verdict": "明确需要触控、Pencil 和顶级大屏时购买",
+    "curve": "pro",
+    "sourceIds": [
+      "apple-ipadpro-m4-news"
+    ],
+    "configurations": [
+      {
+        "id": "256gb-wifi",
+        "storage": "256GB",
+        "network": "Wi-Fi",
+        "launchPrice": 11499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "256gb-cellular",
+        "storage": "256GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 12999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "512gb-wifi",
+        "storage": "512GB",
+        "network": "Wi-Fi",
+        "launchPrice": 13199,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "512gb-cellular",
+        "storage": "512GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 14699,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "1tb-wifi",
+        "storage": "1TB",
+        "network": "Wi-Fi",
+        "launchPrice": 15799,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "1tb-cellular",
+        "storage": "1TB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 17299,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "2tb-wifi",
+        "storage": "2TB",
+        "network": "Wi-Fi",
+        "launchPrice": 18999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "2tb-cellular",
+        "storage": "2TB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 20499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      }
+    ],
+    "configurationCount": 8
+  },
+  {
+    "id": "ipad-pro11-m4-2024",
+    "name": "iPad Pro 11 英寸（M4）",
+    "year": 2024,
+    "release": "2024-05",
+    "tier": "Pro",
+    "size": "11 英寸",
+    "chip": "M4",
+    "cpuCores": 9,
+    "gpuCores": 10,
+    "memory": "8GB",
+    "baseStorage": "256GB",
+    "storageOptions": "256/512GB/1TB/2TB",
+    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
+    "launchPrice": 8999,
+    "cellularPremium": 1500,
+    "currentOfficialPrice": null,
+    "display": "11 英寸 Ultra Retina XDR OLED / 120Hz",
+    "weightKg": 0.444,
+    "batteryHours": 10,
+    "ports": "雷雳 / USB 4",
+    "camera": "12MP 后摄 / 横向 12MP 原深感",
+    "pencil": "Apple Pencil Pro / USB-C",
+    "keyUpdates": "串联 OLED、极薄机身、M4、全新妙控键盘。",
+    "pros": "顶级屏幕、轻薄、性能强",
+    "cons": "售价高、配件成本高、单后摄",
+    "verdict": "重视屏幕和专业创作才值得",
+    "curve": "pro",
+    "sourceIds": [
+      "apple-ipadpro-m4-news"
+    ],
+    "configurations": [
+      {
+        "id": "256gb-wifi",
+        "storage": "256GB",
+        "network": "Wi-Fi",
+        "launchPrice": 8999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "256gb-cellular",
+        "storage": "256GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 10499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "512gb-wifi",
+        "storage": "512GB",
+        "network": "Wi-Fi",
+        "launchPrice": 10699,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "512gb-cellular",
+        "storage": "512GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 12199,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "1tb-wifi",
+        "storage": "1TB",
+        "network": "Wi-Fi",
+        "launchPrice": 13299,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "1tb-cellular",
+        "storage": "1TB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 14799,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "2tb-wifi",
+        "storage": "2TB",
+        "network": "Wi-Fi",
+        "launchPrice": 16499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "2tb-cellular",
+        "storage": "2TB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 17999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      }
+    ],
+    "configurationCount": 8
+  },
+  {
+    "id": "ipad-air13-m2-2024",
+    "name": "iPad Air 13 英寸（M2）",
+    "year": 2024,
+    "release": "2024-05",
+    "tier": "Air",
+    "size": "13 英寸",
+    "chip": "M2",
+    "cpuCores": 8,
+    "gpuCores": 9,
+    "memory": "8GB",
+    "baseStorage": "128GB",
+    "storageOptions": "128/256/512GB/1TB",
+    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
+    "launchPrice": 6499,
+    "cellularPremium": 1000,
+    "currentOfficialPrice": null,
+    "display": "13 英寸 Liquid Retina / 60Hz",
+    "weightKg": 0.617,
+    "batteryHours": 10,
+    "ports": "USB-C / 10Gbps",
+    "camera": "12MP 后摄 / 横向 12MP 前摄",
+    "pencil": "Apple Pencil Pro / USB-C",
+    "keyUpdates": "首款 13 英寸 Air、M2、横向前摄。",
+    "pros": "大屏生产力和影音体验好，价格低于 Pro",
+    "cons": "更重、60Hz、键盘配件成本高",
+    "verdict": "明确需要大屏且不需要 ProMotion 时购买",
+    "curve": "air",
+    "sourceIds": [
+      "apple-ipadair-m2-news"
+    ],
+    "configurations": [
+      {
+        "id": "128gb-wifi",
+        "storage": "128GB",
+        "network": "Wi-Fi",
+        "launchPrice": 6499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "128gb-cellular",
+        "storage": "128GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 7499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "256gb-wifi",
+        "storage": "256GB",
+        "network": "Wi-Fi",
+        "launchPrice": 7299,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "256gb-cellular",
+        "storage": "256GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 8299,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "512gb-wifi",
+        "storage": "512GB",
+        "network": "Wi-Fi",
+        "launchPrice": 8899,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "512gb-cellular",
+        "storage": "512GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 9899,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "1tb-wifi",
+        "storage": "1TB",
+        "network": "Wi-Fi",
+        "launchPrice": 11199,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "1tb-cellular",
+        "storage": "1TB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 12199,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      }
+    ],
+    "configurationCount": 8
+  },
+  {
+    "id": "ipad-air11-m2-2024",
+    "name": "iPad Air 11 英寸（M2）",
+    "year": 2024,
+    "release": "2024-05",
+    "tier": "Air",
+    "size": "11 英寸",
+    "chip": "M2",
+    "cpuCores": 8,
+    "gpuCores": 9,
+    "memory": "8GB",
+    "baseStorage": "128GB",
+    "storageOptions": "128/256/512GB/1TB",
+    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
+    "launchPrice": 4799,
+    "cellularPremium": 1000,
+    "currentOfficialPrice": null,
+    "display": "11 英寸 Liquid Retina / 60Hz",
+    "weightKg": 0.462,
+    "batteryHours": 10,
+    "ports": "USB-C / 10Gbps",
+    "camera": "12MP 后摄 / 横向 12MP 前摄",
+    "pencil": "Apple Pencil Pro / USB-C",
+    "keyUpdates": "M2、横向前摄、128GB 起步、Pencil Pro。",
+    "pros": "尺寸、性能、容量和配件平衡",
+    "cons": "60Hz、与 Pro 差距主要在屏幕",
+    "verdict": "二手价格合理时是主流 iPad 甜点款",
+    "curve": "air",
+    "sourceIds": [
+      "apple-ipadair-m2-news"
+    ],
+    "configurations": [
+      {
+        "id": "128gb-wifi",
+        "storage": "128GB",
+        "network": "Wi-Fi",
+        "launchPrice": 4799,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "128gb-cellular",
+        "storage": "128GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 5799,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "256gb-wifi",
+        "storage": "256GB",
+        "network": "Wi-Fi",
+        "launchPrice": 5599,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "256gb-cellular",
+        "storage": "256GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 6599,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "512gb-wifi",
+        "storage": "512GB",
+        "network": "Wi-Fi",
+        "launchPrice": 7199,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "512gb-cellular",
+        "storage": "512GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 8199,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "1tb-wifi",
+        "storage": "1TB",
+        "network": "Wi-Fi",
+        "launchPrice": 9499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "1tb-cellular",
+        "storage": "1TB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 10499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      }
+    ],
+    "configurationCount": 8
+  },
+  {
+    "id": "ipad-10-2022",
+    "name": "iPad（第10代）",
+    "year": 2022,
+    "release": "2022-10",
+    "tier": "iPad",
+    "size": "10.9 英寸",
+    "chip": "A14 Bionic",
+    "cpuCores": 6,
+    "gpuCores": 4,
+    "memory": "4GB（拆解口径）",
+    "baseStorage": "64GB",
+    "storageOptions": "64/256GB",
+    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
+    "launchPrice": 3599,
+    "cellularPremium": 1200,
+    "currentOfficialPrice": null,
+    "display": "10.9 英寸 Liquid Retina / 60Hz",
+    "weightKg": 0.477,
+    "batteryHours": 10,
+    "ports": "USB-C / USB 2",
+    "camera": "12MP 后摄 / 横向 12MP 前摄",
+    "pencil": "Apple Pencil（USB-C/第一代）",
+    "keyUpdates": "全面屏外观、USB-C、横向前摄。",
+    "pros": "外观现代、横屏视频会议方便",
+    "cons": "64GB 起步、屏幕仍非全贴合、Pencil 兼容复杂",
+    "verdict": "折扣或二手价格合适时值得买",
+    "curve": "base",
+    "sourceIds": [
+      "apple-ipad-identify"
+    ],
+    "configurations": [
+      {
+        "id": "64gb-wifi",
+        "storage": "64GB",
+        "network": "Wi-Fi",
+        "launchPrice": 3599,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "64gb-cellular",
+        "storage": "64GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 4799,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "256gb-wifi",
+        "storage": "256GB",
+        "network": "Wi-Fi",
+        "launchPrice": 4799,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "256gb-cellular",
+        "storage": "256GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 5999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      }
+    ],
+    "configurationCount": 4
+  },
+  {
+    "id": "ipad-air5-m1-2022",
+    "name": "iPad Air（M1）",
+    "year": 2022,
+    "release": "2022-03",
+    "tier": "Air",
+    "size": "10.9 英寸",
+    "chip": "M1",
+    "cpuCores": 8,
+    "gpuCores": 8,
+    "memory": "8GB",
+    "baseStorage": "64GB",
+    "storageOptions": "64/256GB",
+    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
+    "launchPrice": 4399,
+    "cellularPremium": 1100,
+    "currentOfficialPrice": null,
+    "display": "10.9 英寸 Liquid Retina / 60Hz",
+    "weightKg": 0.461,
+    "batteryHours": 10,
+    "ports": "USB-C / 10Gbps",
+    "camera": "12MP 后摄 / 12MP 前摄",
+    "pencil": "Apple Pencil（第二代）",
+    "keyUpdates": "M1、8GB 内存、5G 蜂窝。",
+    "pros": "性能充足、支持台前调度和 Apple Intelligence",
+    "cons": "64GB 起步严重限制，60Hz",
+    "verdict": "二手优先 256GB，仍是高性价比 Air",
+    "curve": "air",
+    "sourceIds": [
+      "apple-ipad-identify"
+    ],
+    "configurations": [
+      {
+        "id": "64gb-wifi",
+        "storage": "64GB",
+        "network": "Wi-Fi",
+        "launchPrice": 4399,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "64gb-cellular",
+        "storage": "64GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 5499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "256gb-wifi",
+        "storage": "256GB",
+        "network": "Wi-Fi",
+        "launchPrice": 5599,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "256gb-cellular",
+        "storage": "256GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 6699,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      }
+    ],
+    "configurationCount": 4
+  },
+  {
+    "id": "ipad-mini6-2021",
+    "name": "iPad mini（第6代）",
+    "year": 2021,
+    "release": "2021-09",
+    "tier": "mini",
+    "size": "8.3 英寸",
+    "chip": "A15 Bionic",
+    "cpuCores": 6,
+    "gpuCores": 5,
+    "memory": "4GB（拆解口径）",
+    "baseStorage": "64GB",
+    "storageOptions": "64/256GB",
+    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
+    "launchPrice": 3799,
+    "cellularPremium": 1200,
+    "currentOfficialPrice": null,
+    "display": "8.3 英寸 Liquid Retina / 60Hz",
+    "weightKg": 0.293,
+    "batteryHours": 10,
+    "ports": "USB-C / 5Gbps",
+    "camera": "12MP 后摄 / 12MP 前摄",
+    "pencil": "Apple Pencil（第二代）",
+    "keyUpdates": "全面屏、A15、USB-C、极致便携。",
+    "pros": "单手阅读、游戏和飞行图导航优秀",
+    "cons": "64GB 起步、果冻屏争议、屏幕较小",
+    "verdict": "需要小尺寸才值得，优先 256GB",
+    "curve": "mini",
+    "sourceIds": [
+      "apple-ipad-identify"
+    ],
+    "configurations": [
+      {
+        "id": "64gb-wifi",
+        "storage": "64GB",
+        "network": "Wi-Fi",
+        "launchPrice": 3799,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "64gb-cellular",
+        "storage": "64GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 4999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "256gb-wifi",
+        "storage": "256GB",
+        "network": "Wi-Fi",
+        "launchPrice": 4999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "256gb-cellular",
+        "storage": "256GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 6199,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      }
+    ],
+    "configurationCount": 4
+  },
+  {
+    "id": "ipad-9-2021",
+    "name": "iPad（第9代）",
+    "year": 2021,
+    "release": "2021-09",
+    "tier": "iPad",
+    "size": "10.2 英寸",
+    "chip": "A13 Bionic",
+    "cpuCores": 6,
+    "gpuCores": 4,
+    "memory": "3GB（拆解口径）",
+    "baseStorage": "64GB",
+    "storageOptions": "64/256GB",
+    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
+    "launchPrice": 2499,
+    "cellularPremium": 1000,
+    "currentOfficialPrice": null,
+    "display": "10.2 英寸 Retina / 60Hz",
+    "weightKg": 0.49,
+    "batteryHours": 10,
+    "ports": "Lightning",
+    "camera": "8MP 后摄 / 12MP 超广角前摄",
+    "pencil": "Apple Pencil（第一代）",
+    "keyUpdates": "A13、人物居中、64GB 起步。",
+    "pros": "成熟稳定、基础用途性价比高",
+    "cons": "旧外观、非全贴合屏、Lightning",
+    "verdict": "低预算学习与看视频的稳妥选择",
+    "curve": "base",
+    "sourceIds": [
+      "apple-ipad-identify"
+    ],
+    "configurations": [
+      {
+        "id": "64gb-wifi",
+        "storage": "64GB",
+        "network": "Wi-Fi",
+        "launchPrice": 2499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "64gb-cellular",
+        "storage": "64GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 3499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "256gb-wifi",
+        "storage": "256GB",
+        "network": "Wi-Fi",
+        "launchPrice": 3699,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "256gb-cellular",
+        "storage": "256GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 4699,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      }
+    ],
+    "configurationCount": 4
+  },
+  {
+    "id": "ipad-pro129-m1-2021",
+    "name": "iPad Pro 12.9 英寸（M1）",
+    "year": 2021,
+    "release": "2021-05",
+    "tier": "Pro",
+    "size": "12.9 英寸",
+    "chip": "M1",
+    "cpuCores": 8,
+    "gpuCores": 8,
+    "memory": "8GB",
+    "baseStorage": "128GB",
+    "storageOptions": "128/256/512GB/1TB/2TB",
+    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
+    "launchPrice": 8499,
+    "cellularPremium": 1200,
+    "currentOfficialPrice": null,
+    "display": "12.9 英寸 Liquid Retina XDR / 120Hz",
+    "weightKg": 0.682,
+    "batteryHours": 10,
+    "ports": "雷雳 / USB 4",
+    "camera": "12MP + 10MP 双摄 / LiDAR",
+    "pencil": "Apple Pencil（第二代）",
+    "keyUpdates": "M1、mini‑LED XDR、雷雳接口。",
+    "pros": "大屏 mini‑LED、二手价格较低",
+    "cons": "重、屏幕可能出现光晕、配件昂贵",
+    "verdict": "大屏创作和影音的二手高性价比选择",
+    "curve": "pro",
+    "sourceIds": [
+      "apple-ipad-identify"
+    ],
+    "configurations": [
+      {
+        "id": "128gb-wifi",
+        "storage": "128GB",
+        "network": "Wi-Fi",
+        "launchPrice": 8499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "128gb-cellular",
+        "storage": "128GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 9699,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "256gb-wifi",
+        "storage": "256GB",
+        "network": "Wi-Fi",
+        "launchPrice": 9299,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "256gb-cellular",
+        "storage": "256GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 10499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "512gb-wifi",
+        "storage": "512GB",
+        "network": "Wi-Fi",
+        "launchPrice": 10899,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "512gb-cellular",
+        "storage": "512GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 12099,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "1tb-wifi",
+        "storage": "1TB",
+        "network": "Wi-Fi",
+        "launchPrice": 14099,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "1tb-cellular",
+        "storage": "1TB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 15299,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "2tb-wifi",
+        "storage": "2TB",
+        "network": "Wi-Fi",
+        "launchPrice": 17299,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "2tb-cellular",
+        "storage": "2TB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 18499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      }
+    ],
+    "configurationCount": 10
+  },
+  {
+    "id": "ipad-pro11-m1-2021",
+    "name": "iPad Pro 11 英寸（M1）",
+    "year": 2021,
+    "release": "2021-05",
+    "tier": "Pro",
+    "size": "11 英寸",
+    "chip": "M1",
+    "cpuCores": 8,
+    "gpuCores": 8,
+    "memory": "8GB",
+    "baseStorage": "128GB",
+    "storageOptions": "128/256/512GB/1TB/2TB",
+    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
+    "launchPrice": 6199,
+    "cellularPremium": 1200,
+    "currentOfficialPrice": null,
+    "display": "11 英寸 Liquid Retina / 120Hz",
+    "weightKg": 0.466,
+    "batteryHours": 10,
+    "ports": "雷雳 / USB 4",
+    "camera": "12MP + 10MP 双摄 / LiDAR",
+    "pencil": "Apple Pencil（第二代）",
+    "keyUpdates": "M1、雷雳接口、5G。",
+    "pros": "120Hz、性能强、二手价格成熟",
+    "cons": "无 mini‑LED，机龄较高",
+    "verdict": "二手高性价比 Pro，重点检查屏幕和电池",
+    "curve": "pro",
+    "sourceIds": [
+      "apple-ipad-identify"
+    ],
+    "configurations": [
+      {
+        "id": "128gb-wifi",
+        "storage": "128GB",
+        "network": "Wi-Fi",
+        "launchPrice": 6199,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "128gb-cellular",
+        "storage": "128GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 7399,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "256gb-wifi",
+        "storage": "256GB",
+        "network": "Wi-Fi",
+        "launchPrice": 6999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "256gb-cellular",
+        "storage": "256GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 8199,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "512gb-wifi",
+        "storage": "512GB",
+        "network": "Wi-Fi",
+        "launchPrice": 8599,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "512gb-cellular",
+        "storage": "512GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 9799,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "1tb-wifi",
+        "storage": "1TB",
+        "network": "Wi-Fi",
+        "launchPrice": 11799,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "1tb-cellular",
+        "storage": "1TB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 12999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "2tb-wifi",
+        "storage": "2TB",
+        "network": "Wi-Fi",
+        "launchPrice": 14999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "2tb-cellular",
+        "storage": "2TB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 16199,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      }
+    ],
+    "configurationCount": 10
+  },
+  {
+    "id": "ipad-air4-2020",
+    "name": "iPad Air（第4代）",
+    "year": 2020,
+    "release": "2020-10",
+    "tier": "Air",
+    "size": "10.9 英寸",
+    "chip": "A14 Bionic",
+    "cpuCores": 6,
+    "gpuCores": 4,
+    "memory": "4GB（拆解口径）",
+    "baseStorage": "64GB",
+    "storageOptions": "64/256GB",
+    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
+    "launchPrice": 4799,
+    "cellularPremium": 1000,
+    "currentOfficialPrice": null,
+    "display": "10.9 英寸 Liquid Retina / 60Hz",
+    "weightKg": 0.458,
+    "batteryHours": 10,
+    "ports": "USB-C / 5Gbps",
+    "camera": "12MP 后摄 / 7MP 前摄",
+    "pencil": "Apple Pencil（第二代）",
+    "keyUpdates": "全面屏、A14、USB-C、Touch ID 顶键。",
+    "pros": "屏幕和机身优于基础 iPad，二手价格低",
+    "cons": "64GB、内存较小、不支持 Apple Intelligence",
+    "verdict": "二手低价时适合笔记和轻办公",
+    "curve": "air",
+    "sourceIds": [
+      "apple-ipadair4-news"
+    ],
+    "configurations": [
+      {
+        "id": "64gb-wifi",
+        "storage": "64GB",
+        "network": "Wi-Fi",
+        "launchPrice": 4799,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "64gb-cellular",
+        "storage": "64GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 5799,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "256gb-wifi",
+        "storage": "256GB",
+        "network": "Wi-Fi",
+        "launchPrice": 5999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "256gb-cellular",
+        "storage": "256GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 6999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      }
+    ],
+    "configurationCount": 4
+  },
+  {
+    "id": "ipad-8-2020",
+    "name": "iPad（第8代）",
+    "year": 2020,
+    "release": "2020-09",
+    "tier": "iPad",
+    "size": "10.2 英寸",
+    "chip": "A12 Bionic",
+    "cpuCores": 6,
+    "gpuCores": 4,
+    "memory": "3GB（拆解口径）",
+    "baseStorage": "32GB",
+    "storageOptions": "32/128GB",
+    "networkOptions": "Wi-Fi/Wi-Fi + 蜂窝网络",
+    "launchPrice": 2499,
+    "cellularPremium": 1000,
+    "currentOfficialPrice": null,
+    "display": "10.2 英寸 Retina / 60Hz",
+    "weightKg": 0.49,
+    "batteryHours": 10,
+    "ports": "Lightning",
+    "camera": "8MP 后摄 / 1.2MP 前摄",
+    "pencil": "Apple Pencil（第一代）",
+    "keyUpdates": "A12 性能升级，保留 Home 键与 Lightning。",
+    "pros": "二手便宜、基础学习和视频够用",
+    "cons": "32GB 太小、非全贴合屏、接口旧",
+    "verdict": "只建议 128GB 低价机型",
+    "curve": "base",
+    "sourceIds": [
+      "apple-ipad8-news"
+    ],
+    "configurations": [
+      {
+        "id": "32gb-wifi",
+        "storage": "32GB",
+        "network": "Wi-Fi",
+        "launchPrice": 2499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "32gb-cellular",
+        "storage": "32GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 3499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "128gb-wifi",
+        "storage": "128GB",
+        "network": "Wi-Fi",
+        "launchPrice": 3299,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      },
+      {
+        "id": "128gb-cellular",
+        "storage": "128GB",
+        "network": "Wi-Fi + 蜂窝网络",
+        "launchPrice": 4299,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_ladder_reference"
+      }
+    ],
+    "configurationCount": 4
   }
 ]

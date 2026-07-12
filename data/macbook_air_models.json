@@ -1,206 +1,135 @@
 [
   {
-    "id": "mba-13-m1-2020",
-    "name": "MacBook Air 13 英寸（M1）",
-    "year": 2020,
-    "release": "2020-11",
-    "size": "13.3 英寸",
-    "chip": "M1",
-    "cpuCores": 8,
-    "gpuCores": 7,
-    "memory": "8GB",
-    "maxMemory": "16GB",
-    "storage": "256GB",
-    "storageOptions": "256GB–2TB",
-    "launchPrice": 7999,
-    "currentOfficialPrice": null,
-    "display": "13.3 英寸 Retina / 60Hz",
-    "weightKg": 1.29,
-    "batteryHours": 18,
-    "ports": "2× 雷雳 / USB 4、3.5mm",
-    "camera": "720p FaceTime HD",
-    "keyUpdates": "首代 Apple 芯片 Air，无风扇、长续航。",
-    "pros": "安静、省电、二手价格低、日常性能仍足",
-    "cons": "8GB/256GB 余量有限、720p 摄像头、仅两接口",
-    "verdict": "低预算办公和轻开发甜点机，优先 16GB",
-    "curve": "base",
-    "sourceIds": [
-      "apple-mba-m1-news"
-    ]
-  },
-  {
-    "id": "mba-13-m2-2022",
-    "name": "MacBook Air 13 英寸（M2）",
-    "year": 2022,
-    "release": "2022-07",
-    "size": "13.6 英寸",
-    "chip": "M2",
-    "cpuCores": 8,
-    "gpuCores": 8,
-    "memory": "8GB",
-    "maxMemory": "24GB",
-    "storage": "256GB",
-    "storageOptions": "256GB–2TB",
-    "launchPrice": 9499,
-    "currentOfficialPrice": null,
-    "display": "13.6 英寸 Liquid Retina / 60Hz",
-    "weightKg": 1.24,
-    "batteryHours": 18,
-    "ports": "2× 雷雳 / USB 4、MagSafe 3、3.5mm",
-    "camera": "1080p FaceTime HD",
-    "keyUpdates": "新外观、MagSafe、1080p 摄像头、更大屏幕。",
-    "pros": "轻薄、外观现代、续航好",
-    "cons": "基础 256GB SSD 性能偏低、8GB 版本余量有限",
-    "verdict": "二手价格合理时比 M1 更适合长期使用",
-    "curve": "base",
-    "sourceIds": [
-      "apple-mba-m2-news"
-    ]
-  },
-  {
-    "id": "mba-15-m2-2023",
-    "name": "MacBook Air 15 英寸（M2）",
-    "year": 2023,
-    "release": "2023-06",
+    "id": "mba-15-m5-2026",
+    "name": "MacBook Air 15 英寸（M5）",
+    "year": 2026,
+    "release": "2026-03",
     "size": "15.3 英寸",
-    "chip": "M2",
-    "cpuCores": 8,
-    "gpuCores": 10,
-    "memory": "8GB",
-    "maxMemory": "24GB",
-    "storage": "256GB",
-    "storageOptions": "256GB–2TB",
-    "launchPrice": 10499,
-    "currentOfficialPrice": null,
-    "display": "15.3 英寸 Liquid Retina / 60Hz",
-    "weightKg": 1.51,
-    "batteryHours": 18,
-    "ports": "2× 雷雳 / USB 4、MagSafe 3、3.5mm",
-    "camera": "1080p FaceTime HD",
-    "keyUpdates": "首款 15 英寸 Air、大屏无风扇。",
-    "pros": "大屏、重量仍低、续航好",
-    "cons": "接口少、无高刷、基础配置偏低",
-    "verdict": "大屏办公和影音但不需要 Pro 性能时适合",
-    "curve": "base",
-    "sourceIds": [
-      "apple-mba-identify"
-    ]
-  },
-  {
-    "id": "mba-13-m3-2024",
-    "name": "MacBook Air 13 英寸（M3）",
-    "year": 2024,
-    "release": "2024-03",
-    "size": "13.6 英寸",
-    "chip": "M3",
-    "cpuCores": 8,
-    "gpuCores": 8,
-    "memory": "16GB",
-    "maxMemory": "24GB",
-    "storage": "256GB",
-    "storageOptions": "256GB–2TB",
-    "launchPrice": 8999,
-    "currentOfficialPrice": null,
-    "display": "13.6 英寸 Liquid Retina / 60Hz",
-    "weightKg": 1.24,
-    "batteryHours": 18,
-    "ports": "2× 雷雳 / USB 4、MagSafe 3、3.5mm",
-    "camera": "1080p FaceTime HD",
-    "keyUpdates": "M3、支持双外接显示器（合盖）、Wi‑Fi 6E。",
-    "pros": "性能、便携和续航均衡",
-    "cons": "60Hz、接口少、价格接近后续 M4",
-    "verdict": "二手价格明显低于 M4 时购买",
-    "curve": "base",
-    "sourceIds": [
-      "apple-mba-m3-news"
-    ]
-  },
-  {
-    "id": "mba-15-m3-2024",
-    "name": "MacBook Air 15 英寸（M3）",
-    "year": 2024,
-    "release": "2024-03",
-    "size": "15.3 英寸",
-    "chip": "M3",
-    "cpuCores": 8,
-    "gpuCores": 10,
-    "memory": "16GB",
-    "maxMemory": "24GB",
-    "storage": "256GB",
-    "storageOptions": "256GB–2TB",
-    "launchPrice": 10499,
-    "currentOfficialPrice": null,
-    "display": "15.3 英寸 Liquid Retina / 60Hz",
-    "weightKg": 1.51,
-    "batteryHours": 18,
-    "ports": "2× 雷雳 / USB 4、MagSafe 3、3.5mm",
-    "camera": "1080p FaceTime HD",
-    "keyUpdates": "M3、大屏、双外接显示器支持。",
-    "pros": "大屏轻薄、办公体验好",
-    "cons": "价格和重量逐渐接近 14 英寸 Pro",
-    "verdict": "不需要高刷和持续高性能的大屏用户选择",
-    "curve": "base",
-    "sourceIds": [
-      "apple-mba-m3-news"
-    ]
-  },
-  {
-    "id": "mba-13-m4-2025",
-    "name": "MacBook Air 13 英寸（M4）",
-    "year": 2025,
-    "release": "2025-03",
-    "size": "13.6 英寸",
-    "chip": "M4",
-    "cpuCores": 10,
-    "gpuCores": 8,
-    "memory": "16GB",
-    "maxMemory": "32GB",
-    "storage": "256GB",
-    "storageOptions": "256GB–2TB",
-    "launchPrice": 7999,
-    "currentOfficialPrice": null,
-    "display": "13.6 英寸 Liquid Retina / 60Hz",
-    "weightKg": 1.24,
-    "batteryHours": 18,
-    "ports": "2× 雷雳 4、MagSafe 3、3.5mm",
-    "camera": "12MP Center Stage",
-    "keyUpdates": "M4、16GB 起步、12MP 摄像头、降价。",
-    "pros": "价格低、内存合理、轻薄续航优秀",
-    "cons": "基础 SSD 仍 256GB、60Hz、接口少",
-    "verdict": "当前二手甜点款，适合大多数轻中度工作",
-    "curve": "base",
-    "sourceIds": [
-      "apple-mba-m4-news"
-    ]
-  },
-  {
-    "id": "mba-15-m4-2025",
-    "name": "MacBook Air 15 英寸（M4）",
-    "year": 2025,
-    "release": "2025-03",
-    "size": "15.3 英寸",
-    "chip": "M4",
+    "chip": "M5",
     "cpuCores": 10,
     "gpuCores": 10,
     "memory": "16GB",
     "maxMemory": "32GB",
-    "storage": "256GB",
-    "storageOptions": "256GB–2TB",
+    "storage": "512GB",
+    "storageOptions": "512GB–4TB",
     "launchPrice": 9999,
-    "currentOfficialPrice": null,
+    "currentOfficialPrice": 9999,
     "display": "15.3 英寸 Liquid Retina / 60Hz",
     "weightKg": 1.51,
     "batteryHours": 18,
     "ports": "2× 雷雳 4、MagSafe 3、3.5mm",
     "camera": "12MP Center Stage",
-    "keyUpdates": "M4、16GB 起步、12MP 摄像头。",
-    "pros": "大屏、安静、续航好",
-    "cons": "价格接近 14 英寸 Pro，接口和屏幕规格较弱",
-    "verdict": "大屏办公、数据表格和影音用户选择",
+    "keyUpdates": "M5、512GB 起步、SSD 提速、大屏。",
+    "pros": "大屏、基础容量合理、安静和长续航",
+    "cons": "价格接近 MacBook Pro，60Hz 和端口较少",
+    "verdict": "大屏轻办公和移动生产力用户选择",
     "curve": "base",
     "sourceIds": [
-      "apple-mba-m4-news"
-    ]
+      "apple-mba-m5-news",
+      "apple-mba-m5-spec"
+    ],
+    "baseStorage": "512GB",
+    "baseMemory": "16GB",
+    "memoryOptions": "16GB/24GB/32GB",
+    "configurations": [
+      {
+        "id": "16gb-512gb",
+        "memory": "16GB",
+        "storage": "512GB",
+        "launchPrice": 9999,
+        "currentOfficialPrice": 9999,
+        "priceBasis": "official_current_estimate"
+      },
+      {
+        "id": "16gb-1tb",
+        "memory": "16GB",
+        "storage": "1TB",
+        "launchPrice": 11499,
+        "currentOfficialPrice": 11499,
+        "priceBasis": "official_current_estimate"
+      },
+      {
+        "id": "16gb-2tb",
+        "memory": "16GB",
+        "storage": "2TB",
+        "launchPrice": 14499,
+        "currentOfficialPrice": 14499,
+        "priceBasis": "official_current_estimate"
+      },
+      {
+        "id": "16gb-4tb",
+        "memory": "16GB",
+        "storage": "4TB",
+        "launchPrice": 20499,
+        "currentOfficialPrice": 20499,
+        "priceBasis": "official_current_estimate"
+      },
+      {
+        "id": "24gb-512gb",
+        "memory": "24GB",
+        "storage": "512GB",
+        "launchPrice": 11499,
+        "currentOfficialPrice": 11499,
+        "priceBasis": "official_current_estimate"
+      },
+      {
+        "id": "24gb-1tb",
+        "memory": "24GB",
+        "storage": "1TB",
+        "launchPrice": 12999,
+        "currentOfficialPrice": 12999,
+        "priceBasis": "official_current_estimate"
+      },
+      {
+        "id": "24gb-2tb",
+        "memory": "24GB",
+        "storage": "2TB",
+        "launchPrice": 15999,
+        "currentOfficialPrice": 15999,
+        "priceBasis": "official_current_estimate"
+      },
+      {
+        "id": "24gb-4tb",
+        "memory": "24GB",
+        "storage": "4TB",
+        "launchPrice": 21999,
+        "currentOfficialPrice": 21999,
+        "priceBasis": "official_current_estimate"
+      },
+      {
+        "id": "32gb-512gb",
+        "memory": "32GB",
+        "storage": "512GB",
+        "launchPrice": 12999,
+        "currentOfficialPrice": 12999,
+        "priceBasis": "official_current_estimate"
+      },
+      {
+        "id": "32gb-1tb",
+        "memory": "32GB",
+        "storage": "1TB",
+        "launchPrice": 14499,
+        "currentOfficialPrice": 14499,
+        "priceBasis": "official_current_estimate"
+      },
+      {
+        "id": "32gb-2tb",
+        "memory": "32GB",
+        "storage": "2TB",
+        "launchPrice": 17499,
+        "currentOfficialPrice": 17499,
+        "priceBasis": "official_current_estimate"
+      },
+      {
+        "id": "32gb-4tb",
+        "memory": "32GB",
+        "storage": "4TB",
+        "launchPrice": 23499,
+        "currentOfficialPrice": 23499,
+        "priceBasis": "official_current_estimate"
+      }
+    ],
+    "configurationCount": 12
   },
   {
     "id": "mba-13-m5-2026",
@@ -230,36 +159,929 @@
     "sourceIds": [
       "apple-mba-m5-news",
       "apple-mba-m5-spec"
-    ]
+    ],
+    "baseStorage": "512GB",
+    "baseMemory": "16GB",
+    "memoryOptions": "16GB/24GB/32GB",
+    "configurations": [
+      {
+        "id": "16gb-512gb",
+        "memory": "16GB",
+        "storage": "512GB",
+        "launchPrice": 8499,
+        "currentOfficialPrice": 8499,
+        "priceBasis": "official_current_estimate"
+      },
+      {
+        "id": "16gb-1tb",
+        "memory": "16GB",
+        "storage": "1TB",
+        "launchPrice": 9999,
+        "currentOfficialPrice": 9999,
+        "priceBasis": "official_current_estimate"
+      },
+      {
+        "id": "16gb-2tb",
+        "memory": "16GB",
+        "storage": "2TB",
+        "launchPrice": 12999,
+        "currentOfficialPrice": 12999,
+        "priceBasis": "official_current_estimate"
+      },
+      {
+        "id": "16gb-4tb",
+        "memory": "16GB",
+        "storage": "4TB",
+        "launchPrice": 18999,
+        "currentOfficialPrice": 18999,
+        "priceBasis": "official_current_estimate"
+      },
+      {
+        "id": "24gb-512gb",
+        "memory": "24GB",
+        "storage": "512GB",
+        "launchPrice": 9999,
+        "currentOfficialPrice": 9999,
+        "priceBasis": "official_current_estimate"
+      },
+      {
+        "id": "24gb-1tb",
+        "memory": "24GB",
+        "storage": "1TB",
+        "launchPrice": 11499,
+        "currentOfficialPrice": 11499,
+        "priceBasis": "official_current_estimate"
+      },
+      {
+        "id": "24gb-2tb",
+        "memory": "24GB",
+        "storage": "2TB",
+        "launchPrice": 14499,
+        "currentOfficialPrice": 14499,
+        "priceBasis": "official_current_estimate"
+      },
+      {
+        "id": "24gb-4tb",
+        "memory": "24GB",
+        "storage": "4TB",
+        "launchPrice": 20499,
+        "currentOfficialPrice": 20499,
+        "priceBasis": "official_current_estimate"
+      },
+      {
+        "id": "32gb-512gb",
+        "memory": "32GB",
+        "storage": "512GB",
+        "launchPrice": 11499,
+        "currentOfficialPrice": 11499,
+        "priceBasis": "official_current_estimate"
+      },
+      {
+        "id": "32gb-1tb",
+        "memory": "32GB",
+        "storage": "1TB",
+        "launchPrice": 12999,
+        "currentOfficialPrice": 12999,
+        "priceBasis": "official_current_estimate"
+      },
+      {
+        "id": "32gb-2tb",
+        "memory": "32GB",
+        "storage": "2TB",
+        "launchPrice": 15999,
+        "currentOfficialPrice": 15999,
+        "priceBasis": "official_current_estimate"
+      },
+      {
+        "id": "32gb-4tb",
+        "memory": "32GB",
+        "storage": "4TB",
+        "launchPrice": 21999,
+        "currentOfficialPrice": 21999,
+        "priceBasis": "official_current_estimate"
+      }
+    ],
+    "configurationCount": 12
   },
   {
-    "id": "mba-15-m5-2026",
-    "name": "MacBook Air 15 英寸（M5）",
-    "year": 2026,
-    "release": "2026-03",
+    "id": "mba-15-m4-2025",
+    "name": "MacBook Air 15 英寸（M4）",
+    "year": 2025,
+    "release": "2025-03",
     "size": "15.3 英寸",
-    "chip": "M5",
+    "chip": "M4",
     "cpuCores": 10,
     "gpuCores": 10,
     "memory": "16GB",
     "maxMemory": "32GB",
-    "storage": "512GB",
-    "storageOptions": "512GB–4TB",
+    "storage": "256GB",
+    "storageOptions": "256GB–2TB",
     "launchPrice": 9999,
-    "currentOfficialPrice": 9999,
+    "currentOfficialPrice": null,
     "display": "15.3 英寸 Liquid Retina / 60Hz",
     "weightKg": 1.51,
     "batteryHours": 18,
     "ports": "2× 雷雳 4、MagSafe 3、3.5mm",
     "camera": "12MP Center Stage",
-    "keyUpdates": "M5、512GB 起步、SSD 提速、大屏。",
-    "pros": "大屏、基础容量合理、安静和长续航",
-    "cons": "价格接近 MacBook Pro，60Hz 和端口较少",
-    "verdict": "大屏轻办公和移动生产力用户选择",
+    "keyUpdates": "M4、16GB 起步、12MP 摄像头。",
+    "pros": "大屏、安静、续航好",
+    "cons": "价格接近 14 英寸 Pro，接口和屏幕规格较弱",
+    "verdict": "大屏办公、数据表格和影音用户选择",
     "curve": "base",
     "sourceIds": [
-      "apple-mba-m5-news",
-      "apple-mba-m5-spec"
-    ]
+      "apple-mba-m4-news"
+    ],
+    "baseStorage": "256GB",
+    "baseMemory": "16GB",
+    "memoryOptions": "16GB/24GB/32GB",
+    "configurations": [
+      {
+        "id": "16gb-256gb",
+        "memory": "16GB",
+        "storage": "256GB",
+        "launchPrice": 9999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "16gb-512gb",
+        "memory": "16GB",
+        "storage": "512GB",
+        "launchPrice": 11499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "16gb-1tb",
+        "memory": "16GB",
+        "storage": "1TB",
+        "launchPrice": 12999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "16gb-2tb",
+        "memory": "16GB",
+        "storage": "2TB",
+        "launchPrice": 15999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "24gb-256gb",
+        "memory": "24GB",
+        "storage": "256GB",
+        "launchPrice": 11499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "24gb-512gb",
+        "memory": "24GB",
+        "storage": "512GB",
+        "launchPrice": 12999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "24gb-1tb",
+        "memory": "24GB",
+        "storage": "1TB",
+        "launchPrice": 14499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "24gb-2tb",
+        "memory": "24GB",
+        "storage": "2TB",
+        "launchPrice": 17499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "32gb-256gb",
+        "memory": "32GB",
+        "storage": "256GB",
+        "launchPrice": 12999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "32gb-512gb",
+        "memory": "32GB",
+        "storage": "512GB",
+        "launchPrice": 14499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "32gb-1tb",
+        "memory": "32GB",
+        "storage": "1TB",
+        "launchPrice": 15999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "32gb-2tb",
+        "memory": "32GB",
+        "storage": "2TB",
+        "launchPrice": 18999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      }
+    ],
+    "configurationCount": 12
+  },
+  {
+    "id": "mba-13-m4-2025",
+    "name": "MacBook Air 13 英寸（M4）",
+    "year": 2025,
+    "release": "2025-03",
+    "size": "13.6 英寸",
+    "chip": "M4",
+    "cpuCores": 10,
+    "gpuCores": 8,
+    "memory": "16GB",
+    "maxMemory": "32GB",
+    "storage": "256GB",
+    "storageOptions": "256GB–2TB",
+    "launchPrice": 7999,
+    "currentOfficialPrice": null,
+    "display": "13.6 英寸 Liquid Retina / 60Hz",
+    "weightKg": 1.24,
+    "batteryHours": 18,
+    "ports": "2× 雷雳 4、MagSafe 3、3.5mm",
+    "camera": "12MP Center Stage",
+    "keyUpdates": "M4、16GB 起步、12MP 摄像头、降价。",
+    "pros": "价格低、内存合理、轻薄续航优秀",
+    "cons": "基础 SSD 仍 256GB、60Hz、接口少",
+    "verdict": "当前二手甜点款，适合大多数轻中度工作",
+    "curve": "base",
+    "sourceIds": [
+      "apple-mba-m4-news"
+    ],
+    "baseStorage": "256GB",
+    "baseMemory": "16GB",
+    "memoryOptions": "16GB/24GB/32GB",
+    "configurations": [
+      {
+        "id": "16gb-256gb",
+        "memory": "16GB",
+        "storage": "256GB",
+        "launchPrice": 7999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "16gb-512gb",
+        "memory": "16GB",
+        "storage": "512GB",
+        "launchPrice": 9499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "16gb-1tb",
+        "memory": "16GB",
+        "storage": "1TB",
+        "launchPrice": 10999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "16gb-2tb",
+        "memory": "16GB",
+        "storage": "2TB",
+        "launchPrice": 13999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "24gb-256gb",
+        "memory": "24GB",
+        "storage": "256GB",
+        "launchPrice": 9499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "24gb-512gb",
+        "memory": "24GB",
+        "storage": "512GB",
+        "launchPrice": 10999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "24gb-1tb",
+        "memory": "24GB",
+        "storage": "1TB",
+        "launchPrice": 12499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "24gb-2tb",
+        "memory": "24GB",
+        "storage": "2TB",
+        "launchPrice": 15499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "32gb-256gb",
+        "memory": "32GB",
+        "storage": "256GB",
+        "launchPrice": 10999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "32gb-512gb",
+        "memory": "32GB",
+        "storage": "512GB",
+        "launchPrice": 12499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "32gb-1tb",
+        "memory": "32GB",
+        "storage": "1TB",
+        "launchPrice": 13999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "32gb-2tb",
+        "memory": "32GB",
+        "storage": "2TB",
+        "launchPrice": 16999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      }
+    ],
+    "configurationCount": 12
+  },
+  {
+    "id": "mba-15-m3-2024",
+    "name": "MacBook Air 15 英寸（M3）",
+    "year": 2024,
+    "release": "2024-03",
+    "size": "15.3 英寸",
+    "chip": "M3",
+    "cpuCores": 8,
+    "gpuCores": 10,
+    "memory": "16GB",
+    "maxMemory": "24GB",
+    "storage": "256GB",
+    "storageOptions": "256GB–2TB",
+    "launchPrice": 10499,
+    "currentOfficialPrice": null,
+    "display": "15.3 英寸 Liquid Retina / 60Hz",
+    "weightKg": 1.51,
+    "batteryHours": 18,
+    "ports": "2× 雷雳 / USB 4、MagSafe 3、3.5mm",
+    "camera": "1080p FaceTime HD",
+    "keyUpdates": "M3、大屏、双外接显示器支持。",
+    "pros": "大屏轻薄、办公体验好",
+    "cons": "价格和重量逐渐接近 14 英寸 Pro",
+    "verdict": "不需要高刷和持续高性能的大屏用户选择",
+    "curve": "base",
+    "sourceIds": [
+      "apple-mba-m3-news"
+    ],
+    "baseStorage": "256GB",
+    "baseMemory": "16GB",
+    "memoryOptions": "16GB/24GB",
+    "configurations": [
+      {
+        "id": "16gb-256gb",
+        "memory": "16GB",
+        "storage": "256GB",
+        "launchPrice": 10499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "16gb-512gb",
+        "memory": "16GB",
+        "storage": "512GB",
+        "launchPrice": 11999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "16gb-1tb",
+        "memory": "16GB",
+        "storage": "1TB",
+        "launchPrice": 13499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "16gb-2tb",
+        "memory": "16GB",
+        "storage": "2TB",
+        "launchPrice": 16499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "24gb-256gb",
+        "memory": "24GB",
+        "storage": "256GB",
+        "launchPrice": 11999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "24gb-512gb",
+        "memory": "24GB",
+        "storage": "512GB",
+        "launchPrice": 13499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "24gb-1tb",
+        "memory": "24GB",
+        "storage": "1TB",
+        "launchPrice": 14999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "24gb-2tb",
+        "memory": "24GB",
+        "storage": "2TB",
+        "launchPrice": 17999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      }
+    ],
+    "configurationCount": 8
+  },
+  {
+    "id": "mba-13-m3-2024",
+    "name": "MacBook Air 13 英寸（M3）",
+    "year": 2024,
+    "release": "2024-03",
+    "size": "13.6 英寸",
+    "chip": "M3",
+    "cpuCores": 8,
+    "gpuCores": 8,
+    "memory": "16GB",
+    "maxMemory": "24GB",
+    "storage": "256GB",
+    "storageOptions": "256GB–2TB",
+    "launchPrice": 8999,
+    "currentOfficialPrice": null,
+    "display": "13.6 英寸 Liquid Retina / 60Hz",
+    "weightKg": 1.24,
+    "batteryHours": 18,
+    "ports": "2× 雷雳 / USB 4、MagSafe 3、3.5mm",
+    "camera": "1080p FaceTime HD",
+    "keyUpdates": "M3、支持双外接显示器（合盖）、Wi‑Fi 6E。",
+    "pros": "性能、便携和续航均衡",
+    "cons": "60Hz、接口少、价格接近后续 M4",
+    "verdict": "二手价格明显低于 M4 时购买",
+    "curve": "base",
+    "sourceIds": [
+      "apple-mba-m3-news"
+    ],
+    "baseStorage": "256GB",
+    "baseMemory": "16GB",
+    "memoryOptions": "16GB/24GB",
+    "configurations": [
+      {
+        "id": "16gb-256gb",
+        "memory": "16GB",
+        "storage": "256GB",
+        "launchPrice": 8999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "16gb-512gb",
+        "memory": "16GB",
+        "storage": "512GB",
+        "launchPrice": 10499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "16gb-1tb",
+        "memory": "16GB",
+        "storage": "1TB",
+        "launchPrice": 11999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "16gb-2tb",
+        "memory": "16GB",
+        "storage": "2TB",
+        "launchPrice": 14999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "24gb-256gb",
+        "memory": "24GB",
+        "storage": "256GB",
+        "launchPrice": 10499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "24gb-512gb",
+        "memory": "24GB",
+        "storage": "512GB",
+        "launchPrice": 11999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "24gb-1tb",
+        "memory": "24GB",
+        "storage": "1TB",
+        "launchPrice": 13499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "24gb-2tb",
+        "memory": "24GB",
+        "storage": "2TB",
+        "launchPrice": 16499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      }
+    ],
+    "configurationCount": 8
+  },
+  {
+    "id": "mba-15-m2-2023",
+    "name": "MacBook Air 15 英寸（M2）",
+    "year": 2023,
+    "release": "2023-06",
+    "size": "15.3 英寸",
+    "chip": "M2",
+    "cpuCores": 8,
+    "gpuCores": 10,
+    "memory": "8GB",
+    "maxMemory": "24GB",
+    "storage": "256GB",
+    "storageOptions": "256GB–2TB",
+    "launchPrice": 10499,
+    "currentOfficialPrice": null,
+    "display": "15.3 英寸 Liquid Retina / 60Hz",
+    "weightKg": 1.51,
+    "batteryHours": 18,
+    "ports": "2× 雷雳 / USB 4、MagSafe 3、3.5mm",
+    "camera": "1080p FaceTime HD",
+    "keyUpdates": "首款 15 英寸 Air、大屏无风扇。",
+    "pros": "大屏、重量仍低、续航好",
+    "cons": "接口少、无高刷、基础配置偏低",
+    "verdict": "大屏办公和影音但不需要 Pro 性能时适合",
+    "curve": "base",
+    "sourceIds": [
+      "apple-mba-identify"
+    ],
+    "baseStorage": "256GB",
+    "baseMemory": "8GB",
+    "memoryOptions": "8GB/16GB/24GB",
+    "configurations": [
+      {
+        "id": "8gb-256gb",
+        "memory": "8GB",
+        "storage": "256GB",
+        "launchPrice": 10499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "8gb-512gb",
+        "memory": "8GB",
+        "storage": "512GB",
+        "launchPrice": 11999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "8gb-1tb",
+        "memory": "8GB",
+        "storage": "1TB",
+        "launchPrice": 13499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "8gb-2tb",
+        "memory": "8GB",
+        "storage": "2TB",
+        "launchPrice": 16499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "16gb-256gb",
+        "memory": "16GB",
+        "storage": "256GB",
+        "launchPrice": 11999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "16gb-512gb",
+        "memory": "16GB",
+        "storage": "512GB",
+        "launchPrice": 13499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "16gb-1tb",
+        "memory": "16GB",
+        "storage": "1TB",
+        "launchPrice": 14999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "16gb-2tb",
+        "memory": "16GB",
+        "storage": "2TB",
+        "launchPrice": 17999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "24gb-256gb",
+        "memory": "24GB",
+        "storage": "256GB",
+        "launchPrice": 13499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "24gb-512gb",
+        "memory": "24GB",
+        "storage": "512GB",
+        "launchPrice": 14999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "24gb-1tb",
+        "memory": "24GB",
+        "storage": "1TB",
+        "launchPrice": 16499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "24gb-2tb",
+        "memory": "24GB",
+        "storage": "2TB",
+        "launchPrice": 19499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      }
+    ],
+    "configurationCount": 12
+  },
+  {
+    "id": "mba-13-m2-2022",
+    "name": "MacBook Air 13 英寸（M2）",
+    "year": 2022,
+    "release": "2022-07",
+    "size": "13.6 英寸",
+    "chip": "M2",
+    "cpuCores": 8,
+    "gpuCores": 8,
+    "memory": "8GB",
+    "maxMemory": "24GB",
+    "storage": "256GB",
+    "storageOptions": "256GB–2TB",
+    "launchPrice": 9499,
+    "currentOfficialPrice": null,
+    "display": "13.6 英寸 Liquid Retina / 60Hz",
+    "weightKg": 1.24,
+    "batteryHours": 18,
+    "ports": "2× 雷雳 / USB 4、MagSafe 3、3.5mm",
+    "camera": "1080p FaceTime HD",
+    "keyUpdates": "新外观、MagSafe、1080p 摄像头、更大屏幕。",
+    "pros": "轻薄、外观现代、续航好",
+    "cons": "基础 256GB SSD 性能偏低、8GB 版本余量有限",
+    "verdict": "二手价格合理时比 M1 更适合长期使用",
+    "curve": "base",
+    "sourceIds": [
+      "apple-mba-m2-news"
+    ],
+    "baseStorage": "256GB",
+    "baseMemory": "8GB",
+    "memoryOptions": "8GB/16GB/24GB",
+    "configurations": [
+      {
+        "id": "8gb-256gb",
+        "memory": "8GB",
+        "storage": "256GB",
+        "launchPrice": 9499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "8gb-512gb",
+        "memory": "8GB",
+        "storage": "512GB",
+        "launchPrice": 10999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "8gb-1tb",
+        "memory": "8GB",
+        "storage": "1TB",
+        "launchPrice": 12499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "8gb-2tb",
+        "memory": "8GB",
+        "storage": "2TB",
+        "launchPrice": 15499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "16gb-256gb",
+        "memory": "16GB",
+        "storage": "256GB",
+        "launchPrice": 10999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "16gb-512gb",
+        "memory": "16GB",
+        "storage": "512GB",
+        "launchPrice": 12499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "16gb-1tb",
+        "memory": "16GB",
+        "storage": "1TB",
+        "launchPrice": 13999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "16gb-2tb",
+        "memory": "16GB",
+        "storage": "2TB",
+        "launchPrice": 16999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "24gb-256gb",
+        "memory": "24GB",
+        "storage": "256GB",
+        "launchPrice": 12499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "24gb-512gb",
+        "memory": "24GB",
+        "storage": "512GB",
+        "launchPrice": 13999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "24gb-1tb",
+        "memory": "24GB",
+        "storage": "1TB",
+        "launchPrice": 15499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "24gb-2tb",
+        "memory": "24GB",
+        "storage": "2TB",
+        "launchPrice": 18499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      }
+    ],
+    "configurationCount": 12
+  },
+  {
+    "id": "mba-13-m1-2020",
+    "name": "MacBook Air 13 英寸（M1）",
+    "year": 2020,
+    "release": "2020-11",
+    "size": "13.3 英寸",
+    "chip": "M1",
+    "cpuCores": 8,
+    "gpuCores": 7,
+    "memory": "8GB",
+    "maxMemory": "16GB",
+    "storage": "256GB",
+    "storageOptions": "256GB–2TB",
+    "launchPrice": 7999,
+    "currentOfficialPrice": null,
+    "display": "13.3 英寸 Retina / 60Hz",
+    "weightKg": 1.29,
+    "batteryHours": 18,
+    "ports": "2× 雷雳 / USB 4、3.5mm",
+    "camera": "720p FaceTime HD",
+    "keyUpdates": "首代 Apple 芯片 Air，无风扇、长续航。",
+    "pros": "安静、省电、二手价格低、日常性能仍足",
+    "cons": "8GB/256GB 余量有限、720p 摄像头、仅两接口",
+    "verdict": "低预算办公和轻开发甜点机，优先 16GB",
+    "curve": "base",
+    "sourceIds": [
+      "apple-mba-m1-news"
+    ],
+    "baseStorage": "256GB",
+    "baseMemory": "8GB",
+    "memoryOptions": "8GB/16GB",
+    "configurations": [
+      {
+        "id": "8gb-256gb",
+        "memory": "8GB",
+        "storage": "256GB",
+        "launchPrice": 7999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "8gb-512gb",
+        "memory": "8GB",
+        "storage": "512GB",
+        "launchPrice": 9499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "8gb-1tb",
+        "memory": "8GB",
+        "storage": "1TB",
+        "launchPrice": 10999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "8gb-2tb",
+        "memory": "8GB",
+        "storage": "2TB",
+        "launchPrice": 13999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "16gb-256gb",
+        "memory": "16GB",
+        "storage": "256GB",
+        "launchPrice": 9499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "16gb-512gb",
+        "memory": "16GB",
+        "storage": "512GB",
+        "launchPrice": 10999,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "16gb-1tb",
+        "memory": "16GB",
+        "storage": "1TB",
+        "launchPrice": 12499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      },
+      {
+        "id": "16gb-2tb",
+        "memory": "16GB",
+        "storage": "2TB",
+        "launchPrice": 15499,
+        "currentOfficialPrice": null,
+        "priceBasis": "launch_cto_reference"
+      }
+    ],
+    "configurationCount": 8
   }
 ]

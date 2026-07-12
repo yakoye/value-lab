@@ -1,6 +1,6 @@
 {
   "name": "Value Lab",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "updated": "2026-07-11",
   "modules": [
     "cost",
@@ -16,6 +16,14 @@
     "iphone": 37,
     "ipad": 18,
     "macbookAir": 9,
-    "macbookPro": 16
+    "macbookPro": 16,
+    "iphoneConfigurations": 113,
+    "ipadConfigurations": 120,
+    "macbookAirConfigurations": 96,
+    "macbookProConfigurations": 176,
+    "iphoneMarket": 737,
+    "ipadMarket": 884,
+    "macbookAirMarket": 696,
+    "macbookProMarket": 746
   }
 }

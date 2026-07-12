@@ -9,5 +9,39 @@
   "iphone_models": 31,
   "iphone_market_records": 202,
   "macbook_models": 16,
-  "macbook_market_records": 68
+  "macbook_market_records": 68,
+  "configurationPricing": {
+    "updated": "2026-07-11",
+    "models": {
+      "iphone": 37,
+      "ipad": 18,
+      "macbook-air": 9,
+      "macbook": 16
+    },
+    "configurations": {
+      "iphone": 113,
+      "ipad": 120,
+      "macbook-air": 96,
+      "macbook": 176
+    },
+    "marketExpansion": {
+      "market.json": {
+        "before": 244,
+        "after": 737
+      },
+      "ipad_market.json": {
+        "before": 258,
+        "after": 884
+      },
+      "macbook_air_market.json": {
+        "before": 65,
+        "after": 696
+      },
+      "macbook_market.json": {
+        "before": 68,
+        "after": 746
+      }
+    },
+    "rule": "Every selectable configuration has an explicit launch price and at least one explicit current market path; estimated configurations are labelled reference."
+  }
 }
