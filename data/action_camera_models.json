@@ -1,0 +1,222 @@
+[
+  {
+    "id": "cam-insta-x5",
+    "name": "Insta360 X5",
+    "year": 2025,
+    "release": "2025-04",
+    "tier": "全景相机",
+    "chip": "双影像芯片",
+    "memory": "",
+    "storage": "标准套装",
+    "baseStorage": "标准套装",
+    "storageOptions": "标准套装/全能套装",
+    "launchPrice": 3998,
+    "display": "触控屏",
+    "camera": "8K 全景 / 可更换镜片",
+    "battery": "约 185 分钟",
+    "ports": "USB-C",
+    "keyUpdates": "更大传感器、可更换镜片与夜景增强。",
+    "pros": "后期取景自由度高。",
+    "cons": "文件量大，镜片仍需保护。",
+    "verdict": "旅行、骑行和全景创作。",
+    "specs": {
+      "防水": "15 米",
+      "重量": "约 200g"
+    },
+    "configurations": [
+      {
+        "id": "",
+        "memory": null,
+        "storage": "标准套装",
+        "launchPrice": 3998,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "",
+        "memory": null,
+        "storage": "全能套装",
+        "launchPrice": 4798,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 2
+  },
+  {
+    "id": "cam-gopro13",
+    "name": "GoPro HERO13 Black",
+    "year": 2024,
+    "release": "2024-09",
+    "tier": "运动相机",
+    "chip": "GP2",
+    "memory": "",
+    "storage": "标准套装",
+    "baseStorage": "标准套装",
+    "storageOptions": "标准套装/创作者套装",
+    "launchPrice": 3298,
+    "display": "前后双屏",
+    "camera": "5.3K60 / HyperSmooth",
+    "battery": "Enduro 1900mAh",
+    "ports": "USB-C",
+    "keyUpdates": "HB 系列镜头、GPS 与磁吸安装。",
+    "pros": "配件生态成熟、画面稳定。",
+    "cons": "暗光和发热仍受体积限制。",
+    "verdict": "成熟运动相机生态用户。",
+    "specs": {
+      "防水": "10 米",
+      "重量": "约 159g"
+    },
+    "configurations": [
+      {
+        "id": "",
+        "memory": null,
+        "storage": "标准套装",
+        "launchPrice": 3298,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "",
+        "memory": null,
+        "storage": "创作者套装",
+        "launchPrice": 4098,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 2
+  },
+  {
+    "id": "cam-action5pro",
+    "name": "DJI Osmo Action 5 Pro",
+    "year": 2024,
+    "release": "2024-09",
+    "tier": "运动相机",
+    "chip": "DJI 影像平台",
+    "memory": "47GB 内置",
+    "storage": "标准套装",
+    "baseStorage": "标准套装",
+    "storageOptions": "标准套装/畅拍套装",
+    "launchPrice": 2598,
+    "display": "前后 OLED",
+    "camera": "1/1.3 英寸 / 4K120",
+    "battery": "最长约 4 小时",
+    "ports": "USB-C",
+    "keyUpdates": "OLED 双屏、主体跟踪和长续航。",
+    "pros": "续航、暗光和直出体验好。",
+    "cons": "生态和第三方配件少于 GoPro。",
+    "verdict": "日常记录、骑行和潜水。",
+    "specs": {
+      "防水": "20 米",
+      "重量": "约 146g"
+    },
+    "configurations": [
+      {
+        "id": "47gb",
+        "memory": "47GB 内置",
+        "storage": "标准套装",
+        "launchPrice": 2598,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "47gb",
+        "memory": "47GB 内置",
+        "storage": "畅拍套装",
+        "launchPrice": 3398,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 2
+  },
+  {
+    "id": "cam-acepro2",
+    "name": "Insta360 Ace Pro 2",
+    "year": 2024,
+    "release": "2024-10",
+    "tier": "运动相机",
+    "chip": "双芯 AI",
+    "memory": "",
+    "storage": "标准套装",
+    "baseStorage": "标准套装",
+    "storageOptions": "标准套装/双电池套装",
+    "launchPrice": 2998,
+    "display": "翻转触控屏",
+    "camera": "8K / 徕卡影像",
+    "battery": "1800mAh",
+    "ports": "USB-C",
+    "keyUpdates": "翻转屏、AI 降噪和高分辨率。",
+    "pros": "自拍、Vlog 和夜景友好。",
+    "cons": "翻转结构更大、更重。",
+    "verdict": "Vlog 与运动兼顾。",
+    "specs": {
+      "防水": "12 米",
+      "重量": "约 177g"
+    },
+    "configurations": [
+      {
+        "id": "",
+        "memory": null,
+        "storage": "标准套装",
+        "launchPrice": 2998,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "",
+        "memory": null,
+        "storage": "双电池套装",
+        "launchPrice": 3798,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 2
+  },
+  {
+    "id": "cam-pocket3",
+    "name": "DJI Osmo Pocket 3",
+    "year": 2023,
+    "release": "2023-10",
+    "tier": "口袋云台相机",
+    "chip": "DJI 影像平台",
+    "memory": "",
+    "storage": "标准套装",
+    "baseStorage": "标准套装",
+    "storageOptions": "标准套装/全能套装",
+    "launchPrice": 3499,
+    "display": "2 英寸旋转屏",
+    "camera": "1 英寸 / 4K120",
+    "battery": "约 166 分钟",
+    "ports": "USB-C",
+    "keyUpdates": "1 英寸传感器、旋转屏和三轴云台。",
+    "pros": "画质和稳定性远胜普通运动相机。",
+    "cons": "不耐摔、不防水，不适合激烈运动。",
+    "verdict": "旅行和日常 Vlog。",
+    "specs": {
+      "防水": "无",
+      "重量": "约 179g"
+    },
+    "configurations": [
+      {
+        "id": "",
+        "memory": null,
+        "storage": "标准套装",
+        "launchPrice": 3499,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "",
+        "memory": null,
+        "storage": "全能套装",
+        "launchPrice": 4299,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 2
+  }
+]

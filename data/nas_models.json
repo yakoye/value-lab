@@ -1,0 +1,262 @@
+[
+  {
+    "id": "nas-ds925",
+    "name": "Synology DS925+",
+    "year": 2025,
+    "release": "2025-04",
+    "tier": "群晖",
+    "chip": "AMD Ryzen V1500B",
+    "memory": "4GB",
+    "storage": "裸机",
+    "baseStorage": "裸机",
+    "storageOptions": "裸机/2×8TB/4×8TB",
+    "launchPrice": 5999,
+    "display": "4 盘位 NAS",
+    "battery": "—",
+    "ports": "2×2.5GbE、2×M.2、USB",
+    "camera": "—",
+    "keyUpdates": "双 2.5GbE、M.2 存储池与扩展接口。",
+    "pros": "DSM 生态成熟，适合长期维护。",
+    "cons": "硬盘兼容策略和整机成本需关注。",
+    "verdict": "家庭和小团队长期数据管理。",
+    "specs": {
+      "盘位": "4",
+      "扩展": "可扩展至 9 盘位"
+    },
+    "configurations": [
+      {
+        "id": "4gb",
+        "memory": "4GB",
+        "storage": "裸机",
+        "launchPrice": 5999,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "4gb-2-8tb",
+        "memory": "4GB",
+        "storage": "2×8TB",
+        "launchPrice": 8999,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "4gb-4-8tb",
+        "memory": "4GB",
+        "storage": "4×8TB",
+        "launchPrice": 11999,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 3
+  },
+  {
+    "id": "nas-ds923",
+    "name": "Synology DS923+",
+    "year": 2022,
+    "release": "2022-11",
+    "tier": "群晖",
+    "chip": "AMD Ryzen R1600",
+    "memory": "4GB",
+    "storage": "裸机",
+    "baseStorage": "裸机",
+    "storageOptions": "裸机/2×8TB/4×8TB",
+    "launchPrice": 4999,
+    "display": "4 盘位 NAS",
+    "battery": "—",
+    "ports": "1GbE、M.2、可选 10GbE",
+    "camera": "—",
+    "keyUpdates": "ECC 内存、M.2 存储池与 10GbE 扩展。",
+    "pros": "成熟稳定，二手流通较好。",
+    "cons": "默认只有 1GbE。",
+    "verdict": "看重 DSM 和可扩展性。",
+    "specs": {
+      "盘位": "4",
+      "扩展": "可扩展至 9 盘位"
+    },
+    "configurations": [
+      {
+        "id": "4gb",
+        "memory": "4GB",
+        "storage": "裸机",
+        "launchPrice": 4999,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "4gb-2-8tb",
+        "memory": "4GB",
+        "storage": "2×8TB",
+        "launchPrice": 7999,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "4gb-4-8tb",
+        "memory": "4GB",
+        "storage": "4×8TB",
+        "launchPrice": 10999,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 3
+  },
+  {
+    "id": "nas-ugreen-dxp4800p",
+    "name": "绿联 DXP4800 Plus",
+    "year": 2024,
+    "release": "2024-05",
+    "tier": "绿联",
+    "chip": "Intel Pentium Gold 8505",
+    "memory": "8GB",
+    "storage": "裸机",
+    "baseStorage": "裸机",
+    "storageOptions": "裸机/2×8TB/4×8TB",
+    "launchPrice": 3999,
+    "display": "4 盘位 NAS",
+    "battery": "—",
+    "ports": "10GbE + 2.5GbE、双 M.2、雷电 4",
+    "camera": "—",
+    "keyUpdates": "高规格网络、双 M.2 和 x86 平台。",
+    "pros": "硬件规格高、性价比突出。",
+    "cons": "系统成熟度和长期维护仍需观察。",
+    "verdict": "愿意尝试新生态的高性能家庭用户。",
+    "specs": {
+      "盘位": "4",
+      "扩展": "双 M.2"
+    },
+    "configurations": [
+      {
+        "id": "8gb",
+        "memory": "8GB",
+        "storage": "裸机",
+        "launchPrice": 3999,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "8gb-2-8tb",
+        "memory": "8GB",
+        "storage": "2×8TB",
+        "launchPrice": 6999,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "8gb-4-8tb",
+        "memory": "8GB",
+        "storage": "4×8TB",
+        "launchPrice": 9999,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 3
+  },
+  {
+    "id": "nas-qnap-ts464",
+    "name": "QNAP TS-464",
+    "year": 2022,
+    "release": "2022-04",
+    "tier": "威联通",
+    "chip": "Intel Celeron N5095",
+    "memory": "4GB",
+    "storage": "裸机",
+    "baseStorage": "裸机",
+    "storageOptions": "裸机/2×8TB/4×8TB",
+    "launchPrice": 4599,
+    "display": "4 盘位 NAS",
+    "battery": "—",
+    "ports": "双 2.5GbE、M.2、PCIe",
+    "camera": "—",
+    "keyUpdates": "x86 平台、双 2.5GbE 和 PCIe 扩展。",
+    "pros": "虚拟化、容器和扩展灵活。",
+    "cons": "系统设置复杂，安全维护要求更高。",
+    "verdict": "熟悉网络和存储的进阶用户。",
+    "specs": {
+      "盘位": "4",
+      "扩展": "PCIe + 双 M.2"
+    },
+    "configurations": [
+      {
+        "id": "4gb",
+        "memory": "4GB",
+        "storage": "裸机",
+        "launchPrice": 4599,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "4gb-2-8tb",
+        "memory": "4GB",
+        "storage": "2×8TB",
+        "launchPrice": 7599,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "4gb-4-8tb",
+        "memory": "4GB",
+        "storage": "4×8TB",
+        "launchPrice": 10599,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 3
+  },
+  {
+    "id": "nas-zspace-z4pro",
+    "name": "极空间 Z4Pro",
+    "year": 2023,
+    "release": "2023-08",
+    "tier": "极空间",
+    "chip": "Intel N305",
+    "memory": "8GB",
+    "storage": "裸机",
+    "baseStorage": "裸机",
+    "storageOptions": "裸机/2×8TB/4×8TB",
+    "launchPrice": 3999,
+    "display": "4 盘位 NAS",
+    "battery": "—",
+    "ports": "2.5GbE、M.2、HDMI",
+    "camera": "—",
+    "keyUpdates": "易用系统、影音和照片管理。",
+    "pros": "上手简单，家庭影音体验好。",
+    "cons": "专业扩展和迁移自由度不及传统 NAS。",
+    "verdict": "家庭照片、影音和备份。",
+    "specs": {
+      "盘位": "4",
+      "扩展": "M.2"
+    },
+    "configurations": [
+      {
+        "id": "8gb",
+        "memory": "8GB",
+        "storage": "裸机",
+        "launchPrice": 3999,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "8gb-2-8tb",
+        "memory": "8GB",
+        "storage": "2×8TB",
+        "launchPrice": 6999,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "8gb-4-8tb",
+        "memory": "8GB",
+        "storage": "4×8TB",
+        "launchPrice": 9999,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 3
+  }
+]

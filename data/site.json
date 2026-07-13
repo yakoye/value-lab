@@ -1,7 +1,7 @@
 {
   "name": "Value Lab",
-  "version": "0.5.2",
-  "updated": "2026-07-12",
+  "version": "0.6.0",
+  "updated": "2026-07-11",
   "modules": [
     "cost",
     "market",
@@ -25,5 +25,6 @@
     "ipadMarket": 1232,
     "macbookAirMarket": 1020,
     "macbookProMarket": 1246
-  }
+  },
+  "summary": "扩展 Android、ThinkPad、运动相机、无人机、NAS、硬盘和自行车的通用价值分析。"
 }

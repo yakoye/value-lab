@@ -1,0 +1,182 @@
+[
+  {
+    "id": "disk-wd-red8",
+    "name": "WD Red Plus 8TB",
+    "year": 2024,
+    "release": "2024-01",
+    "tier": "机械硬盘",
+    "chip": "CMR 5640RPM",
+    "memory": "256MB 缓存",
+    "storage": "8TB",
+    "baseStorage": "8TB",
+    "storageOptions": "8TB",
+    "launchPrice": 1499,
+    "display": "3.5 英寸 SATA",
+    "battery": "—",
+    "ports": "SATA 6Gb/s",
+    "camera": "—",
+    "keyUpdates": "面向 NAS 的 CMR 盘。",
+    "pros": "兼容性和噪声较平衡。",
+    "cons": "二手必须检查通电时间和 SMART。",
+    "verdict": "家庭 NAS 常规容量盘。",
+    "specs": {
+      "保修": "3 年",
+      "工作负载": "180TB/年"
+    },
+    "configurations": [
+      {
+        "id": "256mb-8tb",
+        "memory": "256MB 缓存",
+        "storage": "8TB",
+        "launchPrice": 1499,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 1
+  },
+  {
+    "id": "disk-ironwolf8",
+    "name": "Seagate IronWolf 8TB",
+    "year": 2024,
+    "release": "2024-01",
+    "tier": "机械硬盘",
+    "chip": "CMR 7200RPM",
+    "memory": "256MB 缓存",
+    "storage": "8TB",
+    "baseStorage": "8TB",
+    "storageOptions": "8TB",
+    "launchPrice": 1599,
+    "display": "3.5 英寸 SATA",
+    "battery": "—",
+    "ports": "SATA 6Gb/s",
+    "camera": "—",
+    "keyUpdates": "IronWolf Health 与 NAS 优化。",
+    "pros": "性能好、生态支持广。",
+    "cons": "噪声与温度通常高于低转速盘。",
+    "verdict": "多盘位 NAS 和较高负载。",
+    "specs": {
+      "保修": "3 年",
+      "工作负载": "180TB/年"
+    },
+    "configurations": [
+      {
+        "id": "256mb-8tb",
+        "memory": "256MB 缓存",
+        "storage": "8TB",
+        "launchPrice": 1599,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 1
+  },
+  {
+    "id": "ssd-990pro2",
+    "name": "Samsung 990 PRO 2TB",
+    "year": 2022,
+    "release": "2022-11",
+    "tier": "NVMe SSD",
+    "chip": "PCIe 4.0 控制器",
+    "memory": "DRAM 缓存",
+    "storage": "2TB",
+    "baseStorage": "2TB",
+    "storageOptions": "2TB",
+    "launchPrice": 2199,
+    "display": "M.2 2280",
+    "battery": "—",
+    "ports": "PCIe 4.0 x4",
+    "camera": "—",
+    "keyUpdates": "高随机性能和成熟软件生态。",
+    "pros": "稳定、性能强、兼容广。",
+    "cons": "新品价格下降快，二手需检查写入量。",
+    "verdict": "高性能主力盘。",
+    "specs": {
+      "耐久度": "1200 TBW",
+      "保修": "5 年"
+    },
+    "configurations": [
+      {
+        "id": "dram-2tb",
+        "memory": "DRAM 缓存",
+        "storage": "2TB",
+        "launchPrice": 2199,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 1
+  },
+  {
+    "id": "ssd-sn850x2",
+    "name": "WD_BLACK SN850X 2TB",
+    "year": 2022,
+    "release": "2022-08",
+    "tier": "NVMe SSD",
+    "chip": "PCIe 4.0 控制器",
+    "memory": "DRAM 缓存",
+    "storage": "2TB",
+    "baseStorage": "2TB",
+    "storageOptions": "2TB",
+    "launchPrice": 1899,
+    "display": "M.2 2280",
+    "battery": "—",
+    "ports": "PCIe 4.0 x4",
+    "camera": "—",
+    "keyUpdates": "游戏优化和高顺序性能。",
+    "pros": "性能、温度和价格平衡。",
+    "cons": "二手残值低于机械硬盘。",
+    "verdict": "游戏和高性能桌面。",
+    "specs": {
+      "耐久度": "1200 TBW",
+      "保修": "5 年"
+    },
+    "configurations": [
+      {
+        "id": "dram-2tb",
+        "memory": "DRAM 缓存",
+        "storage": "2TB",
+        "launchPrice": 1899,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 1
+  },
+  {
+    "id": "ssd-t5002",
+    "name": "Crucial T500 2TB",
+    "year": 2023,
+    "release": "2023-10",
+    "tier": "NVMe SSD",
+    "chip": "PCIe 4.0 控制器",
+    "memory": "DRAM 缓存",
+    "storage": "2TB",
+    "baseStorage": "2TB",
+    "storageOptions": "2TB",
+    "launchPrice": 1399,
+    "display": "M.2 2280",
+    "battery": "—",
+    "ports": "PCIe 4.0 x4",
+    "camera": "—",
+    "keyUpdates": "高能效和高顺序性能。",
+    "pros": "促销价格低、适合笔记本和 PS5。",
+    "cons": "市场价格波动大。",
+    "verdict": "追求性价比的 PCIe 4.0 盘。",
+    "specs": {
+      "耐久度": "1200 TBW",
+      "保修": "5 年"
+    },
+    "configurations": [
+      {
+        "id": "dram-2tb",
+        "memory": "DRAM 缓存",
+        "storage": "2TB",
+        "launchPrice": 1399,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 1
+  }
+]

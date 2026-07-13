@@ -1,0 +1,246 @@
+[
+  {
+    "id": "drone-air3s",
+    "name": "DJI Air 3S",
+    "year": 2024,
+    "release": "2024-10",
+    "tier": "Air",
+    "chip": "DJI 飞控",
+    "memory": "42GB 内置",
+    "storage": "单机",
+    "baseStorage": "单机",
+    "storageOptions": "单机/畅飞套装（RC-N3）/畅飞套装（RC 2）",
+    "launchPrice": 6988,
+    "display": "双摄系统",
+    "camera": "1 英寸主摄 + 70mm 中长焦",
+    "battery": "最长 45 分钟",
+    "ports": "USB-C",
+    "keyUpdates": "1 英寸主摄、全向避障与夜景增强。",
+    "pros": "画质、体积和避障均衡。",
+    "cons": "不属于 249g 级别，法规和携带成本更高。",
+    "verdict": "旅行航拍主力机。",
+    "specs": {
+      "起飞重量": "约 724g",
+      "图传": "O4"
+    },
+    "configurations": [
+      {
+        "id": "42gb",
+        "memory": "42GB 内置",
+        "storage": "单机",
+        "launchPrice": 6988,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "42gb-rc-n3",
+        "memory": "42GB 内置",
+        "storage": "畅飞套装（RC-N3）",
+        "launchPrice": 7788,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "42gb-rc-2",
+        "memory": "42GB 内置",
+        "storage": "畅飞套装（RC 2）",
+        "launchPrice": 8788,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 3
+  },
+  {
+    "id": "drone-mini4pro",
+    "name": "DJI Mini 4 Pro",
+    "year": 2023,
+    "release": "2023-09",
+    "tier": "Mini",
+    "chip": "DJI 飞控",
+    "memory": "2GB 内置",
+    "storage": "单机",
+    "baseStorage": "单机",
+    "storageOptions": "单机/畅飞套装（RC-N2）/畅飞套装（RC 2）",
+    "launchPrice": 4788,
+    "display": "竖拍云台",
+    "camera": "1/1.3 英寸 / 4K100",
+    "battery": "34 分钟",
+    "ports": "USB-C",
+    "keyUpdates": "全向避障、O4 图传和原生竖拍。",
+    "pros": "小于 249g、便携、功能完整。",
+    "cons": "抗风和大光比不及 Air 系列。",
+    "verdict": "旅行轻量航拍首选。",
+    "specs": {
+      "起飞重量": "<249g",
+      "图传": "O4"
+    },
+    "configurations": [
+      {
+        "id": "2gb",
+        "memory": "2GB 内置",
+        "storage": "单机",
+        "launchPrice": 4788,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "2gb-rc-n2",
+        "memory": "2GB 内置",
+        "storage": "畅飞套装（RC-N2）",
+        "launchPrice": 5588,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "2gb-rc-2",
+        "memory": "2GB 内置",
+        "storage": "畅飞套装（RC 2）",
+        "launchPrice": 6588,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 3
+  },
+  {
+    "id": "drone-avata2",
+    "name": "DJI Avata 2",
+    "year": 2024,
+    "release": "2024-04",
+    "tier": "FPV",
+    "chip": "DJI 飞控",
+    "memory": "46GB 内置",
+    "storage": "单机",
+    "baseStorage": "单机",
+    "storageOptions": "单电池套装/三电池畅飞套装",
+    "launchPrice": 5988,
+    "display": "沉浸式飞行",
+    "camera": "1/1.3 英寸 / 4K60",
+    "battery": "23 分钟",
+    "ports": "USB-C",
+    "keyUpdates": "一体式桨保、体感操控与 O4 图传。",
+    "pros": "沉浸感强、学习门槛低于传统 FPV。",
+    "cons": "用途专一，摔机与电池成本高。",
+    "verdict": "FPV 入门和动态镜头。",
+    "specs": {
+      "起飞重量": "约 377g",
+      "图传": "O4"
+    },
+    "configurations": [
+      {
+        "id": "46gb",
+        "memory": "46GB 内置",
+        "storage": "单电池套装",
+        "launchPrice": 5988,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "46gb",
+        "memory": "46GB 内置",
+        "storage": "三电池畅飞套装",
+        "launchPrice": 6788,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 2
+  },
+  {
+    "id": "drone-neo",
+    "name": "DJI Neo",
+    "year": 2024,
+    "release": "2024-09",
+    "tier": "轻量自拍",
+    "chip": "DJI 飞控",
+    "memory": "22GB 内置",
+    "storage": "单机",
+    "baseStorage": "单机",
+    "storageOptions": "单机/畅飞套装",
+    "launchPrice": 1299,
+    "display": "掌上起降",
+    "camera": "1/2 英寸 / 4K30",
+    "battery": "18 分钟",
+    "ports": "USB-C",
+    "keyUpdates": "掌上起降、自动跟拍和轻量化。",
+    "pros": "便宜、轻、无需遥控器也能使用。",
+    "cons": "抗风、画质和避障有限。",
+    "verdict": "入门自拍与短视频。",
+    "specs": {
+      "起飞重量": "约 135g",
+      "图传": "Wi-Fi/O4（配遥控器）"
+    },
+    "configurations": [
+      {
+        "id": "22gb",
+        "memory": "22GB 内置",
+        "storage": "单机",
+        "launchPrice": 1299,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "22gb",
+        "memory": "22GB 内置",
+        "storage": "畅飞套装",
+        "launchPrice": 2099,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 2
+  },
+  {
+    "id": "drone-mavic3pro",
+    "name": "DJI Mavic 3 Pro",
+    "year": 2023,
+    "release": "2023-04",
+    "tier": "Mavic",
+    "chip": "DJI 飞控",
+    "memory": "8GB 内置",
+    "storage": "单机",
+    "baseStorage": "单机",
+    "storageOptions": "单机/畅飞套装/Cine 套装",
+    "launchPrice": 13888,
+    "display": "三摄系统",
+    "camera": "4/3 哈苏 + 双长焦",
+    "battery": "43 分钟",
+    "ports": "USB-C",
+    "keyUpdates": "三摄焦段与专业视频能力。",
+    "pros": "画质和焦段完整。",
+    "cons": "价格、重量和维护成本高。",
+    "verdict": "专业航拍和商业创作。",
+    "specs": {
+      "起飞重量": "约 958g",
+      "图传": "O3+"
+    },
+    "configurations": [
+      {
+        "id": "8gb",
+        "memory": "8GB 内置",
+        "storage": "单机",
+        "launchPrice": 13888,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "8gb",
+        "memory": "8GB 内置",
+        "storage": "畅飞套装",
+        "launchPrice": 14688,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "8gb-cine",
+        "memory": "8GB 内置",
+        "storage": "Cine 套装",
+        "launchPrice": 15688,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 3
+  }
+]

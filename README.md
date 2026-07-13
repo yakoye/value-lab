@@ -98,3 +98,8 @@ data/
 - [生活平替审核说明](docs/ALTERNATIVES_REVIEW.md)
 - [测试记录](docs/TEST_REPORT.md)
 - [数据来源说明](SOURCES.md)
+
+
+## v0.6.0 新增品类
+
+Android 手机、ThinkPad、运动/全景相机、无人机、NAS、硬盘/SSD和自行车已进入统一成本与残值框架。新增品类的价格以带日期的参考模型为主，正式交易前应重新采样。

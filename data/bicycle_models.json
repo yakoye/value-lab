@@ -1,0 +1,218 @@
+[
+  {
+    "id": "bike-tcr-adv2",
+    "name": "Giant TCR Advanced 2",
+    "year": 2025,
+    "release": "2025-01",
+    "tier": "捷安特",
+    "chip": "Shimano 105 机械 12速",
+    "memory": "",
+    "storage": "",
+    "baseStorage": "",
+    "storageOptions": "",
+    "launchPrice": 15800,
+    "display": "碳纤维公路车",
+    "battery": "—",
+    "ports": "油压碟刹",
+    "camera": "—",
+    "keyUpdates": "新一代轻量车架与整合走线。",
+    "pros": "品牌网络广、几何成熟、二手流通好。",
+    "cons": "原厂轮组和配置仍有升级空间。",
+    "verdict": "长距离、爬坡和综合公路骑行。",
+    "specs": {
+      "车架": "碳纤维",
+      "轮径": "700C"
+    },
+    "configurations": [
+      {
+        "id": "",
+        "memory": null,
+        "storage": "标准配置",
+        "launchPrice": 15800,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 1
+  },
+  {
+    "id": "bike-scultura4000",
+    "name": "Merida Scultura 4000",
+    "year": 2024,
+    "release": "2024-01",
+    "tier": "美利达",
+    "chip": "Shimano 105 机械 12速",
+    "memory": "",
+    "storage": "",
+    "baseStorage": "",
+    "storageOptions": "",
+    "launchPrice": 13980,
+    "display": "碳纤维公路车",
+    "battery": "—",
+    "ports": "油压碟刹",
+    "camera": "—",
+    "keyUpdates": "轻量耐力兼顾的碳纤维平台。",
+    "pros": "配置均衡，售后网络完善。",
+    "cons": "不同年份轮组和车架版本需核对。",
+    "verdict": "预算适中的碳纤维公路车。",
+    "specs": {
+      "车架": "碳纤维",
+      "轮径": "700C"
+    },
+    "configurations": [
+      {
+        "id": "",
+        "memory": null,
+        "storage": "标准配置",
+        "launchPrice": 13980,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 1
+  },
+  {
+    "id": "bike-xds-ad350",
+    "name": "喜德盛 AD350",
+    "year": 2025,
+    "release": "2025-01",
+    "tier": "喜德盛",
+    "chip": "Shimano 105 机械 12速",
+    "memory": "",
+    "storage": "",
+    "baseStorage": "",
+    "storageOptions": "",
+    "launchPrice": 9999,
+    "display": "碳纤维公路车",
+    "battery": "—",
+    "ports": "油压碟刹",
+    "camera": "—",
+    "keyUpdates": "国产碳架和高配置价格比。",
+    "pros": "同价位配置高、国内服务方便。",
+    "cons": "二手品牌溢价低于国际品牌。",
+    "verdict": "重视配置性价比的入门竞赛用户。",
+    "specs": {
+      "车架": "碳纤维",
+      "轮径": "700C"
+    },
+    "configurations": [
+      {
+        "id": "",
+        "memory": null,
+        "storage": "标准配置",
+        "launchPrice": 9999,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 1
+  },
+  {
+    "id": "bike-allez-sport",
+    "name": "Specialized Allez Sport",
+    "year": 2024,
+    "release": "2024-02",
+    "tier": "闪电",
+    "chip": "Shimano Tiagra",
+    "memory": "",
+    "storage": "",
+    "baseStorage": "",
+    "storageOptions": "",
+    "launchPrice": 9990,
+    "display": "铝合金公路车",
+    "battery": "—",
+    "ports": "油压/机械碟刹（按版本）",
+    "camera": "—",
+    "keyUpdates": "成熟铝架和品牌几何。",
+    "pros": "骑行体验好、品牌认知高。",
+    "cons": "配置相对价格偏低。",
+    "verdict": "重视车架和品牌、后续愿意升级。",
+    "specs": {
+      "车架": "铝合金",
+      "轮径": "700C"
+    },
+    "configurations": [
+      {
+        "id": "",
+        "memory": null,
+        "storage": "标准配置",
+        "launchPrice": 9990,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 1
+  },
+  {
+    "id": "bike-trek-emonda-alr5",
+    "name": "Trek Émonda ALR 5",
+    "year": 2024,
+    "release": "2024-01",
+    "tier": "崔克",
+    "chip": "Shimano 105",
+    "memory": "",
+    "storage": "",
+    "baseStorage": "",
+    "storageOptions": "",
+    "launchPrice": 14980,
+    "display": "高端铝合金公路车",
+    "battery": "—",
+    "ports": "油压碟刹",
+    "camera": "—",
+    "keyUpdates": "轻量铝架与竞赛几何。",
+    "pros": "焊接和车架品质好、品牌保值。",
+    "cons": "价格接近部分碳架整车。",
+    "verdict": "偏爱高品质铝架与竞赛操控。",
+    "specs": {
+      "车架": "铝合金",
+      "轮径": "700C"
+    },
+    "configurations": [
+      {
+        "id": "",
+        "memory": null,
+        "storage": "标准配置",
+        "launchPrice": 14980,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 1
+  },
+  {
+    "id": "bike-brompton-c",
+    "name": "Brompton C Line Explore",
+    "year": 2024,
+    "release": "2024-01",
+    "tier": "Brompton",
+    "chip": "6 速传动",
+    "memory": "",
+    "storage": "",
+    "baseStorage": "",
+    "storageOptions": "",
+    "launchPrice": 13900,
+    "display": "16 英寸折叠车",
+    "battery": "—",
+    "ports": "圈刹",
+    "camera": "—",
+    "keyUpdates": "经典三折结构和通勤生态。",
+    "pros": "折叠体积小、品牌保值和配件多。",
+    "cons": "价格高、速度和舒适性不如大轮径。",
+    "verdict": "地铁接驳、通勤和小空间收纳。",
+    "specs": {
+      "车架": "钢",
+      "轮径": "16 英寸"
+    },
+    "configurations": [
+      {
+        "id": "",
+        "memory": null,
+        "storage": "标准配置",
+        "launchPrice": 13900,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 1
+  }
+]

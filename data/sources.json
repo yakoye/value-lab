@@ -565,5 +565,131 @@
     "type": "sample",
     "accessed": "2026-07-12",
     "note": "2025-09 iPhone 17 Pro Max 256GB 低至 8999 元样本；优惠券和库存具有时效性。"
+  },
+  {
+    "id": "android-official",
+    "title": "Android 代表机型品牌官方产品页",
+    "publisher": "华为、小米、三星、vivo、OPPO、荣耀",
+    "url": "https://consumer.huawei.com/cn/phones/",
+    "type": "official",
+    "accessed": "2026-07-12",
+    "note": "用于核对代表机型定位和主要规格；首发价与市场价仍需逐型号复核。"
+  },
+  {
+    "id": "android-market-model",
+    "title": "Android 手机残值参考模型",
+    "publisher": "Value Lab",
+    "url": "",
+    "type": "model",
+    "accessed": "2026-07-12",
+    "note": "按首发价、机龄和安卓旗舰历史折旧区间生成，不是实时平台报价。"
+  },
+  {
+    "id": "thinkpad-official",
+    "title": "ThinkPad 官方产品资料",
+    "publisher": "联想中国",
+    "url": "https://www.lenovo.com.cn/thinkpad/",
+    "type": "official",
+    "accessed": "2026-07-12",
+    "note": "用于核对系列定位、处理器、内存和屏幕等规格。"
+  },
+  {
+    "id": "thinkpad-market-model",
+    "title": "ThinkPad 残值参考模型",
+    "publisher": "Value Lab",
+    "url": "",
+    "type": "model",
+    "accessed": "2026-07-12",
+    "note": "按系列、首发价和机龄生成参考区间。"
+  },
+  {
+    "id": "action-camera-official",
+    "title": "运动与全景相机官方资料",
+    "publisher": "DJI、GoPro、Insta360",
+    "url": "https://www.dji.com/cn/handheld",
+    "type": "official",
+    "accessed": "2026-07-12",
+    "note": "用于核对代表机型主要规格和套装。"
+  },
+  {
+    "id": "action-camera-market-model",
+    "title": "运动相机残值参考模型",
+    "publisher": "Value Lab",
+    "url": "",
+    "type": "model",
+    "accessed": "2026-07-12",
+    "note": "按发布年份、套装和品类历史折旧生成。"
+  },
+  {
+    "id": "drone-official",
+    "title": "DJI 消费级无人机官方资料",
+    "publisher": "DJI 大疆创新",
+    "url": "https://www.dji.com/cn/camera-drones",
+    "type": "official",
+    "accessed": "2026-07-12",
+    "note": "用于核对代表机型重量、相机、续航和图传。"
+  },
+  {
+    "id": "drone-market-model",
+    "title": "无人机残值参考模型",
+    "publisher": "Value Lab",
+    "url": "",
+    "type": "model",
+    "accessed": "2026-07-12",
+    "note": "未计入炸机、飞行时长、电池循环和 Care 等个体差异。"
+  },
+  {
+    "id": "nas-official",
+    "title": "NAS 代表产品官方规格",
+    "publisher": "Synology、QNAP、绿联、极空间",
+    "url": "https://www.synology.cn/zh-cn/products",
+    "type": "official",
+    "accessed": "2026-07-12",
+    "note": "用于核对盘位、CPU、内存和网络接口。"
+  },
+  {
+    "id": "nas-market-model",
+    "title": "NAS 残值参考模型",
+    "publisher": "Value Lab",
+    "url": "",
+    "type": "model",
+    "accessed": "2026-07-12",
+    "note": "裸机和带盘套装分开估值；硬盘健康需单独复核。"
+  },
+  {
+    "id": "storage-official",
+    "title": "硬盘与 SSD 官方规格资料",
+    "publisher": "Western Digital、Seagate、Samsung、Crucial",
+    "url": "https://www.westerndigital.com/zh-cn/products",
+    "type": "official",
+    "accessed": "2026-07-12",
+    "note": "用于核对容量、接口、耐久度和保修。"
+  },
+  {
+    "id": "storage-market-model",
+    "title": "硬盘与 SSD 残值参考模型",
+    "publisher": "Value Lab",
+    "url": "",
+    "type": "model",
+    "accessed": "2026-07-12",
+    "note": "未读取具体 SMART、通电小时或写入量，二手成交前必须检查健康信息。"
+  },
+  {
+    "id": "bicycle-official",
+    "title": "自行车代表车型品牌资料",
+    "publisher": "Giant、Merida、XDS、Specialized、Trek、Brompton",
+    "url": "https://www.giant.com.cn/",
+    "type": "official",
+    "accessed": "2026-07-12",
+    "note": "用于核对车型定位和主要配置；不同地区和年份配置可能变化。"
+  },
+  {
+    "id": "bicycle-market-model",
+    "title": "自行车残值参考模型",
+    "publisher": "Value Lab",
+    "url": "",
+    "type": "model",
+    "accessed": "2026-07-12",
+    "note": "未计入摔车、里程、磨损和升级件拆卖价值。"
   }
 ]

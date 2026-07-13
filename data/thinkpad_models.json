@@ -1,0 +1,306 @@
+[
+  {
+    "id": "tp-x1c-g13",
+    "name": "ThinkPad X1 Carbon Gen 13 Aura",
+    "year": 2025,
+    "release": "2025-01",
+    "size": "14 英寸",
+    "chip": "Intel Core Ultra 7 258V",
+    "memory": "32GB",
+    "storage": "1TB",
+    "baseStorage": "1TB",
+    "storageOptions": "1TB/2TB",
+    "launchPrice": 17299,
+    "display": "14 英寸 2.8K OLED / 120Hz",
+    "battery": "约 57Wh",
+    "ports": "雷雳 4、USB-A、HDMI",
+    "camera": "5MP + IR",
+    "keyUpdates": "Lunar Lake、低重量、Aura 智能体验。",
+    "pros": "轻、键盘好、商务接口完整。",
+    "cons": "价格高，内存不可升级。",
+    "verdict": "高预算移动商务用户。",
+    "specs": {
+      "重量": "约 986g",
+      "定位": "旗舰商务"
+    },
+    "configurations": [
+      {
+        "id": "32gb-1tb",
+        "memory": "32GB",
+        "storage": "1TB",
+        "launchPrice": 17299,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "32gb-2tb",
+        "memory": "32GB",
+        "storage": "2TB",
+        "launchPrice": 20799,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 2
+  },
+  {
+    "id": "tp-t14s-g6",
+    "name": "ThinkPad T14s Gen 6",
+    "year": 2025,
+    "release": "2025-01",
+    "size": "14 英寸",
+    "chip": "AMD Ryzen AI 7 PRO 360",
+    "memory": "32GB",
+    "storage": "1TB",
+    "baseStorage": "1TB",
+    "storageOptions": "512GB/1TB/2TB",
+    "launchPrice": 11999,
+    "display": "14 英寸 2.8K OLED",
+    "battery": "约 58Wh",
+    "ports": "USB4、USB-A、HDMI",
+    "camera": "5MP + IR",
+    "keyUpdates": "Ryzen AI PRO、企业管理与轻薄机身。",
+    "pros": "性能、续航和企业管理均衡。",
+    "cons": "高配价格接近 X1。",
+    "verdict": "企业采购和开发办公。",
+    "specs": {
+      "重量": "约 1.24kg",
+      "定位": "高端商务"
+    },
+    "configurations": [
+      {
+        "id": "32gb-512gb",
+        "memory": "32GB",
+        "storage": "512GB",
+        "launchPrice": 11999,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "32gb-1tb",
+        "memory": "32GB",
+        "storage": "1TB",
+        "launchPrice": 13599,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "32gb-2tb",
+        "memory": "32GB",
+        "storage": "2TB",
+        "launchPrice": 15499,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 3
+  },
+  {
+    "id": "tp-p1-g7",
+    "name": "ThinkPad P1 Gen 7",
+    "year": 2024,
+    "release": "2024-06",
+    "size": "16 英寸",
+    "chip": "Intel Core Ultra 9 + RTX 4070",
+    "memory": "32GB",
+    "storage": "1TB",
+    "baseStorage": "1TB",
+    "storageOptions": "1TB/2TB/4TB",
+    "launchPrice": 24999,
+    "display": "16 英寸 2.5K / 165Hz",
+    "battery": "90Wh",
+    "ports": "雷雳 4、USB-A、HDMI、SD",
+    "camera": "5MP + IR",
+    "keyUpdates": "移动工作站平台与独显。",
+    "pros": "专业软件认证、扩展和性能强。",
+    "cons": "价格高、满载噪声和重量明显。",
+    "verdict": "工程、三维和视频工作站用户。",
+    "specs": {
+      "重量": "约 1.82kg",
+      "定位": "移动工作站"
+    },
+    "configurations": [
+      {
+        "id": "32gb-1tb",
+        "memory": "32GB",
+        "storage": "1TB",
+        "launchPrice": 24999,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "32gb-2tb",
+        "memory": "32GB",
+        "storage": "2TB",
+        "launchPrice": 28499,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "32gb-4tb",
+        "memory": "32GB",
+        "storage": "4TB",
+        "launchPrice": 31999,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 3
+  },
+  {
+    "id": "tp-t14-g5",
+    "name": "ThinkPad T14 Gen 5",
+    "year": 2024,
+    "release": "2024-04",
+    "size": "14 英寸",
+    "chip": "AMD Ryzen 7 PRO 8840U",
+    "memory": "32GB",
+    "storage": "1TB",
+    "baseStorage": "1TB",
+    "storageOptions": "512GB/1TB/2TB",
+    "launchPrice": 9999,
+    "display": "14 英寸 2.2K IPS",
+    "battery": "52.5Wh",
+    "ports": "USB4、USB-A、HDMI、RJ45",
+    "camera": "5MP + IR",
+    "keyUpdates": "可维护性改善、完整商务接口。",
+    "pros": "接口、键盘和维修性好。",
+    "cons": "外观保守，屏幕版本较多需辨别。",
+    "verdict": "可靠的主力商务本。",
+    "specs": {
+      "重量": "约 1.31kg",
+      "定位": "主流商务"
+    },
+    "configurations": [
+      {
+        "id": "32gb-512gb",
+        "memory": "32GB",
+        "storage": "512GB",
+        "launchPrice": 9999,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "32gb-1tb",
+        "memory": "32GB",
+        "storage": "1TB",
+        "launchPrice": 11599,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "32gb-2tb",
+        "memory": "32GB",
+        "storage": "2TB",
+        "launchPrice": 13499,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 3
+  },
+  {
+    "id": "tp-x1-2in1-g9",
+    "name": "ThinkPad X1 2-in-1 Gen 9",
+    "year": 2024,
+    "release": "2024-03",
+    "size": "14 英寸",
+    "chip": "Intel Core Ultra 7 165U",
+    "memory": "32GB",
+    "storage": "1TB",
+    "baseStorage": "1TB",
+    "storageOptions": "512GB/1TB/2TB",
+    "launchPrice": 15999,
+    "display": "14 英寸触控 / 120Hz",
+    "battery": "57Wh",
+    "ports": "雷雳 4、USB-A、HDMI",
+    "camera": "5MP + IR",
+    "keyUpdates": "Yoga 系列更名、触控笔和 360° 翻转。",
+    "pros": "会议、手写和演示灵活。",
+    "cons": "价格高于普通 X1，重量略增。",
+    "verdict": "需要触控和翻转形态的商务用户。",
+    "specs": {
+      "重量": "约 1.35kg",
+      "定位": "二合一商务"
+    },
+    "configurations": [
+      {
+        "id": "32gb-512gb",
+        "memory": "32GB",
+        "storage": "512GB",
+        "launchPrice": 15999,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "32gb-1tb",
+        "memory": "32GB",
+        "storage": "1TB",
+        "launchPrice": 17599,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "32gb-2tb",
+        "memory": "32GB",
+        "storage": "2TB",
+        "launchPrice": 19499,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 3
+  },
+  {
+    "id": "tp-e14-g6",
+    "name": "ThinkPad E14 Gen 6",
+    "year": 2024,
+    "release": "2024-03",
+    "size": "14 英寸",
+    "chip": "AMD Ryzen 7 7735HS",
+    "memory": "16GB",
+    "storage": "1TB",
+    "baseStorage": "1TB",
+    "storageOptions": "512GB/1TB/2TB",
+    "launchPrice": 6499,
+    "display": "14 英寸 2.2K IPS",
+    "battery": "57Wh",
+    "ports": "USB-C、USB-A、HDMI、RJ45",
+    "camera": "1080p",
+    "keyUpdates": "主流平台、双 SSD 与完整接口。",
+    "pros": "价格低、键盘和扩展不错。",
+    "cons": "机身、屏幕和续航不及高端系列。",
+    "verdict": "预算有限的办公与学习用户。",
+    "specs": {
+      "重量": "约 1.44kg",
+      "定位": "入门商务"
+    },
+    "configurations": [
+      {
+        "id": "16gb-512gb",
+        "memory": "16GB",
+        "storage": "512GB",
+        "launchPrice": 6499,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "16gb-1tb",
+        "memory": "16GB",
+        "storage": "1TB",
+        "launchPrice": 8099,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "16gb-2tb",
+        "memory": "16GB",
+        "storage": "2TB",
+        "launchPrice": 9999,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 3
+  }
+]

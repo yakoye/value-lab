@@ -14,3 +14,6 @@ html[data-theme="dark"]{--bg:#111513;--surface:#171c19;--surface2:#1d231f;--text
 @media(max-width:980px){.new-price-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:680px){.new-price-grid{grid-template-columns:repeat(2,1fr)}.new-price-card{min-height:76px}.new-price-card strong{font-size:14px}.section-title{margin-top:7px}}
 @media(max-width:420px){.new-price-grid{grid-template-columns:1fr 1fr}.new-price-card{padding:8px}}
+
+/* v0.6.0 multi-category navigation */
+.product-tabs{overflow-x:auto;scrollbar-width:thin;white-space:nowrap;padding-bottom:2px}.product-tabs button{flex:0 0 auto}.toolbar{align-items:end}.detail-grid{align-items:start}

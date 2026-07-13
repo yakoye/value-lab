@@ -1,0 +1,384 @@
+[
+  {
+    "id": "android-mate70pro",
+    "name": "HUAWEI Mate 70 Pro",
+    "year": 2024,
+    "release": "2024-11",
+    "tier": "华为",
+    "chip": "麒麟 9020",
+    "memory": "12GB",
+    "storage": "256GB",
+    "baseStorage": "256GB",
+    "storageOptions": "256GB/512GB/1TB",
+    "launchPrice": 6499,
+    "display": "6.9 英寸 LTPO OLED / 120Hz",
+    "camera": "红枫原色影像三摄",
+    "battery": "5500mAh / 100W",
+    "ports": "USB-C",
+    "keyUpdates": "鸿蒙生态、卫星通信、红枫原色影像。",
+    "pros": "通信、续航和影像突出。",
+    "cons": "生态兼容与芯片性能需按实际需求评估。",
+    "verdict": "重视通信、国产生态和影像的高端用户。",
+    "specs": {
+      "系统": "HarmonyOS",
+      "重量": "约 221g",
+      "防护": "IP68/IP69"
+    },
+    "configurations": [
+      {
+        "id": "12gb-256gb",
+        "memory": "12GB",
+        "storage": "256GB",
+        "launchPrice": 6499,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "12gb-512gb",
+        "memory": "12GB",
+        "storage": "512GB",
+        "launchPrice": 7299,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "12gb-1tb",
+        "memory": "12GB",
+        "storage": "1TB",
+        "launchPrice": 8099,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "16gb-256gb",
+        "memory": "16GB",
+        "storage": "256GB",
+        "launchPrice": 6999,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "16gb-512gb",
+        "memory": "16GB",
+        "storage": "512GB",
+        "launchPrice": 7799,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "16gb-1tb",
+        "memory": "16GB",
+        "storage": "1TB",
+        "launchPrice": 8599,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 6
+  },
+  {
+    "id": "android-xiaomi15ultra",
+    "name": "小米 15 Ultra",
+    "year": 2025,
+    "release": "2025-02",
+    "tier": "小米",
+    "chip": "骁龙 8 至尊版",
+    "memory": "16GB",
+    "storage": "512GB",
+    "baseStorage": "512GB",
+    "storageOptions": "512GB/1TB",
+    "launchPrice": 6499,
+    "display": "6.73 英寸 LTPO OLED / 120Hz",
+    "camera": "徕卡四摄 / 1 英寸主摄",
+    "battery": "6000mAh / 90W",
+    "ports": "USB-C",
+    "keyUpdates": "大底主摄、双长焦和旗舰平台。",
+    "pros": "影像覆盖全面，性能强。",
+    "cons": "机身厚重，镜头模组突出。",
+    "verdict": "摄影优先的安卓旗舰用户。",
+    "specs": {
+      "系统": "HyperOS",
+      "重量": "约 229g",
+      "防护": "IP68"
+    },
+    "configurations": [
+      {
+        "id": "16gb-512gb",
+        "memory": "16GB",
+        "storage": "512GB",
+        "launchPrice": 6499,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "16gb-1tb",
+        "memory": "16GB",
+        "storage": "1TB",
+        "launchPrice": 8099,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 2
+  },
+  {
+    "id": "android-s25ultra",
+    "name": "Samsung Galaxy S25 Ultra",
+    "year": 2025,
+    "release": "2025-01",
+    "tier": "三星",
+    "chip": "骁龙 8 至尊版 for Galaxy",
+    "memory": "12GB",
+    "storage": "256GB",
+    "baseStorage": "256GB",
+    "storageOptions": "256GB/512GB/1TB",
+    "launchPrice": 9699,
+    "display": "6.9 英寸 Dynamic AMOLED 2X / 120Hz",
+    "camera": "2 亿像素四摄 / S Pen",
+    "battery": "5000mAh / 45W",
+    "ports": "USB-C",
+    "keyUpdates": "轻量化钛金属、Galaxy AI 与长焦系统。",
+    "pros": "屏幕、系统支持和生产力完整。",
+    "cons": "国行价格高，充电速度保守。",
+    "verdict": "需要 S Pen、长系统支持和国际生态。",
+    "specs": {
+      "系统": "One UI",
+      "重量": "约 218g",
+      "防护": "IP68"
+    },
+    "configurations": [
+      {
+        "id": "12gb-256gb",
+        "memory": "12GB",
+        "storage": "256GB",
+        "launchPrice": 9699,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "12gb-512gb",
+        "memory": "12GB",
+        "storage": "512GB",
+        "launchPrice": 10499,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "12gb-1tb",
+        "memory": "12GB",
+        "storage": "1TB",
+        "launchPrice": 11299,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "16gb-256gb",
+        "memory": "16GB",
+        "storage": "256GB",
+        "launchPrice": 10199,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "16gb-512gb",
+        "memory": "16GB",
+        "storage": "512GB",
+        "launchPrice": 10999,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "16gb-1tb",
+        "memory": "16GB",
+        "storage": "1TB",
+        "launchPrice": 11799,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 6
+  },
+  {
+    "id": "android-x200pro",
+    "name": "vivo X200 Pro",
+    "year": 2024,
+    "release": "2024-10",
+    "tier": "vivo",
+    "chip": "天玑 9400",
+    "memory": "16GB",
+    "storage": "512GB",
+    "baseStorage": "512GB",
+    "storageOptions": "256GB/512GB/1TB",
+    "launchPrice": 5299,
+    "display": "6.78 英寸 LTPO OLED / 120Hz",
+    "camera": "蔡司 2 亿像素长焦",
+    "battery": "6000mAh / 90W",
+    "ports": "USB-C",
+    "keyUpdates": "2 亿像素潜望长焦、蓝图影像和大电池。",
+    "pros": "长焦、续航和人像突出。",
+    "cons": "大尺寸机身，视频生态不如部分竞品。",
+    "verdict": "旅行和长焦拍摄优先。",
+    "specs": {
+      "系统": "OriginOS",
+      "重量": "约 223g",
+      "防护": "IP68/IP69"
+    },
+    "configurations": [
+      {
+        "id": "16gb-256gb",
+        "memory": "16GB",
+        "storage": "256GB",
+        "launchPrice": 5299,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "16gb-512gb",
+        "memory": "16GB",
+        "storage": "512GB",
+        "launchPrice": 6099,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "16gb-1tb",
+        "memory": "16GB",
+        "storage": "1TB",
+        "launchPrice": 6899,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 3
+  },
+  {
+    "id": "android-findx8pro",
+    "name": "OPPO Find X8 Pro",
+    "year": 2024,
+    "release": "2024-10",
+    "tier": "OPPO",
+    "chip": "天玑 9400",
+    "memory": "16GB",
+    "storage": "512GB",
+    "baseStorage": "512GB",
+    "storageOptions": "256GB/512GB/1TB",
+    "launchPrice": 5299,
+    "display": "6.78 英寸 LTPO OLED / 120Hz",
+    "camera": "哈苏四摄 / 双潜望",
+    "battery": "5910mAh / 80W",
+    "ports": "USB-C",
+    "keyUpdates": "双潜望长焦、无影抓拍和大电池。",
+    "pros": "相机焦段完整、手感较均衡。",
+    "cons": "高配二手价受新机促销影响明显。",
+    "verdict": "希望旗舰影像但不想买 Ultra 机型。",
+    "specs": {
+      "系统": "ColorOS",
+      "重量": "约 215g",
+      "防护": "IP68/IP69"
+    },
+    "configurations": [
+      {
+        "id": "16gb-256gb",
+        "memory": "16GB",
+        "storage": "256GB",
+        "launchPrice": 5299,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "16gb-512gb",
+        "memory": "16GB",
+        "storage": "512GB",
+        "launchPrice": 6099,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "16gb-1tb",
+        "memory": "16GB",
+        "storage": "1TB",
+        "launchPrice": 6899,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 3
+  },
+  {
+    "id": "android-magic7pro",
+    "name": "荣耀 Magic7 Pro",
+    "year": 2024,
+    "release": "2024-10",
+    "tier": "荣耀",
+    "chip": "骁龙 8 至尊版",
+    "memory": "12GB",
+    "storage": "256GB",
+    "baseStorage": "256GB",
+    "storageOptions": "256GB/512GB/1TB",
+    "launchPrice": 5699,
+    "display": "6.8 英寸 LTPO OLED / 120Hz",
+    "camera": "鹰眼三摄 / 2 亿长焦",
+    "battery": "5850mAh / 100W",
+    "ports": "USB-C",
+    "keyUpdates": "骁龙旗舰平台、护眼屏和大底长焦。",
+    "pros": "综合配置均衡，护眼和续航突出。",
+    "cons": "不同容量和促销渠道价差大。",
+    "verdict": "均衡型国产高端旗舰。",
+    "specs": {
+      "系统": "MagicOS",
+      "重量": "约 223g",
+      "防护": "IP68/IP69"
+    },
+    "configurations": [
+      {
+        "id": "12gb-256gb",
+        "memory": "12GB",
+        "storage": "256GB",
+        "launchPrice": 5699,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "12gb-512gb",
+        "memory": "12GB",
+        "storage": "512GB",
+        "launchPrice": 6499,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "12gb-1tb",
+        "memory": "12GB",
+        "storage": "1TB",
+        "launchPrice": 7299,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "16gb-256gb",
+        "memory": "16GB",
+        "storage": "256GB",
+        "launchPrice": 6199,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "16gb-512gb",
+        "memory": "16GB",
+        "storage": "512GB",
+        "launchPrice": 6999,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      },
+      {
+        "id": "16gb-1tb",
+        "memory": "16GB",
+        "storage": "1TB",
+        "launchPrice": 7799,
+        "currentOfficialPrice": 0,
+        "priceBasis": "reference_launch"
+      }
+    ],
+    "configurationCount": 6
+  }
+]
