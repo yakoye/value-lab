@@ -50,84 +50,135 @@
 
 <main id="appMain">
   <section id="view-cost" class="view active">
-    <div class="page-head"><div><h1>持有成本</h1><p>买入、使用、维护和出售合并计算。</p></div><button id="resetCost" class="text-button" type="button">恢复默认</button></div>
-    <div class="product-tabs" data-product-tabs="cost">
-      <button class="active" data-product="iphone" type="button">iPhone</button>
-      <button data-product="ipad" type="button">iPad</button>
-      <button data-product="macbook-air" type="button">MacBook Air</button>
-      <button data-product="macbook" type="button">MacBook Pro</button><button data-product="android" type="button">Android</button><button data-product="thinkpad" type="button">ThinkPad</button><button data-product="action-camera" type="button">运动相机</button><button data-product="drone" type="button">无人机</button><button data-product="nas" type="button">NAS</button><button data-product="storage" type="button">硬盘</button><button data-product="bicycle" type="button">自行车</button>
-    </div>
-    <section class="block new-price-block">
-      <div class="block-head"><div><h2>新品购买成本</h2><span id="newPriceMeta">官方首发、官网与电商新品价格</span></div><span id="newPriceNotice"></span></div>
+    <div class="page-head"><div><h1>持有成本</h1><p>先确定产品，再查看价格并计算持有成本。</p></div><button id="resetCost" class="text-button" type="button">恢复默认</button></div>
+
+    <section class="block flow-block" id="costSelectionSection">
+      <div class="flow-head"><span class="step-number">1</span><div><h2>选择产品与配置</h2><p>先确定要计算的具体产品、容量或硬件配置。</p></div></div>
+      <div class="product-tabs" data-product-tabs="cost">
+        <button class="active" data-product="iphone" type="button">iPhone</button>
+        <button data-product="ipad" type="button">iPad</button>
+        <button data-product="macbook-air" type="button">MacBook Air</button>
+        <button data-product="macbook" type="button">MacBook Pro</button>
+        <button data-product="android" type="button">Android</button>
+        <button data-product="thinkpad" type="button">ThinkPad</button>
+        <button data-product="action-camera" type="button">运动相机</button>
+        <button data-product="drone" type="button">无人机</button>
+        <button data-product="nas" type="button">NAS</button>
+        <button data-product="storage" type="button">硬盘</button>
+        <button data-product="bicycle" type="button">自行车</button>
+      </div>
+      <div id="costProductControls" class="toolbar selection-toolbar"></div>
+    </section>
+
+    <section class="block new-price-block flow-block" id="costNewPriceSection">
+      <div class="flow-head flow-head-inline"><span class="step-number">2</span><div><h2>查看新品价格基准</h2><p id="newPriceMeta">选择具体产品后显示官方首发、官网与电商新品价格。</p></div><span id="newPriceNotice"></span></div>
       <div id="newPriceBenchmarks" class="new-price-grid"></div>
     </section>
-    <div class="section-title"><div><h2>当前持有成本</h2><span>选择实际买入渠道、持有时间和卖出方式</span></div></div>
-    <div id="costControls" class="toolbar"></div>
-    <div id="costKpis" class="kpi-strip"></div>
-    <section class="block trend-block">
-      <div class="block-head"><div><h2>1–5 年价值趋势</h2><span id="trendMeta"></span></div><div class="segmented"><button class="active" data-trend-mode="age" type="button">产品机龄</button><button data-trend-mode="holding" type="button">我的持有</button></div></div>
+
+    <section class="block flow-block" id="costHoldingSection">
+      <div class="flow-head"><span class="step-number">3</span><div><h2>设置我的持有条件</h2><p>选择实际买入方式、预计卖出方式、持有时间及额外成本。</p></div></div>
+      <div id="costHoldingControls" class="toolbar holding-toolbar"></div>
+    </section>
+
+    <section class="block flow-block result-block" id="costResultSection">
+      <div class="flow-head"><span class="step-number">4</span><div><h2>查看当前持有成本</h2><p id="costResultMeta">根据上面的产品与持有条件计算。</p></div></div>
+      <div id="costKpis" class="kpi-strip"></div>
+    </section>
+
+    <section class="block trend-block flow-block" id="costTrendSection">
+      <div class="flow-head flow-head-inline"><span class="step-number">5</span><div><h2>查看 1–5 年价值趋势</h2><p id="trendMeta"></p></div><div class="segmented"><button class="active" data-trend-mode="age" type="button">产品机龄</button><button data-trend-mode="holding" type="button">我的持有</button></div></div>
       <div class="trend-layout"><div id="trendChart" class="trend-chart"></div><div id="trendSummary" class="trend-summary"></div></div>
       <div id="trendTable" class="table-wrap"></div>
     </section>
-    <div class="split cost-bottom">
-      <section class="block"><div class="block-head"><h2>交易路径</h2><span>同配置比较</span></div><div id="routeTable" class="table-wrap"></div></section>
-      <aside class="block"><div class="block-head"><h2>换机结论</h2><span id="selectedRelease"></span></div><div id="costConclusion"></div></aside>
-    </div>
+
+    <section class="flow-group" id="costDecisionSection">
+      <div class="flow-head standalone"><span class="step-number">6</span><div><h2>比较交易路径并形成结论</h2><p>最后比较不同买卖渠道，判断适合持有多久。</p></div></div>
+      <div class="split cost-bottom">
+        <section class="block"><div class="block-head"><h2>交易路径</h2><span>同一产品与配置</span></div><div id="routeTable" class="table-wrap"></div></section>
+        <aside class="block"><div class="block-head"><h2>换机结论</h2><span id="selectedRelease"></span></div><div id="costConclusion"></div></aside>
+      </div>
+    </section>
   </section>
 
   <section id="view-market" class="view" hidden>
-    <div class="page-head"><div><h1>市场价格</h1><p>新品、二手买入、个人转卖和平台回收分开查看。</p></div></div>
-    <div class="product-tabs" data-product-tabs="market"><button class="active" data-product="iphone" type="button">iPhone</button><button data-product="ipad" type="button">iPad</button><button data-product="macbook-air" type="button">MacBook Air</button><button data-product="macbook" type="button">MacBook Pro</button><button data-product="android" type="button">Android</button><button data-product="thinkpad" type="button">ThinkPad</button><button data-product="action-camera" type="button">运动相机</button><button data-product="drone" type="button">无人机</button><button data-product="nas" type="button">NAS</button><button data-product="storage" type="button">硬盘</button><button data-product="bicycle" type="button">自行车</button></div>
-    <div class="toolbar market-toolbar">
-      <label>搜索<input id="marketSearch" type="search" placeholder="机型、配置、平台、机况"></label>
-      <label>类型<select id="marketSide"><option value="">全部</option><option value="new">新品</option><option value="used-buy">二手买入</option><option value="personal-sell">个人转卖</option><option value="recycle">平台回收</option></select></label>
-      <label>数据<select id="marketConfidence"><option value="">全部</option><option value="high">核验</option><option value="medium">样本</option><option value="low">参考</option></select></label>
-      <label>平台<select id="marketChannel"><option value="">全部</option></select></label>
-    </div>
-    <div id="marketKpis" class="kpi-strip compact"></div>
-    <section class="block"><div class="block-head"><h2>价格记录</h2><span id="marketCount"></span></div><div id="marketTable" class="table-wrap tall"></div></section>
+    <div class="page-head"><div><h1>市场价格</h1><p>先选择具体产品，再比较新品、二手和回收价格。</p></div></div>
+
+    <section class="block flow-block">
+      <div class="flow-head"><span class="step-number">1</span><div><h2>选择产品与配置</h2><p>市场价格只比较同一型号、同一容量或同一硬件配置。</p></div></div>
+      <div class="product-tabs" data-product-tabs="market"><button class="active" data-product="iphone" type="button">iPhone</button><button data-product="ipad" type="button">iPad</button><button data-product="macbook-air" type="button">MacBook Air</button><button data-product="macbook" type="button">MacBook Pro</button><button data-product="android" type="button">Android</button><button data-product="thinkpad" type="button">ThinkPad</button><button data-product="action-camera" type="button">运动相机</button><button data-product="drone" type="button">无人机</button><button data-product="nas" type="button">NAS</button><button data-product="storage" type="button">硬盘</button><button data-product="bicycle" type="button">自行车</button></div>
+      <div id="marketProductControls" class="toolbar selection-toolbar"></div>
+    </section>
+
+    <section class="block flow-block">
+      <div class="flow-head"><span class="step-number">2</span><div><h2>设置市场筛选</h2><p>在已选配置中按价格类型、平台、可信度和日期缩小范围。</p></div></div>
+      <div class="toolbar market-toolbar">
+        <label>搜索<input id="marketSearch" type="search" placeholder="平台、机况或备注"></label>
+        <label>类型<select id="marketSide"><option value="">全部</option><option value="new">新品</option><option value="used-buy">二手买入</option><option value="personal-sell">个人转卖</option><option value="recycle">平台回收</option></select></label>
+        <label>数据<select id="marketConfidence"><option value="">全部</option><option value="high">核验</option><option value="medium">样本</option><option value="low">参考</option></select></label>
+        <label>平台<select id="marketChannel"><option value="">全部</option></select></label>
+        <label>日期<select id="marketDate"><option value="">全部</option></select></label>
+      </div>
+    </section>
+
+    <section class="block flow-block">
+      <div class="flow-head"><span class="step-number">3</span><div><h2>查看当前价格摘要</h2><p id="marketSelectionMeta"></p></div></div>
+      <div id="marketKpis" class="kpi-strip compact"></div>
+    </section>
+
+    <section class="block flow-block"><div class="flow-head"><span class="step-number">4</span><div><h2>查看价格记录</h2><p id="marketCount"></p></div></div><div id="marketTable" class="table-wrap tall"></div></section>
   </section>
 
   <section id="view-buy" class="view" hidden>
-    <div class="page-head"><div><h1>购买参考</h1><p>参数、价格和购买判断放在一起。</p></div></div>
-    <div class="product-tabs" data-product-tabs="buy"><button class="active" data-product="iphone" type="button">iPhone</button><button data-product="ipad" type="button">iPad</button><button data-product="macbook-air" type="button">MacBook Air</button><button data-product="macbook" type="button">MacBook Pro</button><button data-product="android" type="button">Android</button><button data-product="thinkpad" type="button">ThinkPad</button><button data-product="action-camera" type="button">运动相机</button><button data-product="drone" type="button">无人机</button><button data-product="nas" type="button">NAS</button><button data-product="storage" type="button">硬盘</button><button data-product="bicycle" type="button">自行车</button></div>
-    <div class="toolbar buy-toolbar">
-      <label>搜索<input id="buySearch" type="search" placeholder="芯片、内存、120Hz、长焦"></label>
-      <label id="buyYearLabel">年份<select id="buyYear"><option value="">全部</option></select></label>
-      <label id="buyTierLabel">系列<select id="buyTier"><option value="">全部</option></select></label>
-      <label>预算上限<input id="buyBudget" type="number" min="0" step="500" placeholder="不限"></label>
-      <label class="check"><input id="buyUsed" type="checkbox" checked>接受二手</label>
-    </div>
+    <div class="page-head"><div><h1>购买参考</h1><p>先筛选需求，再从产品列表中选择一款查看详情。</p></div></div>
+
+    <section class="block flow-block">
+      <div class="flow-head"><span class="step-number">1</span><div><h2>选择类别与购买条件</h2><p>按年份、系列、预算和是否接受二手筛选候选产品。</p></div></div>
+      <div class="product-tabs" data-product-tabs="buy"><button class="active" data-product="iphone" type="button">iPhone</button><button data-product="ipad" type="button">iPad</button><button data-product="macbook-air" type="button">MacBook Air</button><button data-product="macbook" type="button">MacBook Pro</button><button data-product="android" type="button">Android</button><button data-product="thinkpad" type="button">ThinkPad</button><button data-product="action-camera" type="button">运动相机</button><button data-product="drone" type="button">无人机</button><button data-product="nas" type="button">NAS</button><button data-product="storage" type="button">硬盘</button><button data-product="bicycle" type="button">自行车</button></div>
+      <div class="toolbar buy-toolbar">
+        <label>搜索<input id="buySearch" type="search" placeholder="芯片、内存、功能或型号"></label>
+        <label id="buyYearLabel">年份<select id="buyYear"><option value="">全部</option></select></label>
+        <label id="buyTierLabel">系列<select id="buyTier"><option value="">全部</option></select></label>
+        <label>预算上限<input id="buyBudget" type="number" min="0" step="500" placeholder="不限"></label>
+        <label class="check"><input id="buyUsed" type="checkbox" checked>接受二手</label>
+      </div>
+    </section>
+
     <div class="split buy-layout">
-      <section class="block"><div class="block-head"><h2>产品列表</h2><span id="buyCount"></span></div><div id="buyTable" class="table-wrap tall"></div></section>
-      <aside class="block sticky-detail"><div class="block-head"><h2>详细信息</h2><span>选择一行查看</span></div><div id="buyDetail"></div></aside>
+      <section class="block flow-block"><div class="flow-head"><span class="step-number">2</span><div><h2>选择产品</h2><p id="buyCount"></p></div></div><div id="buyTable" class="table-wrap tall"></div></section>
+      <aside class="block sticky-detail flow-block"><div class="flow-head"><span class="step-number">3</span><div><h2>查看详细信息</h2><p>点击左侧具体产品后显示。</p></div></div><div id="buyDetail"></div></aside>
     </div>
   </section>
 
   <section id="view-alternatives" class="view" hidden>
-    <div class="page-head"><div><h1>生活平替</h1><p>先看功能、限制和风险，再看能省多少。</p></div><button id="showFavorites" class="text-button" type="button">只看收藏</button></div>
-    <div class="alternative-search"><span>⌕</span><input id="alternativeSearch" type="search" placeholder="搜索需求、平替方案、材料或使用场景"></div>
-    <div id="categoryChips" class="category-chips"></div>
-    <div class="toolbar alternative-toolbar">
-      <label>可靠性<select id="alternativeReliability"><option value="">全部</option><option value="A">A · 高</option><option value="B">B · 有限制</option><option value="C">C · 临时</option></select></label>
-      <label>风险<select id="alternativeRisk"><option value="">全部</option><option value="low">低风险</option><option value="conditional">有条件</option></select></label>
-      <label>证据<select id="alternativeEvidence"><option value="">全部</option><option value="A">A</option><option value="B">B</option><option value="C">C</option></select></label>
-      <label>类型<select id="alternativeType"><option value="">全部</option></select></label>
-      <label>排序<select id="alternativeSort"><option value="recommended">综合推荐</option><option value="saving">预计节省</option><option value="reliability">可靠性</option><option value="category">分类</option></select></label>
-    </div>
+    <div class="page-head"><div><h1>生活平替</h1><p>先搜索或筛选，再选择方案查看可靠性和限制。</p></div><button id="showFavorites" class="text-button" type="button">只看收藏</button></div>
+
+    <section class="block flow-block">
+      <div class="flow-head"><span class="step-number">1</span><div><h2>搜索、分类与筛选</h2><p>先确定生活需求、分类和可接受的风险等级。</p></div></div>
+      <div class="alternative-search"><span>⌕</span><input id="alternativeSearch" type="search" placeholder="搜索需求、平替方案、材料或使用场景"></div>
+      <div id="categoryChips" class="category-chips"></div>
+      <div class="toolbar alternative-toolbar">
+        <label>可靠性<select id="alternativeReliability"><option value="">全部</option><option value="A">A · 高</option><option value="B">B · 有限制</option><option value="C">C · 临时</option></select></label>
+        <label>风险<select id="alternativeRisk"><option value="">全部</option><option value="low">低风险</option><option value="conditional">有条件</option></select></label>
+        <label>证据<select id="alternativeEvidence"><option value="">全部</option><option value="A">A</option><option value="B">B</option><option value="C">C</option></select></label>
+        <label>类型<select id="alternativeType"><option value="">全部</option></select></label>
+        <label>排序<select id="alternativeSort"><option value="recommended">综合推荐</option><option value="saving">预计节省</option><option value="reliability">可靠性</option><option value="category">分类</option></select></label>
+      </div>
+    </section>
+
     <div class="split alternative-layout">
-      <section class="block"><div class="block-head"><h2>平替列表</h2><span id="alternativeCount"></span></div><div id="alternativeTable" class="table-wrap tall"></div></section>
-      <aside class="block sticky-detail"><div class="block-head"><h2>方案详情</h2><span id="alternativeDetailMeta"></span></div><div id="alternativeDetail"></div></aside>
+      <section class="block flow-block"><div class="flow-head"><span class="step-number">2</span><div><h2>选择平替方案</h2><p id="alternativeCount"></p></div></div><div id="alternativeTable" class="table-wrap tall"></div></section>
+      <aside class="block sticky-detail flow-block"><div class="flow-head"><span class="step-number">3</span><div><h2>查看方案详情</h2><p id="alternativeDetailMeta">点击左侧方案后显示。</p></div></div><div id="alternativeDetail"></div></aside>
     </div>
   </section>
 
   <section id="view-my" class="view" hidden>
-    <div class="page-head"><div><h1>我的</h1><p>数据只保存在当前浏览器。</p></div><button id="clearMyData" class="text-button danger-text" type="button">清空本地数据</button></div>
-    <div id="myKpis" class="kpi-strip"></div>
-    <div class="split my-layout">
-      <section class="block"><div class="block-head"><h2>我的物品</h2><button id="addOwnedItem" class="small-button" type="button">＋ 添加</button></div><div id="ownedItems"></div></section>
-      <section class="block"><div class="block-head"><h2>平替收藏</h2><span id="favoriteCount"></span></div><div id="favoriteAlternatives"></div></section>
-    </div>
+    <div class="page-head"><div><h1>我的</h1><p>先添加实际物品，再查看当前估值和持有变化。</p></div><button id="clearMyData" class="text-button danger-text" type="button">清空本地数据</button></div>
+
+    <section class="block flow-block"><div class="flow-head flow-head-inline"><span class="step-number">1</span><div><h2>添加或查看我的物品</h2><p>购买价格与具体配置会用于当前估值。</p></div><button id="addOwnedItem" class="small-button" type="button">＋ 添加</button></div><div id="ownedItems"></div></section>
+
+    <section class="block flow-block" id="mySummarySection" hidden><div class="flow-head"><span class="step-number">2</span><div><h2>查看资产汇总</h2><p>只根据已经添加的物品计算。</p></div></div><div id="myKpis" class="kpi-strip"></div></section>
+
+    <section class="block flow-block"><div class="flow-head"><span class="step-number">3</span><div><h2>查看平替收藏</h2><p id="favoriteCount"></p></div></div><div id="favoriteAlternatives"></div></section>
   </section>
 </main>
 
@@ -142,7 +193,7 @@
 <dialog id="detailDialog" class="detail-dialog"><div class="dialog-head"><strong id="detailDialogTitle">详情</strong><button class="icon-button" data-close-dialog="detailDialog" type="button">×</button></div><div id="detailDialogBody"></div></dialog>
 <dialog id="infoDialog" class="info-dialog"><div class="dialog-head"><strong>数据说明</strong><button class="icon-button" data-close-dialog="infoDialog" type="button">×</button></div><div id="infoBody"></div></dialog>
 <dialog id="searchDialog" class="search-dialog"><div class="dialog-head"><strong>全局搜索</strong><button class="icon-button" data-close-dialog="searchDialog" type="button">×</button></div><div class="global-search"><input id="globalSearch" type="search" placeholder="搜索产品、品牌、生活需求或平替方案"></div><div id="globalSearchResults"></div></dialog>
-<dialog id="ownedDialog" class="owned-dialog"><form method="dialog" id="ownedForm"><div class="dialog-head"><strong>添加我的物品</strong><button class="icon-button" value="cancel" type="submit">×</button></div><div class="form-grid"><label>产品类型<select id="ownedType"><option value="iphone">iPhone</option><option value="ipad">iPad</option><option value="macbook-air">MacBook Air</option><option value="macbook">MacBook Pro</option><option value="android">Android 手机</option><option value="thinkpad">ThinkPad</option><option value="action-camera">运动 / 全景相机</option><option value="drone">无人机</option><option value="nas">NAS</option><option value="storage">硬盘 / SSD</option><option value="bicycle">自行车</option></select></label><label>机型<select id="ownedModel"></select></label><label>购买日期<input id="ownedDate" type="date" required></label><label>购买价格<input id="ownedPrice" type="number" min="0" step="100" required></label><label>备注<input id="ownedNote" type="text" maxlength="80" placeholder="成色、容量或配置"></label></div><div class="dialog-actions"><button value="cancel" type="submit" class="text-button">取消</button><button id="saveOwned" value="default" type="button" class="primary-button">保存</button></div></form></dialog>
+<dialog id="ownedDialog" class="owned-dialog"><form method="dialog" id="ownedForm"><div class="dialog-head"><strong>添加我的物品</strong><button class="icon-button" value="cancel" type="submit">×</button></div><div class="form-grid"><label>产品类型<select id="ownedType"><option value="iphone">iPhone</option><option value="ipad">iPad</option><option value="macbook-air">MacBook Air</option><option value="macbook">MacBook Pro</option><option value="android">Android 手机</option><option value="thinkpad">ThinkPad</option><option value="action-camera">运动 / 全景相机</option><option value="drone">无人机</option><option value="nas">NAS</option><option value="storage">硬盘 / SSD</option><option value="bicycle">自行车</option></select></label><label>机型<select id="ownedModel"></select></label><div id="ownedConfigFields" class="form-grid nested-grid"></div><label>购买日期<input id="ownedDate" type="date" required></label><label>购买价格<input id="ownedPrice" type="number" min="0" step="100" required></label><label class="full-span">备注<input id="ownedNote" type="text" maxlength="80" placeholder="成色、保修或维修情况"></label></div><div class="dialog-actions"><button value="cancel" type="submit" class="text-button">取消</button><button id="saveOwned" value="default" type="button" class="primary-button">保存</button></div></form></dialog>
 <div id="toast" class="toast" role="status" aria-live="polite"></div>
 <footer><span>价格、价值趋势和平替评价用于比较；交易或使用前请复核具体条件。</span></footer>
 <script src="app.js"></script>
